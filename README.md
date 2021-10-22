@@ -3,7 +3,7 @@
 HunterFit
 
 HunterFIt is a cross-platform mobile application written in 
-Futter and Dart. This is a fitness application designed to 
+Flutter and Dart. This is a fitness application designed to 
 promote and maintain total balance between a healthy mind,
 proper nutrition, good sleeping habits, and an active lifestyle
 for Hunter Industries employees.

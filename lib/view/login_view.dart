@@ -13,7 +13,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF47ABD1),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        padding: const EdgeInsets.symmetric(horizontal: 50.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,31 +31,32 @@ class LoginView extends StatelessWidget {
                 // Container for username and password
                 const TextField(
                   autofocus: false,
-                  style: TextStyle(fontSize: 18.0,
-                     color: Color(0xFF333333),
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Color(0xFF333333),
                   ),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Username',
                     contentPadding:
-                    EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                        EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
                       ),
                     ),
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
                       ),
                     ),
                   ),
@@ -66,93 +67,71 @@ class LoginView extends StatelessWidget {
                   obscureText: true,
                   autofocus: false,
                   style: TextStyle(
-                      fontSize: 18.0,
-                      color: Color(0xFF333333),
+                    fontSize: 18.0,
+                    color: Color(0xFF333333),
                   ),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Password',
                     contentPadding:
-                    EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                        EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
                       ),
                     ),
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
                       ),
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 25),
                 // Log in button
-                SizedBox(
-                  width: 268,
-                  height: 42,
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        top: 0,
-                        left: 0,
-                        child: Container(
-                          width: 268,
-                          height: 42,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ),
-                            color: Color.fromRGBO(
-                                255, 255, 255, 0.20000000298023224),
-                          ),
-                        ),
+                ElevatedButton(
+                  child: Text(
+                    loginViewModel.loginButtonText,
+                    textAlign: TextAlign.center,
+                  ),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 40),
+                    primary: const Color(0xFF7ebbd7),
+                    padding: const EdgeInsets.only(
+                        left: 40, right: 40, bottom: 8.0, top: 8.0),
+                    textStyle: const TextStyle(fontSize: 18, fontFamily: 'Roboto',
+                    fontWeight: FontWeight.normal),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
                       ),
-                      Positioned(
-                        top: 10,
-                        left: 109,
-                        child: Text(
-                          loginViewModel.loginButtonText,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                            fontFamily: 'Roboto',
-                            fontSize: 18,
-                            letterSpacing:
-                                0 /*percentages not used in flutter. defaulting to zero*/,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-                const SizedBox(height: 30),
                 // Sign up button
-                Text(
-                  loginViewModel.signupButtonText,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontFamily: 'Roboto',
-                      fontSize: 18,
-                      letterSpacing:
-                          0 /*percentages not used in flutter. defaulting to zero*/,
-                      fontWeight: FontWeight.normal,
-                      height: 1),
+                TextButton(
+                  child: Text(loginViewModel.signupButtonText,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 18,  fontWeight: FontWeight.normal),),
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                  ),
+                  onPressed: () {},
                 ),
               ],
             )

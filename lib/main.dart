@@ -15,7 +15,7 @@ class HunterFit extends StatelessWidget {
     return MaterialApp(
       title: 'HunterFit',
       theme: ThemeData(),
-      home: const LoginView(),
+      home: LoginView(),
     );
   }
 }

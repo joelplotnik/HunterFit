@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
 
 // LoginPage is the first screen a user will see upon launching the system
 class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+  LoginView({Key? key}) : super(key: key);
+
+  var loginViewModel = LoginViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +66,11 @@ class LoginView extends StatelessWidget {
                                       )
                                   )
                               ),
-                              const Positioned(
+                              Positioned(
                                   top: 10,
                                   left: 109,
-                                  child: Text('Log in', textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                  child: Text(loginViewModel.loginButtonText, textAlign: TextAlign.center,
+                                    style: const TextStyle(
                                       color: Color.fromRGBO(255, 255, 255, 1),
                                       fontFamily: 'Roboto',
                                       fontSize: 18,
@@ -80,7 +83,8 @@ class LoginView extends StatelessWidget {
                     ),
                     const SizedBox(height: 30),
                     // Sign up button
-                    const Text('Sign up', textAlign: TextAlign.center, style: TextStyle(
+                    Text(loginViewModel.signupButtonText, textAlign: TextAlign.center,
+                      style: const TextStyle(
                         color: Color.fromRGBO(255, 255, 255, 1),
                         fontFamily: 'Roboto',
                         fontSize: 18,

@@ -1,7 +1,7 @@
 import 'package:hunter_fit/model/login_model.dart';
 
 class LoginViewModel{
-  //provide all the state = data needed by the login view
+  // provide all the data needed by the login view
   // contains all business logic
   String loginButtonText = "Log in";
   String signupButtonText = "Sign up";

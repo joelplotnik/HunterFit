@@ -13,6 +13,9 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final loginViewModel = LoginViewModel();
 
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +37,13 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 const SizedBox(height: 30),
                 // Container for username and password
-                const TextField(
+                TextField(
                   autofocus: false,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Color(0xFF333333),
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Username',
@@ -65,17 +68,18 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                   ),
+                  controller: usernameController,
                 ),
                 const SizedBox(height: 30),
 
-                const TextField(
+                TextField(
                   obscureText: true,
                   autofocus: false,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Color(0xFF333333),
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Password',
@@ -100,6 +104,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                   ),
+                  controller: passwordController,
                 ),
 
                 const SizedBox(height: 25),
@@ -109,7 +114,10 @@ class _LoginViewState extends State<LoginView> {
                     loginViewModel.loginButtonText,
                     textAlign: TextAlign.center,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    print(usernameController.text);
+                    print(passwordController.text);
+                  },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),
                     primary: const Color(0xFF7ebbd7),

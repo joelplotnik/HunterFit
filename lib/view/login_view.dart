@@ -3,10 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
 
 // LoginPage is the first screen a user will see upon launching the system
-class LoginView extends StatelessWidget {
-  LoginView({Key? key}) : super(key: key);
+class LoginView extends StatefulWidget {
+  const LoginView({Key? key}) : super(key: key);
 
-  var loginViewModel = LoginViewModel();
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final loginViewModel = LoginViewModel();
 
   @override
   Widget build(BuildContext context) {

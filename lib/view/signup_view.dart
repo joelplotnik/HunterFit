@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hunter_fit/view/signup_view.dart';
-import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
+import 'package:hunter_fit/view/login_view.dart';
+import 'package:hunter_fit/viewmodel/signup_viewmodel.dart';
 
 // LoginPage is the first screen a user will see upon launching the system
-class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends StatefulWidget {
+  const SignupView({Key? key}) : super(key: key);
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignupView> createState() => _SignupViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  final loginViewModel = LoginViewModel();
+class _SignupViewState extends State<SignupView> {
+  final signupViewModel = SignupViewModel();
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController againPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class _LoginViewState extends State<LoginView> {
                     fillColor: Colors.white,
                     hintText: 'Username',
                     contentPadding:
-                        EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                    EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.only(
@@ -85,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
                     fillColor: Colors.white,
                     hintText: 'Password',
                     contentPadding:
-                        EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                    EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.only(
@@ -109,15 +110,53 @@ class _LoginViewState extends State<LoginView> {
                 ),
 
                 const SizedBox(height: 25),
-                // Log in button
+
+                TextField(
+                  obscureText: true,
+                  autofocus: false,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    color: Color(0xFF333333),
+                  ),
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Re-enter password',
+                    contentPadding:
+                    EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+                  ),
+                  controller: againPasswordController,
+                ),
+
+                const SizedBox(height: 25),
+                // submit button
                 ElevatedButton(
                   child: Text(
-                    loginViewModel.loginButtonText,
+                    signupViewModel.submitButtonText,
                     textAlign: TextAlign.center,
                   ),
                   onPressed: () {
                     print(usernameController.text);
                     print(passwordController.text);
+                    print(againPasswordController.text);
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),
@@ -125,7 +164,7 @@ class _LoginViewState extends State<LoginView> {
                     padding: const EdgeInsets.only(
                         left: 40, right: 40, bottom: 8.0, top: 8.0),
                     textStyle: const TextStyle(fontSize: 18, fontFamily: 'Roboto',
-                    fontWeight: FontWeight.normal),
+                        fontWeight: FontWeight.normal),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(5),
@@ -138,18 +177,18 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 // Sign up button
                 TextButton(
-                  child: Text(loginViewModel.signupButtonText,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 18,  fontWeight: FontWeight.normal),),
+                  child: Text(signupViewModel.cancelButtonText,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 18,  fontWeight: FontWeight.normal),),
                   style: ButtonStyle(
                     foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
+                    MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignupView()),
+                          builder: (context) => const LoginView()),
                     );
                   },
                 ),

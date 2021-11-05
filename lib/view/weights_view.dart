@@ -18,7 +18,7 @@ class _WeightsViewState extends State<WeightsView> {
         title: const Text('Weights'),
       ),
       body: const Center(
-        child: Text('Hello World'),
+        child: Text('Hello World i like apple'),
       ),
     );
   }

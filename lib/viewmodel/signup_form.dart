@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/viewmodel/signup_viewmodel.dart';
-import 'login_view.dart';
+import '../view/login_view.dart';
 
 // Define a custom Form widget.
 class SignupForm extends StatefulWidget {
@@ -239,9 +239,7 @@ class SignupFormState extends State<SignupForm> {
               print(againPasswordController.text);
 
               _formKey.currentState!.validate()
-                  ? ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('This is valid')))
+                  ? ScaffoldMessenger.of(context).hideCurrentSnackBar()
                   : ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                       content: Text('Form not submitted')));

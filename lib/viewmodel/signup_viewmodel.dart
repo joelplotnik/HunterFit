@@ -8,4 +8,5 @@ class SignupViewModel{
 
   var loginModel = UserModel();
 
+
 }

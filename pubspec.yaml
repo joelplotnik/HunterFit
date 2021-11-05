@@ -42,6 +42,10 @@ dependencies:
   # all methods are supported on all platforms.
   path_provider: ^2.0.6
 
+  # Allows for tuples in dart
+  # import 'package:tuple/tuple.dart';
+  tuple: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -42,7 +42,6 @@ class SignupFormState extends State<SignupForm> {
               color: Color(0xFF333333),
             ),
             validator: (value) {
-
               if (value!.isEmpty) {
                 return 'You must enter a username.';
               }
@@ -94,7 +93,6 @@ class SignupFormState extends State<SignupForm> {
                   bottomRight: Radius.circular(10),
                 ),
               ),
-
             ),
             controller: usernameController,
           ),
@@ -107,6 +105,14 @@ class SignupFormState extends State<SignupForm> {
               fontSize: 18.0,
               color: Color(0xFF333333),
             ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'You must enter a password.';
+              }
+              if (value.length < 2) {
+                return 'Password must have more than one character';
+              }
+            },
             decoration: const InputDecoration(
               filled: true,
               fillColor: Colors.white,
@@ -131,6 +137,26 @@ class SignupFormState extends State<SignupForm> {
                   bottomRight: Radius.circular(10),
                 ),
               ),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+              errorStyle: TextStyle(
+                color: Colors.white,),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
             ),
             controller: passwordController,
           ),
@@ -144,6 +170,14 @@ class SignupFormState extends State<SignupForm> {
               fontSize: 18.0,
               color: Color(0xFF333333),
             ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'You must re-enter the password.';
+              }
+              if (!(value == passwordController.text)) {
+                return 'Passwords must match';
+              }
+            },
             decoration: const InputDecoration(
               filled: true,
               fillColor: Colors.white,
@@ -160,6 +194,26 @@ class SignupFormState extends State<SignupForm> {
                 ),
               ),
               enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+              errorStyle: TextStyle(
+                color: Colors.white,),
+              focusedErrorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -190,7 +244,7 @@ class SignupFormState extends State<SignupForm> {
                         content: Text('This is valid')))
                   : ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                      content: Text('This is not valid')));
+                      content: Text('Form not submitted')));
 
             },
             style: ElevatedButton.styleFrom(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hunter_fit/view/signup_view.dart';
+import 'package:hunter_fit/view/weights_view.dart';
 import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
 
 // LoginPage is the first screen a user will see upon launching the system
@@ -118,14 +119,21 @@ class _LoginViewState extends State<LoginView> {
                   onPressed: () {
                     print(usernameController.text);
                     print(passwordController.text);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WeightsView()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),
                     primary: const Color(0xFF7ebbd7),
                     padding: const EdgeInsets.only(
                         left: 40, right: 40, bottom: 8.0, top: 8.0),
-                    textStyle: const TextStyle(fontSize: 18, fontFamily: 'Roboto',
-                    fontWeight: FontWeight.normal),
+                    textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.normal),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(5),
@@ -138,9 +146,12 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 // Sign up button
                 TextButton(
-                  child: Text(loginViewModel.signupButtonText,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 18,  fontWeight: FontWeight.normal),),
+                  child: Text(
+                    loginViewModel.signupButtonText,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.normal),
+                  ),
                   style: ButtonStyle(
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),

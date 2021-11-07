@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hunter_fit/viewmodel/signup_form.dart';
 
 // LoginPage is the first screen a user will see upon launching the system
 class WeightsView extends StatefulWidget {
@@ -36,24 +35,24 @@ class _WeightsViewState extends State<WeightsView> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 ElevatedButton(
                   // BACK------------------------------
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     padding: EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Back.png'),
                     radius: 50,
                   ),
@@ -66,7 +65,7 @@ class _WeightsViewState extends State<WeightsView> {
                     padding: EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Biceps.png'),
                     radius: 50,
                   ),
@@ -75,38 +74,38 @@ class _WeightsViewState extends State<WeightsView> {
                   // CALVES------------------------------
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(2),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Calves.png'),
                     radius: 50,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 ElevatedButton(
                   // CHEST------------------------------
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(2),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Chest.png'),
                     radius: 50,
                   ),
@@ -115,11 +114,11 @@ class _WeightsViewState extends State<WeightsView> {
                   // CORE------------------------------
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(2),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Core.png'),
                     radius: 50,
                   ),
@@ -128,38 +127,38 @@ class _WeightsViewState extends State<WeightsView> {
                   // GLUTES------------------------------
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(2),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Glutes.png'),
                     radius: 50,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 ElevatedButton(
                   // SHOULDERS------------------------------
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(2),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Shoulders.png'),
                     radius: 50,
                   ),
@@ -168,11 +167,11 @@ class _WeightsViewState extends State<WeightsView> {
                   // Triceps------------------------------
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(2),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Triceps.png'),
                     radius: 50,
                   ),
@@ -181,16 +180,16 @@ class _WeightsViewState extends State<WeightsView> {
                   // Upper Legs------------------------------
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(2),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(2),
                     onPrimary: Colors.white,
                   ),
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('images/Upper Legs.png'),
                     radius: 50,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
               ],

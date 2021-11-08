@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:hunter_fit/model/user_model.dart';
-import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
+import 'dart:async' show Future;
+import 'package:hunter_fit/model/user_model.dart';
+//import 'package:hunter_fit/helper/db_helper.dart';
 
 class SignupViewModel {
 

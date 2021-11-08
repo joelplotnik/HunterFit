@@ -46,6 +46,12 @@ dependencies:
   # import 'package:tuple/tuple.dart';
   tuple: ^2.0.0
 
+  # A comprehensive, cross-platform path manipulation library for Dart.
+  path: ^1.8.0
+
+  # SQLite plugin for flutter
+  sqflite: ^2.0.0+4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

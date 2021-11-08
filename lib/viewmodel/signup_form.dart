@@ -30,6 +30,9 @@ class SignupFormState extends State<SignupForm> {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve the usernames and passwords from user_data.txt
+    signupViewModel.loadUserData();
+
     // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
@@ -47,6 +50,9 @@ class SignupFormState extends State<SignupForm> {
               }
               if (value.length < 2) {
                 return 'Username must have more than one character';
+              }
+              if (signupViewModel.validateUserExists(value)) {
+                return 'User already exists. Please log in.';
               }
             },
             decoration: const InputDecoration(
@@ -105,12 +111,15 @@ class SignupFormState extends State<SignupForm> {
               fontSize: 18.0,
               color: Color(0xFF333333),
             ),
-            validator: (value) {
+            validator: (value)  {
               if (value!.isEmpty) {
                 return 'You must enter a password.';
               }
               if (value.length < 2) {
                 return 'Password must have more than one character';
+              }
+              if (signupViewModel.validateUserExists(value)){
+                return 'User already exists. Please log in.';
               }
             },
             decoration: const InputDecoration(
@@ -229,14 +238,15 @@ class SignupFormState extends State<SignupForm> {
           const SizedBox(height: 25),
           // submit button
           ElevatedButton(
-            child: Text(
-              signupViewModel.submitButtonText,
+            child: const Text(
+              'Submit',
               textAlign: TextAlign.center,
             ),
             onPressed: () {
               print(usernameController.text);
               print(passwordController.text);
               print(againPasswordController.text);
+              print(signupViewModel.validateUserExists(usernameController.text));
 
               _formKey.currentState!.validate()
                   ? ScaffoldMessenger.of(context).hideCurrentSnackBar()
@@ -266,11 +276,11 @@ class SignupFormState extends State<SignupForm> {
           ),
           // Sign up button
           TextButton(
-            child: Text(
-              signupViewModel.cancelButtonText,
+            child: const Text(
+              'Cancel',
               textAlign: TextAlign.center,
               style:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+                  TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -285,5 +295,7 @@ class SignupFormState extends State<SignupForm> {
         ],
       ),
     );
+
+
   }
 }

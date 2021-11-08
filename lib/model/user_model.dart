@@ -1,25 +1,50 @@
-class UserModel{
+const String usersTable = 'users';
 
-  /* You can remove many of your initState/ constructor calls because
-  late runs "lazily", which means it is not run at all until it is
-  referenced for the first time.
-   */
-  late String _username;
-  late String _password;
+class UserFields {
+
+  static final List<String> values = [
+    /// Add all fields
+    id, username, password
+  ];
+
+  static const String id = '_id';
+  static const String username = 'username';
+  static const String password = 'password';
+}
+
+class User{
+  final int? id;
+  final String username;
+  final String password;
+
+  User({
+    required this.id,
+    required this.username,
+    required this.password,
+  });
+
+  User copy({
+    int? id,
+    String? username,
+    String? password,
+  }) =>
+    User(
+      id: id ?? this.id,
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
+
+  static User fromJson(Map<String, Object?> json) => User(
+    id: json[UserFields.id] as int?,
+    username: json[UserFields.username] as String,
+    password: json[UserFields.password] as String,
+  );
 
 
-  UserModel();
-  UserModel.name(this._username, this._password);
+  Map<String, Object?> toJson()  => {
+    UserFields.id: id,
+    UserFields.username: username,
+    UserFields.password: password,
+  };
 
-  String get password => _password;
-
-  set password(String value) {
-    _password = value;
-  }
-
-  String get username => _username;
-
-  set username(String value) {
-    _username = value;
-  }
 }

@@ -34,8 +34,8 @@ class DBHelper {
     // Get a reference to the database.
     final db = await DBHelper.database();
 
-    // Insert the User into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same user is inserted twice.
+    // Insert the Dog into the correct table. You might also specify the
+    // `conflictAlgorithm` to use in case the same dog is inserted twice.
     //
     // In this case, replace any previous data.
     await db.insert(

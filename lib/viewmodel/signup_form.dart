@@ -15,8 +15,8 @@ class SignupForm extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds data related to the form.
 class SignupFormState extends State<SignupForm> {
-  final signupViewModel = SignupViewModel();
 
+  final signupViewModel = SignupViewModel();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController againPasswordController = TextEditingController();
@@ -30,8 +30,10 @@ class SignupFormState extends State<SignupForm> {
 
   @override
   Widget build(BuildContext context) {
-    // Retrieve the usernames and passwords from user_data.txt
-    signupViewModel.loadUserData();
+
+    // Load up the database
+    signupViewModel.getUserDB();
+    signupViewModel.printDatabase();
 
     // Build a Form widget using the _formKey created above.
     return Form(
@@ -117,9 +119,6 @@ class SignupFormState extends State<SignupForm> {
               }
               if (value.length < 2) {
                 return 'Password must have more than one character';
-              }
-              if (signupViewModel.validateUserExists(value)){
-                return 'User already exists. Please log in.';
               }
             },
             decoration: const InputDecoration(
@@ -246,13 +245,28 @@ class SignupFormState extends State<SignupForm> {
               print(usernameController.text);
               print(passwordController.text);
               print(againPasswordController.text);
-              print(signupViewModel.validateUserExists(usernameController.text));
+              print('');
+              print('');
 
-              _formKey.currentState!.validate()
-                  ? ScaffoldMessenger.of(context).hideCurrentSnackBar()
-                  : ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Form not submitted')));
+              if (_formKey.currentState!.validate()) {
+
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+                signupViewModel.createUser(usernameController.text, passwordController.text);
+                print('');
+                print('');
+                signupViewModel.printDatabase();
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginView()),
+                );
+              }
+              else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('Form not submitted')));
+              }
 
             },
             style: ElevatedButton.styleFrom(

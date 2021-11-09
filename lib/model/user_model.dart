@@ -1,25 +1,28 @@
-class UserModel{
+class User {
+  final int id;
+  final String username;
+  final String password;
 
-  /* You can remove many of your initState/ constructor calls because
-  late runs "lazily", which means it is not run at all until it is
-  referenced for the first time.
-   */
-  late String _username;
-  late String _password;
+  User({
+    required this.id,
+    required this.username,
+    required this.password,
+  });
 
-
-  UserModel();
-  UserModel.name(this._username, this._password);
-
-  String get password => _password;
-
-  set password(String value) {
-    _password = value;
+  // Convert a User into a Map. The keys must correspond to the names of the
+  // columns in the database.
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'username': username,
+      'password': password,
+    };
   }
 
-  String get username => _username;
-
-  set username(String value) {
-    _username = value;
+  // Implement toString to make it easier to see information about
+  // each user when using the print statement.
+  @override
+  String toString() {
+    return 'User{id: $id, username: $username, password: $password}';
   }
 }

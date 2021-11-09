@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hunter_fit/viewmodel/weights_viewmodel.dart';
 
-// LoginPage is the first screen a user will see upon launching the system
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
 
@@ -11,9 +10,20 @@ class WeightsView extends StatefulWidget {
 }
 
 class _WeightsViewState extends State<WeightsView> {
+  bool isSelected = false;
+  static const String test = 'Title';
+
   @override
   Widget build(BuildContext context) {
     final weightsViewModel = WeightsViewModel();
+
+    void toggleSelected() {
+      if (isSelected) {
+        isSelected = false;
+      } else {
+        isSelected = true;
+      }
+    }
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(4, 102, 146, 1),
@@ -22,11 +32,11 @@ class _WeightsViewState extends State<WeightsView> {
         title: RichText(
           textAlign: TextAlign.center,
           text: const TextSpan(
-            text: "Weight Lifting",
+            text: ("Weight Lifting" + test),
             style: TextStyle(fontSize: 20),
             children: <TextSpan>[
               TextSpan(
-                text: '\nWhat are you training today?',
+                text: '\nSelect a muscle group(s)',
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -264,19 +274,22 @@ class _WeightsViewState extends State<WeightsView> {
                   ),
                   ElevatedButton(
                     // CALVES------------------------------
-                    onPressed: () {
-                      weightsViewModel.pressedAttention = false;
-                    },
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(4),
-                      primary: Colors.blueAccent,
+                      primary:
+                          isSelected ? Colors.pink.shade400 : Colors.blueAccent,
                       onPrimary: Colors.black,
                     ),
                     child: const CircleAvatar(
                       backgroundImage: AssetImage('images/Calves.png'),
                       radius: 40,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        toggleSelected();
+                      });
+                    },
                   ),
                   const SizedBox(
                     height: 10,
@@ -295,17 +308,22 @@ class _WeightsViewState extends State<WeightsView> {
                   ),
                   ElevatedButton(
                     // GLUTES------------------------------
-                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(4),
-                      primary: Colors.blueAccent,
+                      primary:
+                          isSelected ? Colors.pink.shade400 : Colors.blueAccent,
                       onPrimary: Colors.black,
                     ),
                     child: const CircleAvatar(
                       backgroundImage: AssetImage('images/Glutes.png'),
                       radius: 40,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        toggleSelected();
+                      });
+                    },
                   ),
                   const SizedBox(
                     height: 10,

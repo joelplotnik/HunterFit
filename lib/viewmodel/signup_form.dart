@@ -15,7 +15,6 @@ class SignupForm extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds data related to the form.
 class SignupFormState extends State<SignupForm> {
-
   final signupViewModel = SignupViewModel();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -30,9 +29,11 @@ class SignupFormState extends State<SignupForm> {
 
   @override
   Widget build(BuildContext context) {
-
     // Load up the database
     signupViewModel.getUserDB();
+
+    // ********** For testing purposes ***********
+    // signupViewModel.deleteUser(''); // Enter a username is database to delete user
     signupViewModel.printDatabase();
 
     // Build a Form widget using the _formKey created above.
@@ -52,6 +53,9 @@ class SignupFormState extends State<SignupForm> {
               }
               if (value.length < 2) {
                 return 'Username must have more than one character';
+              }
+              if (value.length > 25) {
+                return 'Username must have less than twenty five character';
               }
               if (signupViewModel.validateUserExists(value)) {
                 return 'User already exists. Please log in.';
@@ -91,7 +95,8 @@ class SignupFormState extends State<SignupForm> {
                 ),
               ),
               errorStyle: TextStyle(
-                  color: Colors.white,),
+                color: Colors.white,
+              ),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
@@ -113,7 +118,7 @@ class SignupFormState extends State<SignupForm> {
               fontSize: 18.0,
               color: Color(0xFF333333),
             ),
-            validator: (value)  {
+            validator: (value) {
               if (value!.isEmpty) {
                 return 'You must enter a password.';
               }
@@ -155,7 +160,8 @@ class SignupFormState extends State<SignupForm> {
                 ),
               ),
               errorStyle: TextStyle(
-                color: Colors.white,),
+                color: Colors.white,
+              ),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
@@ -220,7 +226,8 @@ class SignupFormState extends State<SignupForm> {
                 ),
               ),
               errorStyle: TextStyle(
-                color: Colors.white,),
+                color: Colors.white,
+              ),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
@@ -242,32 +249,21 @@ class SignupFormState extends State<SignupForm> {
               textAlign: TextAlign.center,
             ),
             onPressed: () {
-              print(usernameController.text);
-              print(passwordController.text);
-              print(againPasswordController.text);
-              print('');
-              print('');
-
               if (_formKey.currentState!.validate()) {
-
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-                signupViewModel.createUser(usernameController.text, passwordController.text);
-                print('');
-                print('');
+                signupViewModel.createUser(
+                    usernameController.text, passwordController.text);
                 signupViewModel.printDatabase();
 
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginView()),
                 );
-              }
-              else {
+              } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('Form not submitted')));
+                    const SnackBar(content: Text('Form not submitted')));
               }
-
             },
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 40),
@@ -293,8 +289,7 @@ class SignupFormState extends State<SignupForm> {
             child: const Text(
               'Cancel',
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -309,7 +304,5 @@ class SignupFormState extends State<SignupForm> {
         ],
       ),
     );
-
-
   }
 }

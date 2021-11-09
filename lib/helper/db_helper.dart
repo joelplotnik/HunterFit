@@ -5,7 +5,6 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
-
   static Future<Database> database() async {
     // Avoid errors caused by flutter upgrade.
     // Importing 'package:flutter/widgets.dart' is required.
@@ -34,7 +33,7 @@ class DBHelper {
     // Get a reference to the database.
     final db = await DBHelper.database();
 
-    // Insert the Dog into the correct table. You might also specify the
+    // Insert the User into the correct table. You might also specify the
     // `conflictAlgorithm` to use in case the same dog is inserted twice.
     //
     // In this case, replace any previous data.
@@ -62,7 +61,6 @@ class DBHelper {
       );
     });
   }
-
 
   Future<void> updateUser(User user) async {
     // Get a reference to the database.

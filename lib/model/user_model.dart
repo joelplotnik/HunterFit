@@ -1,5 +1,5 @@
 class User {
-  final int id;
+  final int? id;
   final String username;
   final String password;
 
@@ -8,8 +8,6 @@ class User {
     required this.username,
     required this.password,
   });
-
-
 
   // Convert a User into a Map. The keys must correspond to the names of the
   // columns in the database.
@@ -25,6 +23,6 @@ class User {
   // each user when using the print statement.
   @override
   String toString() {
-    return 'User{id: $id, username: $username, password: $password}';
+    return 'User{id: $id, username: $username, password: $password}' '\n';
   }
 }

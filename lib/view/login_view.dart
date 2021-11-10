@@ -31,13 +31,13 @@ class _LoginViewState extends State<LoginView> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                const SizedBox(height: 150),
+                const SizedBox(height: 100),
                 // HunterFit logo
                 Align(
                   alignment: Alignment.center,
                   child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 25),
                 // Container for username and password
                 TextField(
                   autofocus: false,
@@ -72,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   controller: usernameController,
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 25),
 
                 TextField(
                   obscureText: true,

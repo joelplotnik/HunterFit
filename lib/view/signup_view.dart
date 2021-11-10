@@ -11,10 +11,10 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF47ABD1),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50.0),
@@ -25,17 +25,17 @@ class _SignupViewState extends State<SignupView> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                const SizedBox(height: 150),
+                const SizedBox(height: 100),
                 // HunterFit logo
                 Align(
                   alignment: Alignment.center,
                   child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 25),
                 // Container for username and password
                 const SignupForm(),
               ],
-            )
+            ),
           ],
         ),
       ),

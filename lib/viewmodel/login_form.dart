@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/view/signup_view.dart';
 import 'package:hunter_fit/view/weights_view.dart';
-import 'package:hunter_fit/viewmodel/signup_viewmodel.dart';
-import '../view/login_view.dart';
+import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
 
 // Define a custom Form widget.
-class SignupForm extends StatefulWidget {
-  const SignupForm({Key? key}) : super(key: key);
+class LoginForm extends StatefulWidget {
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
-  SignupFormState createState() => SignupFormState();
+  LoginFormState createState() => LoginFormState();
 }
 
 // Define a corresponding State class.
 // This class holds data related to the form.
-class SignupFormState extends State<SignupForm> {
-  final signupViewModel = SignupViewModel();
+class LoginFormState extends State<LoginForm> {
+  final loginViewModel = LoginViewModel();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController againPasswordController = TextEditingController();
 
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
@@ -29,11 +28,11 @@ class SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     // Load up the database
-    signupViewModel.getUserDB();
+    loginViewModel.getUserDB();
 
     // ********** For testing purposes ***********
     // signupViewModel.deleteUser(''); // Enter a username is database to delete user
-    signupViewModel.printDatabase();
+    loginViewModel.printDatabase();
 
     // Build a Form widget using the _formKey created above.
     return Form(
@@ -51,13 +50,13 @@ class SignupFormState extends State<SignupForm> {
                 return 'You must enter a username.';
               }
               if (value.length < 2) {
-                return 'Username must have more than one character.';
+                return 'Username must be more than one character.';
               }
               if (value.length > 25) {
-                return 'Username must have less than twenty five character.';
+                return 'Username must be less than twenty five character.';
               }
-              if (signupViewModel.validateUserExists(value)) {
-                return 'User already exists. Please log in.';
+              if (!(loginViewModel.validateUserExists(value))) {
+                return 'User does not exist. Please sign up.';
               }
             },
             decoration: const InputDecoration(
@@ -65,7 +64,7 @@ class SignupFormState extends State<SignupForm> {
               fillColor: Colors.white,
               hintText: 'Username',
               contentPadding:
-                  EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+              EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
@@ -122,18 +121,23 @@ class SignupFormState extends State<SignupForm> {
                 return 'You must enter a password.';
               }
               if (value.length < 2) {
-                return 'Password must have more than one character.';
+                return 'Password must be more than one character.';
               }
               if (value.length > 25) {
                 return 'Password must be less than twenty five character.';
               }
+              if (!(loginViewModel.validateUserPassword(
+                  usernameController.text, passwordController.text))){
+                return 'Incorrect password.';
+              }
+
             },
             decoration: const InputDecoration(
               filled: true,
               fillColor: Colors.white,
               hintText: 'Password',
               contentPadding:
-                  EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+              EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
@@ -179,84 +183,17 @@ class SignupFormState extends State<SignupForm> {
 
           const SizedBox(height: 25),
 
-          TextFormField(
-            obscureText: true,
-            autofocus: false,
-            style: const TextStyle(
-              fontSize: 18.0,
-              color: Color(0xFF333333),
-            ),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'You must re-enter the password.';
-              }
-              if (!(value == passwordController.text)) {
-                return 'Passwords must match.';
-              }
-            },
-            decoration: const InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              hintText: 'Re-enter password',
-              contentPadding:
-                  EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
-                ),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
-                ),
-              ),
-              errorStyle: TextStyle(
-                color: Colors.white,
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
-                ),
-              ),
-            ),
-            controller: againPasswordController,
-          ),
-
-          const SizedBox(height: 25),
-          // Submit button
+          // submit button
           ElevatedButton(
             child: const Text(
-              'Submit',
+              'Log in',
               textAlign: TextAlign.center,
             ),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-                signupViewModel.createUser(
-                    usernameController.text, passwordController.text);
-                signupViewModel.printDatabase();
+                loginViewModel.printDatabase();
 
                 Navigator.push(
                   context,
@@ -286,10 +223,10 @@ class SignupFormState extends State<SignupForm> {
               ),
             ),
           ),
-          // Cancel button
+          // Sign up button
           TextButton(
             child: const Text(
-              'Cancel',
+              'Sign up',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
@@ -299,7 +236,7 @@ class SignupFormState extends State<SignupForm> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const LoginView()),
+                MaterialPageRoute(builder: (context) => const SignupView()),
               );
             },
           ),

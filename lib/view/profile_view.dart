@@ -30,10 +30,10 @@ class _ProfileViewState extends State<ProfileView> {
                     textAlign: TextAlign.center,
                   ),
                   onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LoginView()),
-                      );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginView()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),

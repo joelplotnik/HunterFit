@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hunter_fit/viewmodel/login_form.dart';
+import 'package:hunter_fit/view/forms/login_form.dart';
 
 // LoginView is the first screen a user will see upon launching the system
 class LoginView extends StatefulWidget {

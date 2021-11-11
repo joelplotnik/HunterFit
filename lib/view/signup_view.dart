@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hunter_fit/viewmodel/signup_form.dart';
+import 'package:hunter_fit/view/forms/signup_form.dart';
 
 // Signup is where a user can create a new user
 class SignupView extends StatefulWidget {

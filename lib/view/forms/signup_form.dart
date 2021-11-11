@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weights_view.dart';
 import 'package:hunter_fit/viewmodel/signup_viewmodel.dart';
-import '../view/login_view.dart';
+import '../login_view.dart';
 
 // Define a custom Form widget.
 class SignupForm extends StatefulWidget {

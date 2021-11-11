@@ -71,9 +71,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo-hunter-fit.svg
-    - images/
+    - assets/user_data.txt
+    - assets/images/
 
   fonts:
     - family: Roboto
       fonts:
-        - asset: fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf

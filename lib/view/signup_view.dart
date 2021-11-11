@@ -11,7 +11,6 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

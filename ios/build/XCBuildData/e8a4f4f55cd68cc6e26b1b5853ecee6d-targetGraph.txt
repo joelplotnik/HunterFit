@@ -1,0 +1,13 @@
+Target dependency graph (5 targets)
+FMDB in Pods, no dependencies
+Flutter in Pods, no dependencies
+path_provider in Pods, depends on:
+Flutter in Pods (explicit)
+sqflite in Pods, depends on:
+FMDB in Pods (explicit)
+Flutter in Pods (explicit)
+Pods-Runner in Pods, depends on:
+FMDB in Pods (explicit)
+Flutter in Pods (explicit)
+path_provider in Pods (explicit)
+sqflite in Pods (explicit)

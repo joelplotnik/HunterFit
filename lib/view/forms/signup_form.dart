@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/view/navigation_view.dart';
 import 'package:hunter_fit/viewmodel/signup_viewmodel.dart';
-import '../view/login_view.dart';
+import '../login_view.dart';
 
 // Define a custom Form widget.
 class SignupForm extends StatefulWidget {
   const SignupForm({Key? key}) : super(key: key);
 
   @override
-  SignupFormState createState() {
-    return SignupFormState();
-  }
+  SignupFormState createState() => SignupFormState();
 }
 
 // Define a corresponding State class.
 // This class holds data related to the form.
 class SignupFormState extends State<SignupForm> {
   final signupViewModel = SignupViewModel();
-
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController againPasswordController = TextEditingController();
@@ -30,8 +28,12 @@ class SignupFormState extends State<SignupForm> {
 
   @override
   Widget build(BuildContext context) {
-    // Retrieve the usernames and passwords from user_data.txt
-    signupViewModel.loadUserData();
+    // Load up the database
+    signupViewModel.getUserDB();
+
+    // ********** For testing purposes ***********
+    // signupViewModel.deleteUser(''); // Enter a username is database to delete user
+    signupViewModel.printDatabase();
 
     // Build a Form widget using the _formKey created above.
     return Form(
@@ -49,7 +51,10 @@ class SignupFormState extends State<SignupForm> {
                 return 'You must enter a username.';
               }
               if (value.length < 2) {
-                return 'Username must have more than one character';
+                return 'Username must have more than one character.';
+              }
+              if (value.length > 25) {
+                return 'Username must have less than twenty five character.';
               }
               if (signupViewModel.validateUserExists(value)) {
                 return 'User already exists. Please log in.';
@@ -89,7 +94,8 @@ class SignupFormState extends State<SignupForm> {
                 ),
               ),
               errorStyle: TextStyle(
-                  color: Colors.white,),
+                color: Colors.white,
+              ),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
@@ -102,7 +108,7 @@ class SignupFormState extends State<SignupForm> {
             ),
             controller: usernameController,
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 25),
 
           TextFormField(
             obscureText: true,
@@ -111,15 +117,15 @@ class SignupFormState extends State<SignupForm> {
               fontSize: 18.0,
               color: Color(0xFF333333),
             ),
-            validator: (value)  {
+            validator: (value) {
               if (value!.isEmpty) {
                 return 'You must enter a password.';
               }
               if (value.length < 2) {
-                return 'Password must have more than one character';
+                return 'Password must have more than one character.';
               }
-              if (signupViewModel.validateUserExists(value)){
-                return 'User already exists. Please log in.';
+              if (value.length > 25) {
+                return 'Password must be less than twenty five character.';
               }
             },
             decoration: const InputDecoration(
@@ -156,7 +162,8 @@ class SignupFormState extends State<SignupForm> {
                 ),
               ),
               errorStyle: TextStyle(
-                color: Colors.white,),
+                color: Colors.white,
+              ),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
@@ -184,7 +191,7 @@ class SignupFormState extends State<SignupForm> {
                 return 'You must re-enter the password.';
               }
               if (!(value == passwordController.text)) {
-                return 'Passwords must match';
+                return 'Passwords must match.';
               }
             },
             decoration: const InputDecoration(
@@ -221,7 +228,8 @@ class SignupFormState extends State<SignupForm> {
                 ),
               ),
               errorStyle: TextStyle(
-                color: Colors.white,),
+                color: Colors.white,
+              ),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.only(
@@ -236,24 +244,28 @@ class SignupFormState extends State<SignupForm> {
           ),
 
           const SizedBox(height: 25),
-          // submit button
+          // Submit button
           ElevatedButton(
             child: const Text(
               'Submit',
               textAlign: TextAlign.center,
             ),
             onPressed: () {
-              print(usernameController.text);
-              print(passwordController.text);
-              print(againPasswordController.text);
-              print(signupViewModel.validateUserExists(usernameController.text));
+              if (_formKey.currentState!.validate()) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-              _formKey.currentState!.validate()
-                  ? ScaffoldMessenger.of(context).hideCurrentSnackBar()
-                  : ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Form not submitted')));
+                signupViewModel.createUser(
+                    usernameController.text, passwordController.text);
+                signupViewModel.printDatabase();
 
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Navigation()),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Form not submitted.')));
+              }
             },
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 40),
@@ -274,13 +286,12 @@ class SignupFormState extends State<SignupForm> {
               ),
             ),
           ),
-          // Sign up button
+          // Cancel button
           TextButton(
             child: const Text(
               'Cancel',
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -295,7 +306,5 @@ class SignupFormState extends State<SignupForm> {
         ],
       ),
     );
-
-
   }
 }

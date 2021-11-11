@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hunter_fit/viewmodel/signup_form.dart';
+import 'package:hunter_fit/view/forms/signup_form.dart';
 
-// LoginPage is the first screen a user will see upon launching the system
+// Signup is where a user can create a new user
 class SignupView extends StatefulWidget {
   const SignupView({Key? key}) : super(key: key);
 
@@ -14,6 +14,7 @@ class _SignupViewState extends State<SignupView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF47ABD1),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50.0),
@@ -24,17 +25,17 @@ class _SignupViewState extends State<SignupView> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                const SizedBox(height: 150),
+                const SizedBox(height: 100),
                 // HunterFit logo
                 Align(
                   alignment: Alignment.center,
                   child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
                 ),
-                const SizedBox(height: 30),
-                // Container for username and password
+                const SizedBox(height: 25),
+                // Signup form for username and password
                 const SignupForm(),
               ],
-            )
+            ),
           ],
         ),
       ),

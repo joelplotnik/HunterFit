@@ -80,7 +80,7 @@ class _NavigationState extends State<Navigation> {
           BottomNavigationBarItem(icon: Icon(Icons.person,), label: 'Profile')
         ],
         currentIndex: _selectedPage,
-        selectedItemColor: const Color(0xFFEFEFEF),
+        selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
         onTap: onTapped,
       ),)

@@ -71,7 +71,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo-hunter-fit.svg
-    - assets/user_data.txt
     - assets/images/
 
   fonts:

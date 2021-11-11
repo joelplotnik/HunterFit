@@ -37,7 +37,7 @@ class _ProfileViewState extends State<ProfileView> {
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),
-                    primary: const Color(0xFF7ebbd7),
+                    primary: const Color(0xFF47ABD1),
                     padding: const EdgeInsets.only(
                         left: 40, right: 40, bottom: 8.0, top: 8.0),
                     textStyle: const TextStyle(

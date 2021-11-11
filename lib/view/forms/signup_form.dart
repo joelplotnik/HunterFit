@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/view/weights_view.dart';
+import 'package:hunter_fit/view/navigation_view.dart';
 import 'package:hunter_fit/viewmodel/signup_viewmodel.dart';
 import '../login_view.dart';
 
@@ -260,7 +260,7 @@ class SignupFormState extends State<SignupForm> {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const WeightsView()),
+                  MaterialPageRoute(builder: (context) => const Navigation()),
                 );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(

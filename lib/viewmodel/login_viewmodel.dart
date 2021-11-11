@@ -26,6 +26,7 @@ class LoginViewModel {
     return false;
   }
 
+  // Check to see if password is correct for user
   bool validateUserPassword(String name, String password) {
     var tempName = name.toLowerCase();
 

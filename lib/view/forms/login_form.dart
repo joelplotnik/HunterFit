@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/view/navigation_view.dart';
 import 'package:hunter_fit/view/signup_view.dart';
-import 'package:hunter_fit/view/weights_view.dart';
 import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
 
 // Define a custom Form widget.
@@ -197,7 +197,7 @@ class LoginFormState extends State<LoginForm> {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const WeightsView()),
+                  MaterialPageRoute(builder: (context) => const Navigation()),
                 );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(

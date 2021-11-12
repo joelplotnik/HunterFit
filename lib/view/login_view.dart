@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hunter_fit/view/signup_view.dart';
 import 'package:hunter_fit/view/weights_view.dart';
+import 'package:hunter_fit/view/cardio_view.dart';
 import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
 
 // LoginPage is the first screen a user will see upon launching the system
@@ -122,7 +123,7 @@ class _LoginViewState extends State<LoginView> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const WeightsView()),
+                          builder: (context) => Cardio_View()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

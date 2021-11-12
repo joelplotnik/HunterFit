@@ -23,16 +23,11 @@ class _WeightsViewState extends State<WeightsView> {
   AppBar buildAppBar() {
     return AppBar(
       title: const Text(
-        'Weightlifting Categories',
-        style: TextStyle(
-          color: Colors.black87,
-        ),
+        'Categories',
+        style: TextStyle(color: Colors.black87, fontSize: 18),
       ),
       backgroundColor: Colors.white54,
       elevation: 5,
-      leading: const CircleAvatar(
-        backgroundImage: AssetImage('assets/images/linus.jpeg'),
-      ),
     );
   }
 }

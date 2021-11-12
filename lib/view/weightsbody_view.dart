@@ -40,15 +40,59 @@ class WeightsBodyView extends StatelessWidget {
         itemCount: workoutList.length,
         itemBuilder: (context, index) {
           Workout workout = workoutList[index];
-          return Card(
-            child: ListTile(
-                title: Text(workout.category),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WeightDetails(workout)));
-                }),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WeightDetails(workout)));
+            },
+            child: Container(
+              margin: EdgeInsets.fromLTRB(0, 2, 0, 2),
+              height: 200,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.asset(
+                      'assets/images/${workout.category}.jpeg',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.black.withOpacity(.9),
+                            Colors.transparent
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 15,
+                    left: 10,
+                    child: Text(
+                      workout.category,
+                      style: const TextStyle(
+                        letterSpacing: 6,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w200,
+                        fontSize: 30,
+                        fontFamily: 'Roboto',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         },
       ),

@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-class Cardio_View extends StatelessWidget{
+class CardioView extends StatelessWidget{
+  const CardioView({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(4, 102, 146, 1),
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(73, 172, 207, 1),
-        title: RichText(
-          textAlign: TextAlign.center,
-          text: const TextSpan(
-            text: ("Cardio"),
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      ),
       body: GridView.count(
         primary: false,
         padding: const EdgeInsets.all(20),
@@ -32,9 +24,9 @@ class Cardio_View extends StatelessWidget{
               height: double.infinity,
               width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(
+               /* image: DecorationImage(
                     image: AssetImage('images/Upper Legs.png'),
-                    fit: BoxFit.contain),
+                    fit: BoxFit.contain),*/
               ),
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
@@ -58,9 +50,9 @@ class Cardio_View extends StatelessWidget{
               height: double.infinity,
               width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(
+                /*image: DecorationImage(
                     image: AssetImage('images/Upper Legs.png'),
-                    fit: BoxFit.contain),
+                    fit: BoxFit.contain),*/
               ),
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
@@ -84,9 +76,9 @@ class Cardio_View extends StatelessWidget{
               height: double.infinity,
               width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(
+               /* image: DecorationImage(
                     image: AssetImage('images/Upper Legs.png'),
-                    fit: BoxFit.contain),
+                    fit: BoxFit.contain),*/
               ),
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
@@ -110,9 +102,9 @@ class Cardio_View extends StatelessWidget{
               height: double.infinity,
               width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(
+                /*image: DecorationImage(
                     image: AssetImage('images/Upper Legs.png'),
-                    fit: BoxFit.contain),
+                    fit: BoxFit.contain),*/
               ),
               child: const Padding(
                 padding: EdgeInsets.all(8.0),

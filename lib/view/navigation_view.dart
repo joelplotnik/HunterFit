@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/view/cardio_view.dart';
 import 'package:hunter_fit/view/profile_view.dart';
 import 'package:hunter_fit/view/weights_view.dart';
 
@@ -61,7 +62,7 @@ class _NavigationState extends State<Navigation> {
         controller: pageController,
         children: [
           Container( color: Colors.white,),
-          Container( color: Colors.white,),
+          const CardioView(),
           Container( color: Colors.white,),
           const WeightsView(),
           const ProfileView(),

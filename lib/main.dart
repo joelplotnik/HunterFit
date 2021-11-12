@@ -12,6 +12,7 @@ class HunterFit extends StatelessWidget {
   // This widget is the root of the HunterFit application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'HunterFit',
       theme: ThemeData(),

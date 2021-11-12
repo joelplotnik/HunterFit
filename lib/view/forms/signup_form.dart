@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/view/navigation_view.dart';
 import 'package:hunter_fit/viewmodel/signup_viewmodel.dart';
-import '../view/login_view.dart';
+import '../login_view.dart';
 
 // Define a custom Form widget.
 class SignupForm extends StatefulWidget {
   const SignupForm({Key? key}) : super(key: key);
 
   @override
-  SignupFormState createState() {
-    return SignupFormState();
-  }
+  SignupFormState createState() => SignupFormState();
 }
 
 // Define a corresponding State class.
@@ -52,10 +51,10 @@ class SignupFormState extends State<SignupForm> {
                 return 'You must enter a username.';
               }
               if (value.length < 2) {
-                return 'Username must have more than one character';
+                return 'Username must have more than one character.';
               }
               if (value.length > 25) {
-                return 'Username must have less than twenty five character';
+                return 'Username must have less than twenty five character.';
               }
               if (signupViewModel.validateUserExists(value)) {
                 return 'User already exists. Please log in.';
@@ -109,7 +108,7 @@ class SignupFormState extends State<SignupForm> {
             ),
             controller: usernameController,
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 25),
 
           TextFormField(
             obscureText: true,
@@ -123,7 +122,10 @@ class SignupFormState extends State<SignupForm> {
                 return 'You must enter a password.';
               }
               if (value.length < 2) {
-                return 'Password must have more than one character';
+                return 'Password must have more than one character.';
+              }
+              if (value.length > 25) {
+                return 'Password must be less than twenty five character.';
               }
             },
             decoration: const InputDecoration(
@@ -189,7 +191,7 @@ class SignupFormState extends State<SignupForm> {
                 return 'You must re-enter the password.';
               }
               if (!(value == passwordController.text)) {
-                return 'Passwords must match';
+                return 'Passwords must match.';
               }
             },
             decoration: const InputDecoration(
@@ -242,7 +244,7 @@ class SignupFormState extends State<SignupForm> {
           ),
 
           const SizedBox(height: 25),
-          // submit button
+          // Submit button
           ElevatedButton(
             child: const Text(
               'Submit',
@@ -258,11 +260,11 @@ class SignupFormState extends State<SignupForm> {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginView()),
+                  MaterialPageRoute(builder: (context) => const Navigation()),
                 );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Form not submitted')));
+                    const SnackBar(content: Text('Form not submitted.')));
               }
             },
             style: ElevatedButton.styleFrom(
@@ -284,7 +286,7 @@ class SignupFormState extends State<SignupForm> {
               ),
             ),
           ),
-          // Sign up button
+          // Cancel button
           TextButton(
             child: const Text(
               'Cancel',

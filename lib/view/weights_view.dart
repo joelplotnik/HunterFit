@@ -14,8 +14,9 @@ class _WeightsViewState extends State<WeightsView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        backgroundColor: Colors.white70,
-        // appBar: buildAppBar(),
-        body: MyStatefulWidget());
+      backgroundColor: Colors.white70,
+      // appBar: buildAppBar(),
+      body: Weightlifting(),
+    );
   }
 }

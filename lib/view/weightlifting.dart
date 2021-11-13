@@ -1,51 +1,48 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/view/button_widget.dart';
 
 //
 
 /// This is the stateful widget that the main application instantiates.
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class Weightlifting extends StatefulWidget {
+  const Weightlifting({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<Weightlifting> createState() => weightlifting();
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  String dropdownValue = 'One';
+class weightlifting extends State<Weightlifting> {
+  Duration duration = const Duration(hours: 0, minutes: 0, seconds: 0);
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
-      iconSize: 24,
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            buildTimePicker(),
+            TextButton.icon(
+              icon: Icon(Icons.more_time),
+              label: Text('Select A Time'),
+              onPressed: () {},
+            )
+          ],
+        ),
       ),
-      onChanged: (String? newValue) {
-        setState(() {
-          dropdownValue = newValue!;
-        });
-      },
-      items: <String>['One', 'Two', 'Free', 'Four']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+    );
+  }
+
+  Widget buildTimePicker() {
+    return CupertinoTimerPicker(
+      initialTimerDuration: duration,
+      mode: CupertinoTimerPickerMode.hms,
+      onTimerDurationChanged: (duration) => setState(
+        () {
+          this.duration = duration;
+        },
+      ),
     );
   }
 }
-
-/// Flutter code sample for DropdownButton
-
-// This sample shows a `DropdownButton` with a large arrow icon,
-// purple text style, and bold purple underline, whose value is one of "One",
-// "Two", "Free", or "Four".
-//
-// ![](https://flutter.github.io/assets-for-api-docs/assets/material/dropdown_button.png)

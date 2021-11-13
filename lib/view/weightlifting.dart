@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-//
-
 /// This is the stateful widget that the main application instantiates.
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);

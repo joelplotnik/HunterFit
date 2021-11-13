@@ -52,6 +52,15 @@ dependencies:
   # SQLite plugin for flutter
   sqflite: ^2.0.0+4
 
+  # A Flutter plugin that provides a Google Maps widget.
+  google_maps_flutter: ^2.1.0
+
+  # This plugin for Flutter handles getting a location on Android and iOS.
+  # It also provides callbacks when the location is changed.
+  location: ^4.3.0
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

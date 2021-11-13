@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weightlifting.dart';
-//import 'package:flutter_svg/flutter_svg.dart';
-//import 'package:hunter_fit/viewmodel/weights_viewmodel.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class _WeightsViewState extends State<WeightsView> {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.white70,
-      // appBar: buildAppBar(),
       body: Weightlifting(),
     );
   }

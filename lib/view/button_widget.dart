@@ -10,12 +10,13 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-        style: ElevatedButton.styleFrom(minimumSize: Size(100, 42)),
+        style: ElevatedButton.styleFrom(
+            minimumSize: const Size(100, 42)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: const [
             Icon(Icons.more_time, size: 28),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Text(
               'Show Picker',
               style: TextStyle(fontSize: 20),

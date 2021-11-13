@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hunter_fit/view/signup_view.dart';
-import 'package:hunter_fit/view/weights_view.dart';
-import 'package:hunter_fit/view/cardio_view.dart';
-import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
 import 'package:hunter_fit/view/forms/login_form.dart';
 
 // LoginView is the first screen a user will see upon launching the system

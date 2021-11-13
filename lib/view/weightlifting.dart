@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/view/button_widget.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class Weightlifting extends StatefulWidget {
   const Weightlifting({Key? key}) : super(key: key);
 
   @override
-  State<Weightlifting> createState() => weightlifting();
+  _WeightliftingState createState() => _WeightliftingState();
 }
 
-class weightlifting extends State<Weightlifting> {
+class _WeightliftingState extends State<Weightlifting> {
   Duration duration = const Duration(hours: 0, minutes: 0, seconds: 0);
 
   @override
@@ -22,8 +21,8 @@ class weightlifting extends State<Weightlifting> {
           children: [
             buildTimePicker(),
             TextButton.icon(
-              icon: Icon(Icons.more_time),
-              label: Text('Select A Time'),
+              icon: const Icon(Icons.more_time),
+              label: const Text('Select A Time'),
               onPressed: () {},
             )
           ],
@@ -37,7 +36,7 @@ class weightlifting extends State<Weightlifting> {
       initialTimerDuration: duration,
       mode: CupertinoTimerPickerMode.hms,
       onTimerDurationChanged: (duration) => setState(
-        () {
+            () {
           this.duration = duration;
         },
       ),

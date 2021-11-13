@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/api/google_maps_page.dart';
-import 'package:hunter_fit/view/cardio_view.dart';
+// import 'package:hunter_fit/view/cardio_view.dart';
 import 'package:hunter_fit/view/profile_view.dart';
 import 'package:hunter_fit/view/weights_view.dart';
 
@@ -55,7 +55,8 @@ class _NavigationState extends State<Navigation> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title),
+        title: Center(
+            child: Text(_title)),
         backgroundColor: const Color(0xFF47ABD1),
         automaticallyImplyLeading: false,
       ),

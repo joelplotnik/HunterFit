@@ -59,6 +59,9 @@ dependencies:
   # It also provides callbacks when the location is changed.
   location: ^4.3.0
 
+  # A wrapper around InheritedWidget to make them easier to use and more reusable.
+  provider: ^6.0.1
+
 
 
 dev_dependencies:

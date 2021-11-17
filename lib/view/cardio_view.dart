@@ -31,7 +31,7 @@ class CardioView extends StatelessWidget {
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "HIIT",
+                    "Track Cardio",
                     textAlign: TextAlign.center,
                   ),
                 ),

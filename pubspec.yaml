@@ -37,15 +37,6 @@ dependencies:
   # Draw SVG (and some Android VectorDrawable (XML)) files on a Flutter Widget.
   flutter_svg: ^0.23.0+1
 
-  # This A Flutter plugin for finding commonly used locations on the
-  # filesystem. Supports Android, iOS, Linux, macOS and Windows. Not
-  # all methods are supported on all platforms.
-  path_provider: ^2.0.6
-
-  # Allows for tuples in dart
-  # import 'package:tuple/tuple.dart';
-  tuple: ^2.0.0
-
   # A comprehensive, cross-platform path manipulation library for Dart.
   path: ^1.8.0
 

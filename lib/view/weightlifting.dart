@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/widgets/timer.dart';
+import 'package:hunter_fit/widgets/countdown_timer.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class Weightlifting extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weightlifting.dart';
+import 'package:hunter_fit/widgets/countdown_timer.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);

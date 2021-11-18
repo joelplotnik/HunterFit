@@ -12,9 +12,9 @@ class WeightsView extends StatefulWidget {
 class _WeightsViewState extends State<WeightsView> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white70,
-      body: Weightlifting(),
+      body: countdown_timer(),
     );
   }
 }

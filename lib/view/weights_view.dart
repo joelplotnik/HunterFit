@@ -13,7 +13,7 @@ class _WeightsViewState extends State<WeightsView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.white70,
+      backgroundColor: Colors.white,
       body: CountdownTimer(),
     );
   }

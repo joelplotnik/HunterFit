@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/login_view.dart';
 
@@ -9,6 +10,10 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+
+  late DateTime _dateTime = DateTime.now();
+  bool isVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,18 +41,69 @@ class _ProfileViewState extends State<ProfileView> {
                       SizedBox(height: 10),
                       Text(
                         'Let\'s learn about you.',
+                        style: TextStyle(
+                            fontSize: 16),
                       ),
                     ],
                   ),
-                  const SizedBox(width: 70,),
+                  const SizedBox(width: 50,),
                   const Icon(
                     Icons.account_circle_rounded,
                     color: Colors.black,
                     size: 75.0,
-                    semanticLabel: 'Text to announce in accessibility modes',
+                    semanticLabel: 'profile image',
                   ),
                 ]),
+
                 const SizedBox(height: 50),
+
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child:  Text(
+                    'Name: ',),
+                ),
+
+                const SizedBox(height: 50),
+
+                ElevatedButton(
+                  child: const Text(
+                    'Birthdate',
+                    textAlign: TextAlign.start,
+
+                  ),
+                  onPressed: () => setState(() => isVisible = !isVisible),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 40),
+                    primary: const Color(0xFFefeff0),
+                    onPrimary: Colors.black,
+                    alignment: Alignment.centerLeft,
+                    textStyle: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.normal),
+
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                if (isVisible)
+                SizedBox(
+                  height: 70,
+                  child: CupertinoDatePicker(
+                    initialDateTime: _dateTime,
+                      mode: CupertinoDatePickerMode.date,
+                      onDateTimeChanged: (dateTime) {
+                      setState(() {
+                        _dateTime = dateTime;
+                        print(_dateTime);
+                      });
+                      }),
+                ),
+
+                const SizedBox(height: 50),
+
                 ElevatedButton(
                   child: const Text(
                     'Log out',

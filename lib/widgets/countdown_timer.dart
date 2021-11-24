@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hunter_fit/widgets/round_button.dart';
-class countdown_timer extends StatefulWidget {
-  countdown_timer({Key? key}) : super(key: key);
+class CountdownTimer extends StatefulWidget {
+  const CountdownTimer({Key? key}) : super(key: key);
 
   @override
-  _countdown_timerState createState() => _countdown_timerState();
+  _CountdownTimerState createState() => _CountdownTimerState();
 }
 
-class _countdown_timerState extends State<countdown_timer> with TickerProviderStateMixin{
+class _CountdownTimerState extends State<CountdownTimer> with TickerProviderStateMixin{
 
   late AnimationController controller;
   bool isPlaying = false;
@@ -27,7 +27,7 @@ class _countdown_timerState extends State<countdown_timer> with TickerProviderSt
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 60),
+      duration: const Duration(seconds: 60),
     );
 
     controller.addListener(() {

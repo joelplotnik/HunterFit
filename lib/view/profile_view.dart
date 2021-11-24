@@ -24,6 +24,30 @@ class _ProfileViewState extends State<ProfileView> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
+                Row(children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Hi, User',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Let\'s learn about you.',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 70,),
+                  const Icon(
+                    Icons.account_circle_rounded,
+                    color: Colors.black,
+                    size: 75.0,
+                    semanticLabel: 'Text to announce in accessibility modes',
+                  ),
+                ]),
+                const SizedBox(height: 50),
                 ElevatedButton(
                   child: const Text(
                     'Log out',
@@ -32,7 +56,8 @@ class _ProfileViewState extends State<ProfileView> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginView()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginView()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

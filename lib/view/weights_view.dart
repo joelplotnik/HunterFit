@@ -14,10 +14,9 @@ class _WeightsViewState extends State<WeightsView> {
 
   Widget _setCard() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
+      padding: const EdgeInsets.fromLTRB(80, 10, 80, 10),
       child: SizedBox(
         height: 80,
-        width: (MediaQuery.of(context).size.width) * 0.35,
         child: Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -80,7 +79,6 @@ class _WeightsViewState extends State<WeightsView> {
         children: [
           SizedBox(
             height: 120,
-            width: (MediaQuery.of(context).size.width) * 0.35,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

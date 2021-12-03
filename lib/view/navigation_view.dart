@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hunter_fit/api/google_maps_page.dart';
 import 'package:hunter_fit/view/profile_view.dart';
 import 'package:hunter_fit/view/weights_view.dart';
-<<<<<<< HEAD
 import 'package:hunter_fit/view/activity_view.dart';
-
-=======
 import 'package:hunter_fit/view/groups_view.dart';
->>>>>>> ebed9758f2cd951b3ac4b3209c00f06ff3a95402
-class Navigation extends StatefulWidget {
 
+class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
 
   @override
   _NavigationState createState() => _NavigationState();
-
 }
 
 class _NavigationState extends State<Navigation> {
@@ -32,17 +27,32 @@ class _NavigationState extends State<Navigation> {
     setState(() {
       _selectedPage = page;
 
-      switch(page) {
-        case 0: { _title = 'Activity'; }
-        break;
-        case 1: { _title = 'Cardio'; }
-        break;
-        case 2: { _title = 'Groups'; }
-        break;
-        case 3: { _title = 'Weightlifting'; }
-        break;
-        case 4: { _title = 'Profile'; }
-        break;
+      switch (page) {
+        case 0:
+          {
+            _title = 'Activity';
+          }
+          break;
+        case 1:
+          {
+            _title = 'Cardio';
+          }
+          break;
+        case 2:
+          {
+            _title = 'Groups';
+          }
+          break;
+        case 3:
+          {
+            _title = 'Weightlifting';
+          }
+          break;
+        case 4:
+          {
+            _title = 'Profile';
+          }
+          break;
       }
     });
     pageController.jumpToPage(page);
@@ -56,41 +66,60 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-            child: Text(_title)),
-        backgroundColor: const Color(0xFF47ABD1),
-        automaticallyImplyLeading: false,
-      ),
-      body: PageView(
-        controller: pageController,
-        children: [
-          ActivityView(),
-          const GoogleMapPage(),
-          const GroupsView(),
-          const WeightsView(),
-          const ProfileView(),
-        ],
-      ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: const Color(0xFF47ABD1),
+        appBar: AppBar(
+          title: Center(child: Text(_title)),
+          backgroundColor: const Color(0xFF47ABD1),
+          automaticallyImplyLeading: false,
         ),
-      child: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.local_activity,), label: 'Activity',),
-          BottomNavigationBarItem(icon: Icon(Icons.directions_run,), label: 'Cardio'),
-          BottomNavigationBarItem(icon: Icon(Icons.group,), label: 'Groups'),
-          BottomNavigationBarItem(icon: Icon(Icons.fitness_center,), label: 'Weightlifting'),
-          BottomNavigationBarItem(icon: Icon(Icons.person,), label: 'Profile')
-        ],
-        currentIndex: _selectedPage,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        onTap: onTapped,
-      ),)
-    );
+        body: PageView(
+          controller: pageController,
+          children: [
+            ActivityView(),
+            const GoogleMapPage(),
+            const GroupsView(),
+            const WeightsView(),
+            const ProfileView(),
+          ],
+        ),
+        bottomNavigationBar: Theme(
+          data: Theme.of(context).copyWith(
+            canvasColor: const Color(0xFF47ABD1),
+          ),
+          child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.local_activity,
+                ),
+                label: 'Activity',
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.directions_run,
+                  ),
+                  label: 'Cardio'),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.group,
+                  ),
+                  label: 'Groups'),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.fitness_center,
+                  ),
+                  label: 'Weightlifting'),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person,
+                  ),
+                  label: 'Profile')
+            ],
+            currentIndex: _selectedPage,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white,
+            onTap: onTapped,
+          ),
+        ));
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hunter_fit/api/google_maps_page.dart';
 import 'package:hunter_fit/view/profile_view.dart';
 import 'package:hunter_fit/view/weights_view.dart';
-
+import 'package:hunter_fit/view/groups_view.dart';
 class Navigation extends StatefulWidget {
 
   const Navigation({Key? key}) : super(key: key);
@@ -64,7 +64,7 @@ class _NavigationState extends State<Navigation> {
         children: [
           Container( color: Colors.white,),
           const GoogleMapPage(),
-          Container( color: Colors.white,),
+          const GroupsView(),
           const WeightsView(),
           const ProfileView(),
         ],

@@ -29,7 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  #font awesome
+  font_awesome_flutter: ^9.2.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -52,7 +53,7 @@ dependencies:
 
   # A wrapper around InheritedWidget to make them easier to use and more reusable.
   provider: ^6.0.1
-  flutter_countdown_timer: ^4.1.0
+
 
 
 

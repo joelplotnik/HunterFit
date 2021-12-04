@@ -14,7 +14,7 @@ class _WeightsViewState extends State<WeightsView> {
 
   Widget _setCard() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(80, 10, 80, 10),
+      padding: const EdgeInsets.fromLTRB(70, 2, 70, 2), //Offset of Card outside
       child: SizedBox(
         height: 80,
         child: Card(
@@ -58,7 +58,7 @@ class _WeightsViewState extends State<WeightsView> {
                     hintText: "0",
                     counterText: "",
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.fromLTRB(15, 24, 40, 10),
+                    contentPadding: EdgeInsets.fromLTRB(20, 24, 30, 10),
                   ),
                 ),
               ),
@@ -78,28 +78,61 @@ class _WeightsViewState extends State<WeightsView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 120,
+            height: 50,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              SizedBox(width: 1),
-              Text("Sets"),
-              SizedBox(width: 30),
-              Text("Reps"),
-              SizedBox(width: 50),
-              Text("Weight"),
-              SizedBox(width: 30),
-              Text("1RM"),
-              SizedBox(width: 1),
+          Stack(
+            children: [
+              Container(
+                width: 400,
+                height: 570,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    side: const BorderSide(
+                      color: Colors.grey,
+                      width: 2,
+                    ),
+                  ),
+                  child: ListView(
+                    physics: new ClampingScrollPhysics(),
+                    children: [
+                      Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          image: const DecorationImage(
+                            image: AssetImage("assets/images/Deadlift.jpeg"),
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          SizedBox(width: 2, height: 50),
+                          Text("Sets"),
+                          SizedBox(width: 30),
+                          Text("Reps"),
+                          SizedBox(width: 50),
+                          Text("Weight"),
+                          SizedBox(width: 30),
+                          Text("1RM"),
+                          SizedBox(width: 2),
+                        ],
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _setsList.length,
+                        itemBuilder: (context, index) {
+                          return _setsList[index];
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: _setsList.length,
-            itemBuilder: (context, index) {
-              return _setsList[index];
-            },
           )
         ],
       ),

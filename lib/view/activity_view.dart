@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ActivityView extends StatelessWidget {
+class ActivityView extends StatefulWidget {
   static String routeName = "/activity";
 
+  @override
+  State<ActivityView> createState() => _ActivityViewState();
+}
+
+class _ActivityViewState extends State<ActivityView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -52,6 +52,9 @@ dependencies:
 
   # A wrapper around InheritedWidget to make them easier to use and more reusable.
   provider: ^6.0.1
+
+  # A simple flutter countdown timer widget.Count down through the end timestamp,
+  # Trigger an event after the countdown ends.
   flutter_countdown_timer: ^4.1.0
 
 

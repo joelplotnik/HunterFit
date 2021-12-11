@@ -94,7 +94,7 @@ class _WeightsViewState extends State<WeightsView> {
                     ),
                   ),
                   child: ListView(
-                    physics: new ClampingScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       Container(
                         height: 150,
@@ -139,7 +139,8 @@ class _WeightsViewState extends State<WeightsView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Color(0xFF47ABD1),
+        elevation: 7,
         onPressed: () {
           setState(() {
             _setsList.add(_setCard());

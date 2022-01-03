@@ -13,30 +13,33 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFF47ABD1),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const SizedBox(height: 100),
-                // HunterFit logo
-                Align(
-                  alignment: Alignment.center,
-                  child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
-                ),
-                const SizedBox(height: 25),
-                // Container for username and password
-                const LoginForm(),
-              ],
-            )
-          ],
+    return WillPopScope(
+      onWillPop: () async => !Navigator.of(context).userGestureInProgress,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: const Color(0xFF47ABD1),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const SizedBox(height: 100),
+                  // HunterFit logo
+                  Align(
+                    alignment: Alignment.center,
+                    child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
+                  ),
+                  const SizedBox(height: 25),
+                  // Container for username and password
+                  const LoginForm(),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -68,61 +68,64 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Center(child: Text(_title)),
-          backgroundColor: const Color(0xFF47ABD1),
-          automaticallyImplyLeading: false,
-        ),
-        body: PageView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: pageController,
-          children: [
-            ActivityView(),
-            const GoogleMapPage(),
-            const GroupsView(),
-            const WeightsView(),
-            const ProfileView(),
-          ],
-        ),
-        bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: const Color(0xFF47ABD1),
+    return WillPopScope(
+      onWillPop: () async => !Navigator.of(context).userGestureInProgress,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Center(child: Text(_title)),
+            backgroundColor: const Color(0xFF47ABD1),
+            automaticallyImplyLeading: false,
           ),
-          child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.local_activity,
-                ),
-                label: 'Activity',
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.directions_run,
-                  ),
-                  label: 'Cardio'),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.group,
-                  ),
-                  label: 'Groups'),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.fitness_center,
-                  ),
-                  label: 'Weightlifting'),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.person,
-                  ),
-                  label: 'Profile')
+          body: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: pageController,
+            children: [
+              ActivityView(),
+              const GoogleMapPage(),
+              const GroupsView(),
+              const WeightsView(),
+              const ProfileView(),
             ],
-            currentIndex: _selectedPage,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
-            onTap: onTapped,
           ),
-        ));
+          bottomNavigationBar: Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: const Color(0xFF47ABD1),
+            ),
+            child: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.local_activity,
+                  ),
+                  label: 'Activity',
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.directions_run,
+                    ),
+                    label: 'Cardio'),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.group,
+                    ),
+                    label: 'Groups'),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.fitness_center,
+                    ),
+                    label: 'Weightlifting'),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.person,
+                    ),
+                    label: 'Profile')
+              ],
+              currentIndex: _selectedPage,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white,
+              onTap: onTapped,
+            ),
+          )),
+    );
   }
 }

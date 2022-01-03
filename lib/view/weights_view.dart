@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:hunter_fit/view/weightlifting.dart';
-import 'package:hunter_fit/widgets/countdown_timer.dart';
+//import 'package:hunter_fit/widgets/countdown_timer.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -10,69 +10,13 @@ class WeightsView extends StatefulWidget {
 }
 
 class _WeightsViewState extends State<WeightsView> {
-  List<Widget> _setsList = [];
+  final List<Widget> _setsList = [];
   int number = 1;
 
   BoxDecoration myBoxDecoration() {
-    return BoxDecoration(border: Border.all(), color: Color(0xFF47ABD1));
+    return BoxDecoration(border: Border.all(), color: const Color(0xFF47ABD1));
   }
 
-  Widget _setCard() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(70, 2, 70, 2), //Offset of Card outside
-      child: SizedBox(
-        height: 80,
-        child: Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: const BorderSide(
-                color: Colors.grey,
-                width: 1,
-              )),
-          color: Colors.grey.shade300,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Expanded(
-                child: TextField(
-                  maxLength: 3,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      hintText: "0",
-                      counterText: "",
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.fromLTRB(40, 25, 10, 10)),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(25),
-                child: Text(
-                  "X",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TextField(
-                  maxLength: 3,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: "0",
-                    counterText: "",
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.fromLTRB(20, 24, 30, 10),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _setCard2() {
     return Row(
@@ -143,11 +87,11 @@ class _WeightsViewState extends State<WeightsView> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Container(
-            alignment: Alignment(-.9, -.1),
+            alignment: const Alignment(-.9, -.1),
             child: const Text(
               "Barbell Bench press",
               style: TextStyle(
@@ -155,10 +99,10 @@ class _WeightsViewState extends State<WeightsView> {
                   fontWeight: FontWeight.w500,
                   color: Colors.white),
             ),
-            color: Color(0xFF47ABD1),
+            color: const Color(0xFF47ABD1),
             height: 50,
           ),
-          Divider(
+          const Divider(
             color: Colors.black87,
             height: 2,
             thickness: 3,
@@ -171,7 +115,7 @@ class _WeightsViewState extends State<WeightsView> {
                 return _setsList[index];
               },
               separatorBuilder: (BuildContext context, int index) {
-                return Divider(
+                return const Divider(
                   color: Colors.grey,
                   height: 1,
                   thickness: 1,
@@ -184,7 +128,7 @@ class _WeightsViewState extends State<WeightsView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        backgroundColor: Color(0xFF47ABD1),
+        backgroundColor: const Color(0xFF47ABD1),
         elevation: 7,
         onPressed: () {
           setState(() {

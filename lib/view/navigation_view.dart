@@ -55,7 +55,9 @@ class _NavigationState extends State<Navigation> {
           break;
       }
     });
+
     pageController.jumpToPage(page);
+
 
     // To add animations
     /*
@@ -73,6 +75,7 @@ class _NavigationState extends State<Navigation> {
           automaticallyImplyLeading: false,
         ),
         body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: pageController,
           children: [
             ActivityView(),

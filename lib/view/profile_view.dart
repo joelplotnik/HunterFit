@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hunter_fit/view/login_view.dart';
 
 class ProfileView extends StatefulWidget {
@@ -10,7 +11,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  late DateTime _dateTime = DateTime.now();
+  //late DateTime _dateTime = DateTime.now();
   bool datePickerVisible = false;
 
   @override
@@ -29,176 +30,35 @@ class _ProfileViewState extends State<ProfileView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Row(children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Hi, User',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
+                  SizedBox(
+                    height: 115,
+                    width: 115,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        const CircleAvatar(
+                          backgroundImage:
+                              AssetImage("assets/profile_photo.jpg"),
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Let\'s learn about you.',
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: SizedBox(
+                            height: 46,
+                            width: 46,
+                            child: TextButton(
+                              onPressed: () => {},
+                              child: const Icon(
+                                Icons.camera_alt_rounded,
+                                color: Color(0xFFdcdcdc),
+                                size: 40,
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                    const SizedBox(
-                      width: 50,
-                    ),
-                    const Icon(
-                      Icons.account_circle_rounded,
-                      color: Colors.black,
-                      size: 75.0,
-                      semanticLabel: 'profile image',
-                    ),
-                  ]),
-
-                  const SizedBox(height: 50),
-
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Name: ',
-                    ),
                   ),
-
-                  const SizedBox(height: 50),
-
-                  // *********** THIS BEGINS THE DATE PICKER **************
-                  Stack(
-                    children: [
-                      ElevatedButton(
-                        child: const Text(
-                          'Birthdate',
-                          textAlign: TextAlign.start,
-                        ),
-                        onPressed: () => setState(
-                            () => datePickerVisible = !datePickerVisible),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 40),
-                          primary: const Color(0xFFefeff0),
-                          onPrimary: Colors.black,
-                          alignment: Alignment.centerLeft,
-                          textStyle: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                      if (datePickerVisible)
-                        Container(
-                          color: Colors.white,
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text('Choose Date of Birth'),
-                                      style: ElevatedButton.styleFrom(
-                                        splashFactory: NoSplash.splashFactory,
-                                        elevation: 0,
-                                        side: const BorderSide(width: 1.0, color: Color(0xFFefeff0),),
-                                        primary: Colors.white,
-                                        onPrimary: Colors.black,
-                                        textStyle: const TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: 'Roboto',
-                                            fontWeight: FontWeight.normal),
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(0),
-                                            topRight: Radius.circular(0),
-                                            bottomLeft: Radius.circular(0),
-                                            bottomRight: Radius.circular(0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 70,
-                                child: CupertinoDatePicker(
-                                    backgroundColor: Colors.white,
-                                    initialDateTime: _dateTime,
-                                    mode: CupertinoDatePickerMode.date,
-                                    onDateTimeChanged: (dateTime) {
-                                      setState(() {
-                                        _dateTime = dateTime;
-                                        print(_dateTime);
-                                      });
-                                    }),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                        onPressed: () => setState(
-                                                () => datePickerVisible = !datePickerVisible),
-                                        style: ElevatedButton.styleFrom(
-                                          elevation: 0,
-                                          side: const BorderSide(width: 1.0, color: Color(0xFFefeff0),),
-                                          primary: Colors.white,
-                                          onPrimary: Colors.black,
-                                          textStyle: const TextStyle(
-                                              fontSize: 16,
-                                              fontFamily: 'Roboto',
-                                              fontWeight: FontWeight.normal),
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(0),
-                                              topRight: Radius.circular(0),
-                                              bottomLeft: Radius.circular(0),
-                                              bottomRight: Radius.circular(0),
-                                            ),
-                                          ),
-                                        ),
-                                        child: const Text('Cancel')),
-                                  ),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () => setState(
-                                              () => datePickerVisible = !datePickerVisible),
-                                        child: const Text('OK'),
-                                        style: ElevatedButton.styleFrom(
-                                          elevation: 0,
-                                          side: const BorderSide(width: 1.0, color: Color(0xFFefeff0),),
-                                          primary: Colors.white,
-                                          onPrimary: Colors.black,
-                                          textStyle: const TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: 'Roboto',
-                                            fontWeight: FontWeight.normal),
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(0),
-                                            topRight: Radius.circular(0),
-                                            bottomLeft: Radius.circular(0),
-                                            bottomRight: Radius.circular(0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 50),
-
                   ElevatedButton(
                     child: const Text(
                       'Log out',

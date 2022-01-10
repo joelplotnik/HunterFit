@@ -50,8 +50,8 @@ class _ProfileViewState extends State<ProfileView> {
                               onPressed: () => {},
                               child: const Icon(
                                 Icons.camera_alt_rounded,
-                                color: Color(0xFFdcdcdc),
-                                size: 40,
+                                color: Color(0xFF47ABD1),
+                                size: 38,
                               ),
                             ),
                           ),
@@ -59,6 +59,128 @@ class _ProfileViewState extends State<ProfileView> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 20),
+
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 5, 5, 4),
+                    child: Container(
+                      height: 50,
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Name: ',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          border: Border.all(width: 1.0, color: Colors.black54)),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 5, 5, 4),
+                    child: Container(
+                      height: 50,
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Age: ',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                          const BorderRadius.all(Radius.circular(10)),
+                          border: Border.all(width: 1.0, color: Colors.black54)),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 5, 5, 4),
+                    child: Container(
+                      height: 50,
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Weight: ',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                          const BorderRadius.all(Radius.circular(10)),
+                          border: Border.all(width: 1.0, color: Colors.black54)),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 5, 5, 4),
+                    child: Container(
+                      height: 100,
+                      child: const Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Goals: ',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                          const BorderRadius.all(Radius.circular(10)),
+                          border: Border.all(width: 1.0, color: Colors.black54)),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  ElevatedButton(
+                    child: const Text(
+                      'Save',
+                      textAlign: TextAlign.center,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginView()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 40),
+                      primary: const Color(0xFF47ABD1),
+                      padding: const EdgeInsets.only(
+                          left: 40, right: 40, bottom: 8.0, top: 8.0),
+                      textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.normal),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5),
+                          bottomLeft: Radius.circular(5),
+                          bottomRight: Radius.circular(5),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
                   ElevatedButton(
                     child: const Text(
                       'Log out',

@@ -31,7 +31,7 @@ class LoginFormState extends State<LoginForm> {
     loginViewModel.getUserDB();
 
     // ********** For testing purposes ***********
-    // signupViewModel.deleteUser(''); // Enter a username is database to delete user
+    // signupViewModel.deleteUser(''); // Enter a username in database to delete user
     loginViewModel.printDatabase();
 
     // Build a Form widget using the _formKey created above.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/view/weights/components/set_card.dart';
 //import 'package:hunter_fit/view/weightlifting.dart';
 //import 'package:hunter_fit/widgets/countdown_timer.dart';
 
@@ -11,74 +12,7 @@ class WeightsView extends StatefulWidget {
 
 class _WeightsViewState extends State<WeightsView> {
   final List<Widget> _setsList = [];
-  int number = 1;
-
-  BoxDecoration myBoxDecoration() {
-    return BoxDecoration(border: Border.all(), color: const Color(0xFF47ABD1));
-  }
-
-
-  Widget _setCard2() {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            height: 60,
-            alignment: Alignment.center,
-            child: const Text(
-              '1',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            decoration: myBoxDecoration(),
-          ),
-        ),
-        const Expanded(
-          flex: 3,
-          child: TextField(
-            textAlign: TextAlign.center,
-            maxLength: 3,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 33),
-              hintText: "Reps",
-              suffix: Text('reps'),
-              counterText: "",
-              border: InputBorder.none,
-            ),
-          ),
-        ),
-        const Expanded(
-          child: Text(
-            "X",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const Expanded(
-          flex: 3,
-          child: TextField(
-            textAlign: TextAlign.center,
-            maxLength: 3,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 31),
-              hintText: "Weight",
-              counterText: "",
-              border: InputBorder.none,
-              suffix: Text('lbs'),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  int setNumber = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +66,7 @@ class _WeightsViewState extends State<WeightsView> {
         elevation: 7,
         onPressed: () {
           setState(() {
-            _setsList.add(_setCard2());
+            _setsList.add(setCard());
           });
         },
       ),

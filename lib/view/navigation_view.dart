@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/api/google_maps_page.dart';
 import 'package:hunter_fit/view/profile_view.dart';
-import 'package:hunter_fit/view/weights_view.dart';
+import 'package:hunter_fit/view/weights/weights_view.dart';
 import 'package:hunter_fit/view/activity_view.dart';
 import 'package:hunter_fit/view/groups_view.dart';
 
@@ -57,7 +57,6 @@ class _NavigationState extends State<Navigation> {
     });
 
     pageController.jumpToPage(page);
-
 
     // To add animations
     /*

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
+import 'package:hunter_fit/constants.dart' as constants;
 //import 'package:hunter_fit/view/weightlifting.dart';
 //import 'package:hunter_fit/widgets/countdown_timer.dart';
 
@@ -19,29 +20,55 @@ class _WeightsViewState extends State<WeightsView> {
     return Scaffold(
       backgroundColor: Colors.white70,
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             height: 8,
           ),
           Container(
+            height: 55,
+            color: constants.hunterColor,
             alignment: const Alignment(-.9, -.1),
-            child: const Text(
-              "Barbell Bench press",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  "Barbell Bench press",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+                SizedBox(
+                  width: 125,
+                ),
+                RotatedBox(
+                  quarterTurns: 1,
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: IconButton(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(bottom: 10, top: 5),
+                      icon: Icon(
+                        Icons.fitness_center,
+                        size: 40,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                )
+              ],
             ),
-            color: const Color(0xFF47ABD1),
-            height: 50,
           ),
           const Divider(
             color: Colors.black87,
             height: 2,
             thickness: 3,
           ),
-          Expanded(
+          Container(
+            height: 304,
             child: ListView.separated(
               shrinkWrap: true,
               itemCount: _setsList.length,
@@ -57,18 +84,38 @@ class _WeightsViewState extends State<WeightsView> {
               },
             ),
           ),
+          Divider(
+            color: Colors.grey,
+            height: 1,
+            thickness: 1,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  elevation: 5,
+                  primary: constants.hunterColor,
+                ),
+                onPressed: () {
+                  setState(() {
+                    createSetCard card = createSetCard(setNumber);
+                    _setsList.add(card.setCard());
+                    setNumber++;
+                  });
+                },
+                icon: Icon(Icons.add),
+                label: Text('Add Set'),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text('Hello'),
+            ],
+          )
         ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        backgroundColor: const Color(0xFF47ABD1),
-        elevation: 7,
-        onPressed: () {
-          setState(() {
-            _setsList.add(setCard());
-          });
-        },
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
+import 'workouts_list.dart';
 //import 'package:hunter_fit/view/weightlifting.dart';
 //import 'package:hunter_fit/widgets/countdown_timer.dart';
 
@@ -26,7 +27,7 @@ class _WeightsViewState extends State<WeightsView> {
           ),
           Container(
             height: 55,
-            color: constants.hunterColor,
+            color: constants.kHunterColor,
             alignment: const Alignment(-.9, -.1),
             child: Row(
               children: [
@@ -46,8 +47,14 @@ class _WeightsViewState extends State<WeightsView> {
                 RotatedBox(
                   quarterTurns: 1,
                   child: Material(
-                    type: MaterialType.transparency,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: Colors.blueGrey.shade300,
+                    elevation: 5,
+                    clipBehavior: Clip.hardEdge,
                     child: IconButton(
+                      splashColor: Colors.white,
                       alignment: Alignment.center,
                       padding: EdgeInsets.only(bottom: 10, top: 5),
                       icon: Icon(
@@ -55,10 +62,17 @@ class _WeightsViewState extends State<WeightsView> {
                         size: 40,
                         color: Colors.black,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WorkoutsList(),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -85,9 +99,9 @@ class _WeightsViewState extends State<WeightsView> {
             ),
           ),
           Divider(
-            color: Colors.grey,
-            height: 1,
-            thickness: 1,
+            color: Colors.black,
+            height: 3,
+            thickness: 4,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,13 +109,13 @@ class _WeightsViewState extends State<WeightsView> {
             children: [
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  elevation: 5,
-                  primary: constants.hunterColor,
+                  elevation: 8,
+                  primary: constants.kHunterColor,
                 ),
                 onPressed: () {
                   setState(() {
-                    createSetCard card = createSetCard(setNumber);
-                    _setsList.add(card.setCard());
+                    SetCard card = SetCard(setNumber);
+                    _setsList.add(card.createSetCard());
                     setNumber++;
                   });
                 },
@@ -110,10 +124,100 @@ class _WeightsViewState extends State<WeightsView> {
               ),
             ],
           ),
-          Row(
-            children: [
-              Text('Hello'),
-            ],
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: 45,
+                  width: 130,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Total Reps",
+                        style: constants.kWeightsDataTitle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            '58',
+                            style: constants.kWeightsData,
+                          ),
+                          Text('reps'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 45,
+                  width: 130,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Total Reps",
+                        style: constants.kWeightsDataTitle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            '40',
+                            style: constants.kWeightsData,
+                          ),
+                          Text('reps'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 45,
+                  width: 130,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Average Weight",
+                        style: constants.kWeightsDataTitle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            '85.8',
+                            style: constants.kWeightsData,
+                          ),
+                          Text('lbs'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),

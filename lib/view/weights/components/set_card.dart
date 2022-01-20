@@ -5,12 +5,12 @@ BoxDecoration myBoxDecoration() {
   return BoxDecoration(border: Border.all(), color: const Color(0xFF47ABD1));
 }
 
-class createSetCard {
-  createSetCard(this.setNumber);
+class SetCard {
+  SetCard(this.setNumber);
 
   int setNumber;
 
-  Widget setCard() {
+  Widget createSetCard() {
     return Row(
       children: [
         Expanded(

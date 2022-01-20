@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
 import 'workouts_list.dart';
-//import 'package:hunter_fit/view/weightlifting.dart';
-//import 'package:hunter_fit/widgets/countdown_timer.dart';
+import 'package:flutter_countdown_timer/countdown.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -13,8 +12,64 @@ class WeightsView extends StatefulWidget {
 }
 
 class _WeightsViewState extends State<WeightsView> {
-  final List<Widget> _setsList = [];
-  int setNumber = 1;
+  final List<Widget> _setsList = [
+    Row(
+      children: [
+        Expanded(
+          child: Container(
+            height: 60,
+            alignment: Alignment.center,
+            child: Text(
+              '1',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            decoration: myBoxDecoration(),
+          ),
+        ),
+        const Expanded(
+          flex: 3,
+          child: TextField(
+            textAlign: TextAlign.center,
+            maxLength: 3,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              isDense: true,
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              hintText: "Reps",
+              suffix: Text('reps'),
+              counterText: "",
+              border: InputBorder.none,
+            ),
+          ),
+        ),
+        const Expanded(
+          flex: 3,
+          child: TextField(
+            textAlign: TextAlign.center,
+            maxLength: 3,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              isDense: true,
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              hintText: "Weight",
+              counterText: "",
+              border: InputBorder.none,
+              suffix: Text('lbs'),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 20,
+        )
+      ],
+    ),
+  ];
+  int setNumber = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -103,26 +158,29 @@ class _WeightsViewState extends State<WeightsView> {
             height: 3,
             thickness: 4,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  elevation: 8,
-                  primary: constants.kHunterColor,
+          Container(
+            color: Colors.grey.shade400,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 8,
+                    primary: constants.kHunterColor,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      SetCard card = SetCard(setNumber);
+                      _setsList.add(card.createSetCard());
+                      setNumber++;
+                    });
+                  },
+                  icon: Icon(Icons.add),
+                  label: Text('Add Set'),
                 ),
-                onPressed: () {
-                  setState(() {
-                    SetCard card = SetCard(setNumber);
-                    _setsList.add(card.createSetCard());
-                    setNumber++;
-                  });
-                },
-                icon: Icon(Icons.add),
-                label: Text('Add Set'),
-              ),
-            ],
+              ],
+            ),
           ),
           Expanded(
             child: Row(
@@ -218,7 +276,7 @@ class _WeightsViewState extends State<WeightsView> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

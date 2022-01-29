@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/api/google_maps_page.dart';
 import 'package:hunter_fit/view/ProfilePage.dart';
@@ -18,6 +19,8 @@ class _NavigationState extends State<Navigation> {
   late String _title;
   PageController pageController = PageController();
 
+
+
   @override
   void initState() {
     _title = 'Activity';
@@ -25,6 +28,7 @@ class _NavigationState extends State<Navigation> {
   }
 
   void onTapped(int page) {
+
     setState(() {
       _selectedPage = page;
 
@@ -68,6 +72,7 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+
     return WillPopScope(
       onWillPop: () async => !Navigator.of(context).userGestureInProgress,
       child: Scaffold(
@@ -84,7 +89,7 @@ class _NavigationState extends State<Navigation> {
               const GoogleMapPage(),
               const GroupsView(),
               const WeightsView(),
-              ProfilePage(user: user),
+             // ProfilePage(user: user),
             ],
           ),
           bottomNavigationBar: Theme(

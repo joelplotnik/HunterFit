@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 
 import 'LoginPage.dart';
 import 'fire_auth.dart';
+import 'navigation_view.dart';
 
 class ProfilePage extends StatefulWidget {
   final User user;
+
   const ProfilePage({required this.user});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
+
 }
 class _ProfilePageState extends State<ProfilePage> {
+
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
   late User _currentUser;
@@ -85,7 +90,41 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
               },
             ),
+            ElevatedButton(
+              child: const Text(
+                'Log in',
+                textAlign: TextAlign.center,
+              ),
+              onPressed: () {
 
+
+
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Navigation()),
+                  );
+
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 40),
+                primary: const Color(0xFF7ebbd7),
+                padding: const EdgeInsets.only(
+                    left: 40, right: 40, bottom: 8.0, top: 8.0),
+                textStyle: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.normal),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    topRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
+                  ),
+                ),
+              ),
+            ),
             // Add widgets for verifying email
             // and, signing out the user
           ],

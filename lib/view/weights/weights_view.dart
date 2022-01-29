@@ -282,3 +282,4 @@ class _WeightsViewState extends State<WeightsView> {
     );
   }
 }
+

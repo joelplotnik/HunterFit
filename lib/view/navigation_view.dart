@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/api/google_maps_page.dart';
-import 'package:hunter_fit/view/profile_view.dart';
+import 'package:hunter_fit/view/ProfilePage.dart';
+
 import 'package:hunter_fit/view/weights/weights_view.dart';
 import 'package:hunter_fit/view/activity_view.dart';
 import 'package:hunter_fit/view/groups_view.dart';
@@ -83,7 +84,7 @@ class _NavigationState extends State<Navigation> {
               const GoogleMapPage(),
               const GroupsView(),
               const WeightsView(),
-              const ProfileView(),
+              ProfilePage(user: user),
             ],
           ),
           bottomNavigationBar: Theme(

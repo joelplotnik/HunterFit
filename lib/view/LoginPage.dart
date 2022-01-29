@@ -62,7 +62,7 @@ class LoginPage extends StatelessWidget {
                                 if (_formKey.currentState!.validate()) {
                                   User? user = await FireAuth.signInUsingEmailPassword(
                                     email: _emailTextController.text,
-                                    password: _passwordTextController.text, context: null!,
+                                    password: _passwordTextController.text, context: context
                                   );
                                   if (user != null) {
                                     Navigator.of(context)

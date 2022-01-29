@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hunter_fit/model/user_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
+/*
 class DBHelper {
   static Future<Database> database() async {
     // Avoid errors caused by flutter upgrade.
@@ -91,3 +91,4 @@ class DBHelper {
     );
   }
 }
+*/

@@ -1,6 +1,7 @@
 import 'package:hunter_fit/model/user_model.dart';
 import 'package:hunter_fit/helper/db_helper.dart';
 
+/*
 class LoginViewModel {
   DBHelper dbHelper = DBHelper();
   List<User> userList = [];
@@ -60,3 +61,4 @@ class LoginViewModel {
     print(await dbHelper.users());
   }
 }
+*/

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "377648411741",
+    "project_id": "hunterfit-c39b3",
+    "storage_bucket": "hunterfit-c39b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377648411741:android:cd1565eba2b528c4a749b4",
+        "android_client_info": {
+          "package_name": "com.example.hunter_fit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377648411741-kqbkdbnm289hbkpippkcjo2t9dqi51i3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzpSIH5EPkEk2sKLRSBXSQUk9V7z8Tv9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377648411741-kqbkdbnm289hbkpippkcjo2t9dqi51i3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

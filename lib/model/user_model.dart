@@ -1,14 +1,14 @@
-class User {
+/*class User {
   final int? id;
   final String username;
   final String password;
 
-  User({
+ /* User({
     required this.id,
     required this.username,
     required this.password,
   });
-
+*/
   // Convert a User into a Map. The keys must correspond to the names of the
   // columns in the database.
   Map<String, dynamic> toMap() {
@@ -26,3 +26,4 @@ class User {
     return 'User{id: $id, username: $username, password: $password}' '\n';
   }
 }
+*/

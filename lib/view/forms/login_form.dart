@@ -1,19 +1,25 @@
-import 'package:flutter/material.dart';
+
+/*import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/navigation_view.dart';
 import 'package:hunter_fit/view/signup_view.dart';
 import 'package:hunter_fit/viewmodel/login_viewmodel.dart';
+
+import '../validator.dart';
+
 
 // Define a custom Form widget.
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
 
   @override
-  LoginFormState createState() => LoginFormState();
+  LoginFormState createState() {return LoginFormState();}
 }
 
 // Define a corresponding State class.
 // This class holds data related to the form.
 class LoginFormState extends State<LoginForm> {
+
+
   final loginViewModel = LoginViewModel();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -24,18 +30,51 @@ class LoginFormState extends State<LoginForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
+  final _nameTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
 
+  final _focusName = FocusNode();
+  final _focusEmail = FocusNode();
+  final _focusPassword = FocusNode();
+  bool _isProcessing = false;
   @override
   Widget build(BuildContext context) {
     // Load up the database
-    loginViewModel.getUserDB();
+
 
     // ********** For testing purposes ***********
     // signupViewModel.deleteUser(''); // Enter a username in database to delete user
-    loginViewModel.printDatabase();
+
 
     // Build a Form widget using the _formKey created above.
     return Form(
+
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          TextFormField(
+            controller: _emailTextController,
+            focusNode: _focusEmail,
+            validator: (value) => Validator.validateEmail(email: value),
+          ),
+          SizedBox(height: 8.0),
+          TextFormField(
+            controller: _passwordTextController,
+            focusNode: _focusPassword,
+            obscureText: true,
+            validator: (value) => Validator.validatePassword(password: value),
+          ),
+        ],
+      ),
+
+    )
+
+
+  }
+}
+
+      /*Form(
       key: _formKey,
       child: Column(
         children: [
@@ -245,3 +284,7 @@ class LoginFormState extends State<LoginForm> {
     );
   }
 }
+*/
+*/
+
+

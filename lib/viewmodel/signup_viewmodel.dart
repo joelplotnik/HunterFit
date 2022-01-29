@@ -1,6 +1,9 @@
 import 'package:hunter_fit/model/user_model.dart';
 import 'package:hunter_fit/helper/db_helper.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase/firebase.dart';
+import 'package:firebase/firestore.dart' as fs;
+/*
 class SignupViewModel {
   DBHelper dbHelper = DBHelper();
   List<User> userList = [];
@@ -39,7 +42,19 @@ class SignupViewModel {
     await dbHelper.insertUser(user); // insert user
     getUserDB(); // update the userList
   }
+  /*void createUser(String name, String pass) async {
+    var tempName = name.toLowerCase();
 
+    var user = User(
+      id: null,
+      username: tempName,
+      password: pass,
+    );
+
+    await dbHelper.insertUser(user); // insert user
+    getUserDB(); // update the userList
+  }
+*/
   // Delete user
   void deleteUser(String name) async {
     var tempName = name.toLowerCase();
@@ -57,3 +72,4 @@ class SignupViewModel {
     print(await dbHelper.users());
   }
 }
+*/

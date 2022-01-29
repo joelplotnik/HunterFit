@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 
 
 
@@ -7,19 +9,28 @@ class GroupsView extends StatefulWidget {
 
   @override
   State<GroupsView> createState() => _GroupsViewState();
+
 }
 
 class _GroupsViewState extends State<GroupsView> {
-  final List<String> names = <String>['Aby', 'Aish', 'Ayan', 'Ben', 'Bob', 'Charlie', 'Cook', 'Carline'];
-  final List<int> msgCount = <int>[2, 0, 10, 6, 52, 4, 0, 2];
+  int segmentedControlGroupValue=0;
+  final Map<int, Widget> myTabs = const <int, Widget>{
+    0: Text("Item 1"),
+    1: Text("Item 2")
+  };
+
+  final List<String> names = <String>['Nicks Group', 'Fitness Fire', 'Athletes & All Stars',  'Greatest Group', ];
+  final List<int> memCount = <int>[2, 0, 10, 6, ];
   TextEditingController nameController = TextEditingController();
 
   void addItemToList(){
     setState(() {
       names.insert(0,nameController.text);
-      msgCount.insert(0, 0);
+      memCount.insert(0, 0);
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +44,7 @@ class _GroupsViewState extends State<GroupsView> {
               controller: nameController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Contact Name',
+                labelText: 'Group Name',
               ),
             ),
           ),
@@ -53,7 +64,7 @@ class _GroupsViewState extends State<GroupsView> {
                      margin: EdgeInsets.all(2),
                      color: Color(0xFF47ABD1),
                      child: Center(
-                         child: Text('${names[index]} (${msgCount[index]})',
+                         child: Text('${names[index]} (${memCount[index]})',
                            style: TextStyle(fontSize: 18),
                          )
                      ),
@@ -67,6 +78,8 @@ class _GroupsViewState extends State<GroupsView> {
     );
   }
 }
+
+
 /*
 Expanded(
  child: Row(

@@ -1,7 +1,40 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hunter_fit/view/forms/login_form.dart';
+class LoginView extends StatelessWidget {
 
+
+  Future<FirebaseApp> _initializeFirebase() async {
+
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Firebase Authentication'),
+      ),
+      body: FutureBuilder(
+        future: _initializeFirebase(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Column(
+              children: [
+                Text('Login'),
+              ],
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+    );
+  }
+
+}
+/*
 // LoginView is the first screen a user will see upon launching the system
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -11,6 +44,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -45,3 +80,4 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+*/

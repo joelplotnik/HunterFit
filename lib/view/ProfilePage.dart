@@ -85,18 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
               },
             ),
-            ElevatedButton(
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
 
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => LoginPage(),
-                    ),
-                  );
-                },
-                child: Text('Sign out')
-            )
             // Add widgets for verifying email
             // and, signing out the user
           ],

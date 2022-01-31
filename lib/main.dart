@@ -6,10 +6,12 @@ import 'package:provider/provider.dart';
 // Run HunterFit
 void main() {
 
-  runApp(HunterFit());
+  runApp(const HunterFit());
 }
 
 class HunterFit extends StatelessWidget {
+  const HunterFit({Key? key}) : super(key: key);
+
 
 
 
@@ -26,7 +28,7 @@ class HunterFit extends StatelessWidget {
       child: MaterialApp(
         title: 'HunterFit',
         theme: ThemeData(),
-        home: LoginPage(),
+        home: const LoginPage(),
       ),
     );
   }

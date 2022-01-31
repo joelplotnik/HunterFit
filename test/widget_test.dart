@@ -12,7 +12,7 @@ import 'package:hunter_fit/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const HunterFit());
+    await tester.pumpWidget( HunterFit());
 
     /*
     // Verify that our counter starts at 0.

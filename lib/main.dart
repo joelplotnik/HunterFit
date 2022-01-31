@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/api/google_maps_page.dart';
 import 'package:hunter_fit/provider/location_provider.dart';
-import 'package:hunter_fit/view/LoginPage.dart';
-import 'package:hunter_fit/view/navigation_view.dart';
-
+import 'package:hunter_fit/view/login_view.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
 // Run HunterFit
 void main() {
 

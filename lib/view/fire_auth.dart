@@ -15,20 +15,21 @@ class FireAuth {
         password: password,
       );
       user = userCredential.user;
-      await user!.updateProfile(displayName: name);
+      await user!.updateDisplayName(name);
       await user.reload();
       user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        //print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        //print('The account already exists for that email.');
       }
     } catch (e) {
-      print(e);
+      //print(e);
     }
     return user;
   }
+
   static Future<User?> signInUsingEmailPassword({
     required String email,
     required String password,
@@ -45,15 +46,15 @@ class FireAuth {
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        //print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
+        //print('Wrong password provided.');
       }
     }
 
     return user;
   }
-  
+
   static Future<User?> refreshUser(User user) async {
     FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -62,8 +63,9 @@ class FireAuth {
 
     return refreshedUser;
   }
-Future<String> currentUser() async {
-    User user = await FirebaseAuth.instance.currentUser!;
+
+  Future<String> currentUser() async {
+    User user = FirebaseAuth.instance.currentUser!;
     return user.uid;
-}
+  }
 }

@@ -2,35 +2,35 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/validator.dart';
-
-import 'ProfilePage.dart';
 import 'fire_auth.dart';
-import 'forms/RegisterPage.dart';
+import 'forms/register_view.dart';
 import 'navigation_view.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;
   }
+
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
 
-    final _nameTextController = TextEditingController();
+    //final _nameTextController = TextEditingController();
     final _emailTextController = TextEditingController();
     final _passwordTextController = TextEditingController();
 
-    final _focusName = FocusNode();
+    //final _focusName = FocusNode();
     final _focusEmail = FocusNode();
     final _focusPassword = FocusNode();
 
-    bool _isProcessing = false;
+    //bool _isProcessing = false;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('HunterFit Authentication'),
+        title: const Text('HunterFit Authentication'),
         backgroundColor: const Color(0xFF47ABD1),
       ),
       body: FutureBuilder(
@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return Column(
               children: [
-                Text('Login'),
+                const Text('Login'),
                 Form(
                   key: _formKey,
                   child: Column(
@@ -47,14 +47,16 @@ class LoginPage extends StatelessWidget {
                       TextFormField(
                         controller: _emailTextController,
                         focusNode: _focusEmail,
-                        validator: (value) => Validator.validateEmail(email: value!),
+                        validator: (value) =>
+                            Validator.validateEmail(email: value!),
                       ),
-                      SizedBox(height: 8.0),
+                      const SizedBox(height: 8.0),
                       TextFormField(
                         controller: _passwordTextController,
                         focusNode: _focusPassword,
                         obscureText: true,
-                        validator: (value) => Validator.validatePassword(password: value!),
+                        validator: (value) =>
+                            Validator.validatePassword(password: value!),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,19 +65,22 @@ class LoginPage extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  User? user = await FireAuth.signInUsingEmailPassword(
-                                    email: _emailTextController.text,
-                                    password: _passwordTextController.text, context: context
-                                  );
+                                  User? user =
+                                      await FireAuth.signInUsingEmailPassword(
+                                          email: _emailTextController.text,
+                                          password:
+                                              _passwordTextController.text,
+                                          context: context);
                                   if (user != null) {
-                                    Navigator.of(context)
-                                        .pushReplacement(
-                                      MaterialPageRoute(builder: (context) => Navigation(user: user)),
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Navigation(user: user)),
                                     );
                                   }
                                 }
                               },
-                              child: Text(
+                              child: const Text(
                                 'Sign In',
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -103,13 +108,14 @@ class LoginPage extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RegisterPage()),
                                 );
                               },
-                              child: Text(
+                              child: const Text(
                                 'Register',
                                 style: TextStyle(color: Colors.white),
-
                               ),
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(double.infinity, 40),
@@ -139,7 +145,7 @@ class LoginPage extends StatelessWidget {
               ],
             );
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },

@@ -31,6 +31,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('HunterFit Authentication'),
+        backgroundColor: const Color(0xFF47ABD1),
       ),
       body: FutureBuilder(
         future: _initializeFirebase(),
@@ -78,6 +79,24 @@ class LoginPage extends StatelessWidget {
                                 'Sign In',
                                 style: TextStyle(color: Colors.white),
                               ),
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(double.infinity, 40),
+                                primary: const Color(0xFF7ebbd7),
+                                padding: const EdgeInsets.only(
+                                    left: 40, right: 40, bottom: 8.0, top: 8.0),
+                                textStyle: const TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.normal),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                           Expanded(
@@ -90,6 +109,25 @@ class LoginPage extends StatelessWidget {
                               child: Text(
                                 'Register',
                                 style: TextStyle(color: Colors.white),
+
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(double.infinity, 40),
+                                primary: const Color(0xFF7ebbd7),
+                                padding: const EdgeInsets.only(
+                                    left: 40, right: 40, bottom: 8.0, top: 8.0),
+                                textStyle: const TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.normal),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                  ),
+                                ),
                               ),
                             ),
                           ),

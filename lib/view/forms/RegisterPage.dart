@@ -37,6 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Register'),
+          backgroundColor: const Color(0xFF47ABD1),
         ),
         body: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -140,6 +141,25 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: Text(
                                 'Sign up',
                                 style: TextStyle(color: Colors.white),
+
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(double.infinity, 40),
+                                primary: const Color(0xFF7ebbd7),
+                                padding: const EdgeInsets.only(
+                                    left: 40, right: 40, bottom: 8.0, top: 8.0),
+                                textStyle: const TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.normal),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                  ),
+                                ),
                               ),
                             ),
                           ),

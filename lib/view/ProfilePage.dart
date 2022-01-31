@@ -64,6 +64,24 @@ class _ProfilePageState extends State<ProfilePage> {
                 await _currentUser.sendEmailVerification();
               },
               child: Text('Verify email'),
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(200, 40),
+                primary: const Color(0xFF7ebbd7),
+                padding: const EdgeInsets.only(
+                    left: 40, right: 40, bottom: 8.0, top: 8.0),
+                textStyle: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.normal),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    topRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
+                  ),
+                ),
+              ),
             ),
             ElevatedButton(
                 onPressed: () async {
@@ -75,7 +93,27 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   );
                 },
-                child: Text('Sign out')
+                child: Text('Sign out'),
+
+                style: ElevatedButton.styleFrom(
+            minimumSize: const Size(200, 40),
+
+        primary: const Color(0xFF7ebbd7),
+        padding: const EdgeInsets.only(
+            left: 40, right: 40, bottom: 8.0, top: 8.0),
+        textStyle: const TextStyle(
+            fontSize: 18,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.normal),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(5),
+            topRight: Radius.circular(5),
+            bottomLeft: Radius.circular(5),
+            bottomRight: Radius.circular(5),
+          ),
+        ),
+      ),
             ),
             IconButton(
               icon: Icon(Icons.refresh),

@@ -15,10 +15,10 @@ class _WorkoutsListState extends State<WorkoutsList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: constants.kHunterColor,
-        title: Text('WORKOUTS'),
+        title: const Text('WORKOUTS'),
       ),
       body: Column(
-        children: [
+        children: const [
           Text("hi"),
         ],
       ),

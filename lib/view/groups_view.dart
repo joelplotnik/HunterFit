@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-
-
 
 class GroupsView extends StatefulWidget {
   const GroupsView({Key? key}) : super(key: key);
@@ -39,17 +36,17 @@ class _GroupsViewState extends State<GroupsView> {
       body: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: TextField(
               controller: nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Group Name',
               ),
             ),
           ),
           ElevatedButton(
-            child: Text('Add'),
+            child: const Text('Add'),
             onPressed: () {
               addItemToList();
             },
@@ -61,11 +58,11 @@ class _GroupsViewState extends State<GroupsView> {
                  itemBuilder: (BuildContext context, int index) {
                    return Container(
                      height: 75,
-                     margin: EdgeInsets.all(2),
-                     color: Color(0xFF47ABD1),
+                     margin: const EdgeInsets.all(2),
+                     color: const Color(0xFF47ABD1),
                      child: Center(
                          child: Text('${names[index]} (${memCount[index]})',
-                           style: TextStyle(fontSize: 18),
+                           style: const TextStyle(fontSize: 18),
                          )
                      ),
                    );

@@ -105,7 +105,7 @@ final User user = auth.currentUser!;
             physics: const NeverScrollableScrollPhysics(),
             controller: pageController,
             children: [
-              ActivityView(),
+              const ActivityView(),
               const GoogleMapPage(),
               const GroupsView(),
               const WeightsView(),

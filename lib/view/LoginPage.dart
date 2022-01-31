@@ -6,8 +6,10 @@ import 'package:hunter_fit/view/validator.dart';
 import 'ProfilePage.dart';
 import 'fire_auth.dart';
 import 'forms/RegisterPage.dart';
+import 'navigation_view.dart';
 
 class LoginPage extends StatelessWidget {
+
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;
@@ -28,7 +30,7 @@ class LoginPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Firebase Authentication'),
+        title: Text('HunterFit Authentication'),
       ),
       body: FutureBuilder(
         future: _initializeFirebase(),
@@ -67,7 +69,7 @@ class LoginPage extends StatelessWidget {
                                   if (user != null) {
                                     Navigator.of(context)
                                         .pushReplacement(
-                                      MaterialPageRoute(builder: (context) => ProfilePage(user: user)),
+                                      MaterialPageRoute(builder: (context) => Navigation(user: user)),
                                     );
                                   }
                                 }

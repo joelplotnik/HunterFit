@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../ProfilePage.dart';
 import '../fire_auth.dart';
+import '../navigation_view.dart';
 import '../validator.dart';
 
 
@@ -129,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         .pushAndRemoveUntil(
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            ProfilePage(user: user),
+                                            Navigation(user: user),
                                       ),
                                       ModalRoute.withName('/'),
                                     );

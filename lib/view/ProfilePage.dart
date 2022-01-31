@@ -29,9 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
               },
             ),
-            ElevatedButton(
+            /*ElevatedButton(
               child: const Text(
                 'Log in',
                 textAlign: TextAlign.center,
@@ -100,10 +98,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
 
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Navigation()),
-                  );
+
+
+
 
               },
               style: ElevatedButton.styleFrom(
@@ -124,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-            ),
+            ),*/
             // Add widgets for verifying email
             // and, signing out the user
           ],

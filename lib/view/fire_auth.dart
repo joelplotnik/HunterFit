@@ -62,4 +62,8 @@ class FireAuth {
 
     return refreshedUser;
   }
+Future<String> currentUser() async {
+    User user = await FirebaseAuth.instance.currentUser!;
+    return user.uid;
+}
 }

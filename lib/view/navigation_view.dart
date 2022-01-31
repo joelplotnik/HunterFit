@@ -1,20 +1,30 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/api/google_maps_page.dart';
+import 'package:hunter_fit/view/LoginPage.dart';
 import 'package:hunter_fit/view/ProfilePage.dart';
-
+import 'package:hunter_fit/view/fire_auth.dart';
 import 'package:hunter_fit/view/weights/weights_view.dart';
 import 'package:hunter_fit/view/activity_view.dart';
 import 'package:hunter_fit/view/groups_view.dart';
-
+final _formKey = GlobalKey<FormState>();
 class Navigation extends StatefulWidget {
-  const Navigation({Key? key}) : super(key: key);
-
+  const Navigation({required this.user});
+//final FireAuth auth;
+final User user;
   @override
+
   _NavigationState createState() => _NavigationState();
 }
-
+enum AuthStatus {
+  notSignedIn,
+  signedIn
+}
 class _NavigationState extends State<Navigation> {
+  AuthStatus _authStatus = AuthStatus.notSignedIn;
   int _selectedPage = 0; // Value of the selected page
   late String _title;
   PageController pageController = PageController();
@@ -25,6 +35,12 @@ class _NavigationState extends State<Navigation> {
   void initState() {
     _title = 'Activity';
     super.initState();
+
+/*widget.auth.currentUser().then((userId){
+  setState(() {
+    _authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+  });
+    });*/
   }
 
   void onTapped(int page) {
@@ -72,6 +88,13 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+/*switch (_authStatus) {
+  case AuthStatus.notSignedIn:
+    return LoginPage();
+
+}*/
+FirebaseAuth auth = FirebaseAuth.instance;
+final User user = auth.currentUser!;
 
     return WillPopScope(
       onWillPop: () async => !Navigator.of(context).userGestureInProgress,
@@ -89,7 +112,8 @@ class _NavigationState extends State<Navigation> {
               const GoogleMapPage(),
               const GroupsView(),
               const WeightsView(),
-             // ProfilePage(user: user),
+
+             ProfilePage(user: user),
             ],
           ),
           bottomNavigationBar: Theme(

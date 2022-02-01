@@ -77,6 +77,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       ),
+                      const SizedBox(height: 13,),
                        SizedBox(
 width: 300,
                           height: 40.0,
@@ -102,7 +103,9 @@ width: 300,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          const SizedBox(width: 8,),
                           Expanded(
+
                             child: ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
@@ -121,12 +124,13 @@ width: 300,
                                   }
                                 }
                               },
+
                               child: const Text(
                                 'Log In',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(double.infinity, 40),
+                                minimumSize: const Size(100, 40),
                                 primary: const Color(0xFF7ebbd7),
                                 padding: const EdgeInsets.only(
                                     left: 40, right: 40, bottom: 8.0, top: 8.0),
@@ -145,6 +149,7 @@ width: 300,
                               ),
                             ),
                           ),
+                          const SizedBox(width: 8,),
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
@@ -159,7 +164,8 @@ width: 300,
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(double.infinity, 40),
+
+                                minimumSize: const Size(100, 40),
                                 primary: const Color(0xFF7ebbd7),
                                 padding: const EdgeInsets.only(
                                     left: 40, right: 40, bottom: 8.0, top: 8.0),
@@ -178,6 +184,7 @@ width: 300,
                               ),
                             ),
                           ),
+                          const SizedBox(width: 8,),
                         ],
                       )
                     ],

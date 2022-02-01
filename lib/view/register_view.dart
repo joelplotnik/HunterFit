@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/svg.dart';
 import 'fire_auth.dart';
 import 'navigation_view.dart';
 import 'validator.dart';
@@ -34,17 +35,23 @@ class _RegisterPageState extends State<RegisterPage> {
         _focusPassword.unfocus();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset : false,
         appBar: AppBar(
           title: const Text('Register'),
           backgroundColor: const Color(0xFF47ABD1),
         ),
         backgroundColor: const Color(0xFF47ABD1),
-        body: Padding(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                //const SizedBox(height: 100,),
+                Align(
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
+                ),
                 Form(
                   key: _registerFormKey,
                   child: Column(

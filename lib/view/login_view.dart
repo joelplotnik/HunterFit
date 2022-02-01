@@ -30,10 +30,11 @@ class LoginPage extends StatelessWidget {
     //bool _isProcessing = false;
 
     return Scaffold(
-      appBar: AppBar(
+      resizeToAvoidBottomInset : false,
+      /*appBar: AppBar(
         title: const Text('HunterFit Authentication'),
         backgroundColor: const Color(0xFF47ABD1),
-      ),
+      ),*/
       backgroundColor: const Color(0xFF47ABD1),
       body: FutureBuilder(
         future: _initializeFirebase(),
@@ -44,9 +45,9 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                const SizedBox(height: 100),
-                // HunterFit logo
 
+                // HunterFit logo
+            const SizedBox(height: 100,),
                 Align(
                   alignment: Alignment.center,
                   child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
@@ -60,6 +61,15 @@ class LoginPage extends StatelessWidget {
                         focusNode: _focusEmail,
                         validator: (value) =>
                             Validator.validateEmail(email: value!),
+                        decoration: InputDecoration(
+                          hintText: "Email",
+                          errorBorder: UnderlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 8.0),
 
@@ -69,6 +79,15 @@ class LoginPage extends StatelessWidget {
                         obscureText: true,
                         validator: (value) =>
                             Validator.validatePassword(password: value!),
+                        decoration: InputDecoration(
+                          hintText: "Password",
+                          errorBorder: UnderlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
                       ),
 
                       Row(

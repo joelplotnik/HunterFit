@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../fire_auth.dart';
-import '../navigation_view.dart';
-import '../validator.dart';
+import 'fire_auth.dart';
+import 'navigation_view.dart';
+import 'validator.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -38,6 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
           title: const Text('Register'),
           backgroundColor: const Color(0xFF47ABD1),
         ),
+        backgroundColor: const Color(0xFF47ABD1),
         body: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Center(

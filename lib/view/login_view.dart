@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hunter_fit/view/validator.dart';
 import 'fire_auth.dart';
-import 'forms/register_view.dart';
+import 'register_view.dart';
 import 'navigation_view.dart';
 
 class LoginPage extends StatelessWidget {
@@ -33,13 +34,23 @@ class LoginPage extends StatelessWidget {
         title: const Text('HunterFit Authentication'),
         backgroundColor: const Color(0xFF47ABD1),
       ),
+      backgroundColor: const Color(0xFF47ABD1),
       body: FutureBuilder(
         future: _initializeFirebase(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Column(
+
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Login'),
+
+                const SizedBox(height: 100),
+                // HunterFit logo
+
+                Align(
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
+                ),
                 Form(
                   key: _formKey,
                   child: Column(
@@ -51,6 +62,7 @@ class LoginPage extends StatelessWidget {
                             Validator.validateEmail(email: value!),
                       ),
                       const SizedBox(height: 8.0),
+
                       TextFormField(
                         controller: _passwordTextController,
                         focusNode: _focusPassword,
@@ -58,6 +70,7 @@ class LoginPage extends StatelessWidget {
                         validator: (value) =>
                             Validator.validatePassword(password: value!),
                       ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

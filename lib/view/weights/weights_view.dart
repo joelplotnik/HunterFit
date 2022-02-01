@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
 import 'workouts_list.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -101,12 +103,7 @@ class _WeightsViewState extends State<WeightsView> {
                 RotatedBox(
                   quarterTurns: 1,
                   child: Material(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    color: Colors.blueGrey.shade300,
-                    elevation: 5,
-                    clipBehavior: Clip.hardEdge,
+                    color: Colors.transparent,
                     child: IconButton(
                       splashColor: Colors.white,
                       alignment: Alignment.center,
@@ -153,12 +150,12 @@ class _WeightsViewState extends State<WeightsView> {
             ),
           ),
           const Divider(
-            color: Colors.black,
-            height: 3,
-            thickness: 4,
+            color: Colors.grey,
+            height: 2,
+            thickness: 1,
           ),
           Container(
-            color: Colors.grey.shade400,
+            color: Colors.grey.shade300,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -189,11 +186,7 @@ class _WeightsViewState extends State<WeightsView> {
                 Container(
                   height: 45,
                   width: 130,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
+                  decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
                     children: [
                       const Text(
@@ -218,15 +211,11 @@ class _WeightsViewState extends State<WeightsView> {
                 Container(
                   height: 45,
                   width: 130,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
+                  decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
                     children: [
                       const Text(
-                        "Total Reps",
+                        "Total Weight",
                         style: constants.kWeightsDataTitle,
                       ),
                       Row(
@@ -238,7 +227,7 @@ class _WeightsViewState extends State<WeightsView> {
                             '40',
                             style: constants.kWeightsData,
                           ),
-                          Text('reps'),
+                          Text('lbs'),
                         ],
                       ),
                     ],
@@ -247,11 +236,7 @@ class _WeightsViewState extends State<WeightsView> {
                 Container(
                   height: 45,
                   width: 130,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
+                  decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
                     children: [
                       const Text(
@@ -281,4 +266,3 @@ class _WeightsViewState extends State<WeightsView> {
     );
   }
 }
-

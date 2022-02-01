@@ -52,11 +52,16 @@ class LoginPage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
                 ),
+                const SizedBox(height: 50,),
                 Form(
                   key: _formKey,
                   child: Column(
                     children: <Widget>[
-                      TextFormField(
+                      SizedBox(
+                        height: 40,
+                      width: 300,
+
+                      child: TextFormField(
                         controller: _emailTextController,
                         focusNode: _focusEmail,
                         validator: (value) =>
@@ -71,9 +76,11 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8.0),
-
-                      TextFormField(
+                      ),
+                       SizedBox(
+width: 300,
+                          height: 40.0,
+                      child: TextFormField(
                         controller: _passwordTextController,
                         focusNode: _focusPassword,
                         obscureText: true,
@@ -88,8 +95,10 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
+                      ),),
 
+
+                      const SizedBox(height: 50,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -12,9 +12,6 @@ void main() {
 class HunterFit extends StatelessWidget {
   const HunterFit({Key? key}) : super(key: key);
 
-
-
-
   // This widget is the root of the HunterFit application.
   @override
   Widget build(BuildContext context) {

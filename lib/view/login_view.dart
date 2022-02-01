@@ -113,7 +113,7 @@ class LoginPage extends StatelessWidget {
                                 }
                               },
                               child: const Text(
-                                'Sign In',
+                                'Log In',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
@@ -146,7 +146,7 @@ class LoginPage extends StatelessWidget {
                                 );
                               },
                               child: const Text(
-                                'Register',
+                                'Sign up',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(

@@ -37,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Scaffold(
         resizeToAvoidBottomInset : false,
         appBar: AppBar(
-          title: const Text('Register'),
+          title: const Text('Log in'),
           backgroundColor: const Color(0xFF47ABD1),
         ),
         backgroundColor: const Color(0xFF47ABD1),

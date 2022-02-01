@@ -89,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 );
               },
-              child: const Text('Sign out'),
+              child: const Text('Log out'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(200, 40),
                 primary: const Color(0xFF7ebbd7),

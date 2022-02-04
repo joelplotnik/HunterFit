@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
 import 'workouts_list.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hunter_fit/widgets/stopwatch.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class WeightsView extends StatefulWidget {
 }
 
 class _WeightsViewState extends State<WeightsView> {
+  Stopwatch stopwatch = Stopwatch();
+
   final List<Widget> _setsList = [
     Row(
       children: [
@@ -79,7 +83,7 @@ class _WeightsViewState extends State<WeightsView> {
       body: Column(
         children: [
           const SizedBox(
-            height: 8,
+            height: 1,
           ),
           Container(
             height: 55,
@@ -184,10 +188,11 @@ class _WeightsViewState extends State<WeightsView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: 45,
+                  height: 65,
                   width: 130,
                   decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
                         "Total Reps",
@@ -209,10 +214,11 @@ class _WeightsViewState extends State<WeightsView> {
                   ),
                 ),
                 Container(
-                  height: 45,
+                  height: 65,
                   width: 130,
                   decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
                         "Total Weight",
@@ -234,10 +240,11 @@ class _WeightsViewState extends State<WeightsView> {
                   ),
                 ),
                 Container(
-                  height: 45,
+                  height: 65,
                   width: 130,
                   decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
                         "Average Weight",
@@ -261,6 +268,15 @@ class _WeightsViewState extends State<WeightsView> {
               ],
             ),
           ),
+          Container(
+            width: double.infinity,
+            height: 20,
+            color: Colors.grey.shade300,
+          ),
+          Expanded(
+            flex: 4,
+            child: stopwatch,
+          )
         ],
       ),
     );

@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/constants.dart' as constants;
 
 class ButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
+  final String text;
 
   const ButtonWidget({
     Key? key,
+    required this.text,
     required this.onClicked,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            minimumSize: const Size(100, 42)),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(Icons.more_time, size: 28),
-            SizedBox(width: 8),
-            Text(
-              'Show Picker',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
+        child: Text(text),
+        style: ElevatedButton.styleFrom(primary: constants.kHunterColor),
         onPressed: onClicked,
       );
 }

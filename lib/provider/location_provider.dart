@@ -41,10 +41,10 @@ class LocationProvider with ChangeNotifier {
     }
 
     location.onLocationChanged.listen((LocationData currentLocation) {
-      _locationPosition =
-          LatLng(currentLocation.latitude!, currentLocation.longitude!); // CHANGES MADE HERE
+      _locationPosition = LatLng(currentLocation.latitude!,
+          currentLocation.longitude!); // CHANGES MADE HERE
 
-      print(_locationPosition);
+      //   print(_locationPosition);
       notifyListeners();
     });
   }

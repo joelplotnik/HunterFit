@@ -8,3 +8,9 @@ const kWeightsData = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.bold,
 );
+
+BoxDecoration kWeightsDataBoxDecoration = BoxDecoration(
+  border: Border.all(
+    color: Colors.grey,
+  ),
+);

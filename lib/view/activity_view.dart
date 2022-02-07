@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ActivityView extends StatefulWidget {
   static String routeName = "/activity";
 
+  const ActivityView({Key? key}) : super(key: key);
+
   @override
   State<ActivityView> createState() => _ActivityViewState();
 }

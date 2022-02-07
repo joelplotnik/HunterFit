@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hunter_fit/provider/location_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:hunter_fit/widgets/stopwatch.dart';
 
 class GoogleMapPage extends StatefulWidget {
   const GoogleMapPage({Key? key}) : super(key: key);
@@ -11,6 +12,8 @@ class GoogleMapPage extends StatefulWidget {
 }
 
 class _GoogleMapPageState extends State<GoogleMapPage> {
+  Stopwatch stopwatch = const Stopwatch();
+
   @override
   void initState() {
     super.initState();
@@ -38,19 +41,15 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
               onMapCreated: (GoogleMapController controller) {},
             ),
           ),
-          Column(
-            children: const [
-              SizedBox(
-                height: 100,
-              ),
-              Text('Stopwatch and Start'),
-              Text('Stop, Reset buttons here'),
-              Text('Future... Save the workout'),
-              SizedBox(
-                height: 120,
-              ),
-            ],
+          Container(
+            width: double.infinity,
+            height: 20,
+            color: Colors.grey.shade300,
           ),
+          Expanded(
+            flex: 1,
+            child: stopwatch,
+          )
         ],
       );
     });

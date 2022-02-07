@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
 import 'workouts_list.dart';
-import 'package:flutter_countdown_timer/countdown.dart';
+//import 'package:firebase_core/firebase_core.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hunter_fit/widgets/stopwatch.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class WeightsView extends StatefulWidget {
 }
 
 class _WeightsViewState extends State<WeightsView> {
+  Stopwatch stopwatch = Stopwatch();
+
   final List<Widget> _setsList = [
     Row(
       children: [
@@ -19,7 +24,7 @@ class _WeightsViewState extends State<WeightsView> {
           child: Container(
             height: 60,
             alignment: Alignment.center,
-            child: Text(
+            child: const Text(
               '1',
               style: TextStyle(
                 color: Colors.white,
@@ -63,7 +68,7 @@ class _WeightsViewState extends State<WeightsView> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 20,
         )
       ],
@@ -77,16 +82,14 @@ class _WeightsViewState extends State<WeightsView> {
       backgroundColor: Colors.white70,
       body: Column(
         children: [
-          const SizedBox(
-            height: 8,
-          ),
+
           Container(
             height: 55,
             color: constants.kHunterColor,
             alignment: const Alignment(-.9, -.1),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 const Text(
@@ -96,23 +99,18 @@ class _WeightsViewState extends State<WeightsView> {
                       fontWeight: FontWeight.w500,
                       color: Colors.white),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 125,
                 ),
                 RotatedBox(
                   quarterTurns: 1,
                   child: Material(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    color: Colors.blueGrey.shade300,
-                    elevation: 5,
-                    clipBehavior: Clip.hardEdge,
+                    color: Colors.transparent,
                     child: IconButton(
                       splashColor: Colors.white,
                       alignment: Alignment.center,
                       padding: EdgeInsets.only(bottom: 10, top: 5),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.fitness_center,
                         size: 40,
                         color: Colors.black,
@@ -121,7 +119,7 @@ class _WeightsViewState extends State<WeightsView> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => WorkoutsList(),
+                            builder: (context) => const WorkoutsList(),
                           ),
                         );
                       },
@@ -132,11 +130,11 @@ class _WeightsViewState extends State<WeightsView> {
             ),
           ),
           const Divider(
-            color: Colors.black87,
-            height: 2,
-            thickness: 3,
+            color: Colors.grey,
+            height: 1,
+            thickness: 1,
           ),
-          Container(
+          SizedBox(
             height: 304,
             child: ListView.separated(
               shrinkWrap: true,
@@ -153,13 +151,13 @@ class _WeightsViewState extends State<WeightsView> {
               },
             ),
           ),
-          Divider(
-            color: Colors.black,
-            height: 3,
-            thickness: 4,
+          const Divider(
+            color: Colors.grey,
+            height: 2,
+            thickness: 1,
           ),
           Container(
-            color: Colors.grey.shade400,
+            color: Colors.grey.shade300,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -176,8 +174,8 @@ class _WeightsViewState extends State<WeightsView> {
                       setNumber++;
                     });
                   },
-                  icon: Icon(Icons.add),
-                  label: Text('Add Set'),
+                  icon: const Icon(Icons.add),
+                  label: const Text('Add Set'),
                 ),
               ],
             ),
@@ -188,16 +186,13 @@ class _WeightsViewState extends State<WeightsView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: 45,
+                  height: 65,
                   width: 130,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
+                  decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Total Reps",
                         style: constants.kWeightsDataTitle,
                       ),
@@ -205,7 +200,7 @@ class _WeightsViewState extends State<WeightsView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
-                        children: [
+                        children: const [
                           Text(
                             '58',
                             style: constants.kWeightsData,
@@ -217,45 +212,39 @@ class _WeightsViewState extends State<WeightsView> {
                   ),
                 ),
                 Container(
-                  height: 45,
+                  height: 65,
                   width: 130,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
+                  decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Total Reps",
+                      const Text(
+                        "Total Weight",
                         style: constants.kWeightsDataTitle,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
-                        children: [
+                        children: const [
                           Text(
                             '40',
                             style: constants.kWeightsData,
                           ),
-                          Text('reps'),
+                          Text('lbs'),
                         ],
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  height: 45,
+                  height: 65,
                   width: 130,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
+                  decoration: constants.kWeightsDataBoxDecoration,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Average Weight",
                         style: constants.kWeightsDataTitle,
                       ),
@@ -263,7 +252,7 @@ class _WeightsViewState extends State<WeightsView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
-                        children: [
+                        children: const [
                           Text(
                             '85.8',
                             style: constants.kWeightsData,
@@ -277,6 +266,15 @@ class _WeightsViewState extends State<WeightsView> {
               ],
             ),
           ),
+          Container(
+            width: double.infinity,
+            height: 20,
+            color: Colors.grey.shade300,
+          ),
+          Expanded(
+            flex: 4,
+            child: stopwatch,
+          )
         ],
       ),
     );

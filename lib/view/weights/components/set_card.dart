@@ -19,7 +19,7 @@ class SetCard {
             alignment: Alignment.center,
             child: Text(
               setNumber.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
@@ -61,7 +61,7 @@ class SetCard {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 20,
         )
       ],

@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
 import 'workouts_list.dart';
+import 'package:hunter_fit/widgets/stopwatch.dart';
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hunter_fit/widgets/stopwatch.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -82,7 +82,6 @@ class _WeightsViewState extends State<WeightsView> {
       backgroundColor: Colors.white70,
       body: Column(
         children: [
-
           Container(
             height: 55,
             color: constants.kHunterColor,
@@ -144,7 +143,7 @@ class _WeightsViewState extends State<WeightsView> {
               },
               separatorBuilder: (BuildContext context, int index) {
                 return const Divider(
-                  color: Colors.grey,
+                  color: Colors.black38,
                   height: 1,
                   thickness: 1,
                 );

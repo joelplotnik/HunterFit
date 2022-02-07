@@ -15,7 +15,7 @@ class DBHelper {
       // `path` package is best practice to ensure the path is correctly
       // constructed for each platform.
       join(await getDatabasesPath(), 'user_database.db'),
-      // When the database is first created, create a table to store users.
+        // When the database is first created, create a table to store users.
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         return db.execute(

@@ -71,37 +71,42 @@ class _StopwatchState extends State<Stopwatch> {
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildTimeCard(time: hours, header: 'HOURS'),
-        const SizedBox(
-          width: 8,
-        ),
-        buildTimeCard(time: minutes, header: 'MINUTES'),
-        const SizedBox(
-          width: 8,
-        ),
-        buildTimeCard(time: seconds, header: 'SECONDS'),
-      ],
+    return Expanded(
+      flex: 2,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildTimeCard(time: hours, header: 'HOURS'),
+          const SizedBox(
+            width: 8,
+          ),
+          buildTimeCard(time: minutes, header: 'MINUTES'),
+          const SizedBox(
+            width: 8,
+          ),
+          buildTimeCard(time: seconds, header: 'SECONDS'),
+        ],
+      ),
     );
   }
 
   Widget buildTimeCard({required String time, required String header}) =>
       Column(
         children: [
-          Container(
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              color: Colors.blueGrey.shade200,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              time,
-              style: TextStyle(
-                  fontSize: 60,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.shade200,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                time,
+                style: TextStyle(
+                    fontSize: 50,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400),
+              ),
             ),
           ),
           SizedBox(height: 10),
@@ -113,27 +118,30 @@ class _StopwatchState extends State<Stopwatch> {
     final isCompleted = duration.inSeconds == 0;
 
     return isRunning || !isCompleted
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ButtonWidget(
-                text: isRunning ? 'STOP' : 'RESUME',
-                onClicked: () {
-                  if (isRunning) {
-                    stopTimer(resets: false);
-                  } else {
-                    startTimer(resets: false);
-                  }
-                },
-              ),
-              const SizedBox(width: 12),
-              ButtonWidget(
-                text: 'CANCEL',
-                onClicked: () {
-                  stopTimer();
-                },
-              ),
-            ],
+        ? Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                ButtonWidget(
+                  text: isRunning ? 'STOP' : 'RESUME',
+                  onClicked: () {
+                    if (isRunning) {
+                      stopTimer(resets: false);
+                    } else {
+                      startTimer(resets: false);
+                    }
+                  },
+                ),
+                const SizedBox(width: 12),
+                ButtonWidget(
+                  text: 'CANCEL',
+                  onClicked: () {
+                    stopTimer();
+                  },
+                ),
+              ],
+            ),
           )
         : ButtonWidget(
             text: 'Start Timer',

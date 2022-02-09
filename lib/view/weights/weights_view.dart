@@ -134,7 +134,7 @@ class _WeightsViewState extends State<WeightsView> {
             thickness: 1,
           ),
           SizedBox(
-            height: 304,
+            height: 150,
             child: ListView.separated(
               shrinkWrap: true,
               itemCount: _setsList.length,
@@ -179,12 +179,10 @@ class _WeightsViewState extends State<WeightsView> {
               ],
             ),
           ),
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
+          Row(
+            children: [
+              Expanded(
+                child: Container(
                   height: 65,
                   width: 130,
                   decoration: constants.kWeightsDataBoxDecoration,
@@ -210,7 +208,9 @@ class _WeightsViewState extends State<WeightsView> {
                     ],
                   ),
                 ),
-                Container(
+              ),
+              Expanded(
+                child: Container(
                   height: 65,
                   width: 130,
                   decoration: constants.kWeightsDataBoxDecoration,
@@ -236,7 +236,9 @@ class _WeightsViewState extends State<WeightsView> {
                     ],
                   ),
                 ),
-                Container(
+              ),
+              Expanded(
+                child: Container(
                   height: 65,
                   width: 130,
                   decoration: constants.kWeightsDataBoxDecoration,
@@ -262,8 +264,8 @@ class _WeightsViewState extends State<WeightsView> {
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Container(
             width: double.infinity,

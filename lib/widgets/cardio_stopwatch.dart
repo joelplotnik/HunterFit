@@ -13,6 +13,7 @@ class CardioStopwatch extends StatefulWidget {
 class _CardioStopwatchState extends State<CardioStopwatch> {
   Duration duration = const Duration();
   Timer? timer;
+  LocationProvider locationProvider =LocationProvider();
 
   late LocationProvider locProv;
 

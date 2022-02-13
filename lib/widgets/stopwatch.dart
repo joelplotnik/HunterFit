@@ -10,7 +10,7 @@ class Stopwatch extends StatefulWidget {
 }
 
 class _StopwatchState extends State<Stopwatch> {
-  Duration duration = Duration();
+  Duration duration = const Duration();
   Timer? timer;
 
   @override
@@ -21,7 +21,7 @@ class _StopwatchState extends State<Stopwatch> {
   }
 
   void reset() {
-    setState(() => duration = Duration());
+    setState(() => duration = const Duration());
   }
 
   void startTimer({bool resets = true}) {
@@ -29,7 +29,7 @@ class _StopwatchState extends State<Stopwatch> {
       reset();
     }
 
-    timer = Timer.periodic(Duration(seconds: 1), (_) => addTime());
+    timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 
   void stopTimer({bool resets = true}) {
@@ -40,7 +40,7 @@ class _StopwatchState extends State<Stopwatch> {
   }
 
   addTime() {
-    final addSeconds = 1;
+    const addSeconds = 1;
 
     setState(() {
       final seconds = duration.inSeconds + addSeconds;
@@ -95,21 +95,21 @@ class _StopwatchState extends State<Stopwatch> {
         children: [
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.blueGrey.shade200,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
                 time,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 50,
                     color: Colors.black,
                     fontWeight: FontWeight.w400),
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(header),
         ],
       );

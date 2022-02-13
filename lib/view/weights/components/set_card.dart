@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 BoxDecoration myBoxDecoration() {
-  return BoxDecoration(color: const Color(0xFF47ABD1));
+  return const BoxDecoration(color: Color(0xFF47ABD1));
 }
 
 class SetCard {

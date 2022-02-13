@@ -12,7 +12,6 @@ class GoogleMapPage extends StatefulWidget {
 }
 
 class _GoogleMapPageState extends State<GoogleMapPage> {
-  //Stopwatch stopwatch = const Stopwatch();
   CardioStopwatch cardioStopwatch = const CardioStopwatch();
 
 

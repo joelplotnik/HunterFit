@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/provider/location_provider.dart';
 import 'package:hunter_fit/widgets/button_widget.dart';
 
 class CardioStopwatch extends StatefulWidget {
@@ -12,6 +13,7 @@ class CardioStopwatch extends StatefulWidget {
 class _CardioStopwatchState extends State<CardioStopwatch> {
   Duration duration = const Duration();
   Timer? timer;
+  LocationProvider locationProvider =LocationProvider();
 
   @override
   void initState() {
@@ -28,7 +30,6 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
     if (resets) {
       reset();
     }
-
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 

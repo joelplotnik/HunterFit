@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
 import 'workouts_list.dart';
 import 'package:hunter_fit/widgets/stopwatch.dart';
-//import 'package:firebase_core/firebase_core.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -15,7 +12,7 @@ class WeightsView extends StatefulWidget {
 }
 
 class _WeightsViewState extends State<WeightsView> {
-  Stopwatch stopwatch = Stopwatch();
+  Stopwatch stopwatch = const Stopwatch();
 
   final List<Widget> _setsList = [
     Row(
@@ -108,7 +105,7 @@ class _WeightsViewState extends State<WeightsView> {
                     child: IconButton(
                       splashColor: Colors.white,
                       alignment: Alignment.center,
-                      padding: EdgeInsets.only(bottom: 10, top: 5),
+                      padding: const EdgeInsets.only(bottom: 10, top: 5),
                       icon: const Icon(
                         Icons.fitness_center,
                         size: 40,

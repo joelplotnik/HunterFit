@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/provider/location_provider.dart';
 import 'package:hunter_fit/widgets/button_widget.dart';
+import 'package:provider/provider.dart';
+import 'dart:math' show cos, sqrt, asin;
+
 
 class CardioStopwatch extends StatefulWidget {
   const CardioStopwatch({Key? key}) : super(key: key);
@@ -13,7 +16,9 @@ class CardioStopwatch extends StatefulWidget {
 class _CardioStopwatchState extends State<CardioStopwatch> {
   Duration duration = const Duration();
   Timer? timer;
-  LocationProvider locationProvider =LocationProvider();
+
+  late LocationProvider locProv;
+
 
   @override
   void initState() {
@@ -121,8 +126,10 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
           text: isRunning ? 'STOP' : 'RESUME',
           onClicked: () {
             if (isRunning) {
+              print("STOP GETTING USER POSITION");
               stopTimer(resets: false);
             } else {
+              print("START GETTING USER POSITION");
               startTimer(resets: false);
             }
           },
@@ -131,6 +138,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
         ButtonWidget(
           text: 'CANCEL',
           onClicked: () {
+            print("STOP GETTING USER POSITION");
             stopTimer();
           },
         ),
@@ -139,7 +147,12 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
         : ButtonWidget(
       text: 'Start Timer',
       onClicked: () {
+
         startTimer();
+
+        print("START GETTING USER POSITION");
+
+
       },
     );
   }

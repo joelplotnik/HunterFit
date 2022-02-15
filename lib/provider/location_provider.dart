@@ -79,6 +79,18 @@ class LocationProvider with ChangeNotifier {
         // if there are at least 2 elements in the list, compare the coordinates
         // if they are different, add the new coordinate to the list
       }
+      else if (_coordinateList.length == 1) {
+
+        if ((_coordinateList[_coordinateList.length - 1]) !=
+            (_coordinateList[_coordinateList.length - 2])) {
+
+          print("COORD " +
+              (_coordinateList.length).toString() +
+              ": " +
+              (_coordinateList[_coordinateList.length - 1]).toString());
+        }
+
+      }
       else if ((_coordinateList[_coordinateList.length - 1]) !=
           (_coordinateList[_coordinateList.length - 2])) {
         _coordinateList.add(_locationPosition);

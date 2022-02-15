@@ -7,25 +7,28 @@
 
 //import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hunter_fit/main.dart';
+import 'package:hunter_fit/provider/distance_tracker.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget( HunterFit());
+  test('Should return a distance of 0 when its the first location received', () {
 
-    /*
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    final distance_tracker = const DistanceTracker();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    var result = distance_tracker.calculateDistanceKilometers(const LatLng(33.1295, -117.1596));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-     */
+    expect(result,0.1);
+  });
+
+  test('Should return a distance of 0 when first and second'
+      'location are the same', () {
+
+    final distance_tracker = const DistanceTracker();
+
+    var result = distance_tracker.calculateDistanceKilometers(const LatLng(33.1295, -117.1596));
+    var result2 = distance_tracker.calculateDistanceKilometers(const LatLng(33.1295, -117.1596));
+
+    expect(result2,0.0);
   });
 }

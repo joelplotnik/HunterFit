@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/widgets/button_widget.dart';
 import 'package:hunter_fit/view/database.dart';
@@ -38,14 +39,15 @@ class _StopwatchState extends State<Stopwatch> {
         .doc(currentUID.toString())
         .collection('workoutData')
         .doc('weightsData')
+
         .set({
-          'DATE HERE': {
-            'Time': time,
-          }
-        })
+          'DATE HERE': FieldValue.arrayUnion([time])},
+            SetOptions(merge:true)
+
+        )
         .then((value) => print('Time added'))
         .catchError(
-            (error) => print('Failed to add time to database becasue: $error'));
+            (error) => print('Failed to add time to database because: $error'));
   }
 
   void reset() {

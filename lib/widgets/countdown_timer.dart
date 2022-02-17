@@ -52,6 +52,7 @@ class _CountdownTimerState extends State<CountdownTimer> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff5fbff),
       body: Column(
         children: [

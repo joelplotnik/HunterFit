@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
@@ -240,6 +241,7 @@ class _SignupPageState extends State<SignupPage> {
                             child: ElevatedButton(
                               onPressed: () async {
                                 setState(() {
+
                                   //_isProcessing = true; currently bugged
                                 });
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/widgets/button_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hunter_fit/view/database.dart';
 
 class Stopwatch extends StatefulWidget {
   const Stopwatch({Key? key}) : super(key: key);
@@ -11,7 +11,6 @@ class Stopwatch extends StatefulWidget {
 }
 
 class _StopwatchState extends State<Stopwatch> {
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
   Duration duration = const Duration();
   Timer? timer;
 
@@ -26,11 +25,23 @@ class _StopwatchState extends State<Stopwatch> {
     return d.toString().split('.').first.padLeft(8, "0");
   }
 
-  Future<void> addUserTime() {
-    return users
-        .add({'Time': format(duration)})
-        .then((value) => print("Time Added"))
-        .catchError((error) => print("Failed to add: $error"));
+  Future<void> addUserTime() async {
+    Database database =
+        await Database(); //wait to initialize an instance if firestore
+    var currentUID =
+        await database.getCurrentUserID(); //wait to fetch user ID from DB
+    print('Time is : ${format(duration)}');
+
+    return database
+        .workoutCollection //users > UID > workoutData > weightsData >
+        .doc(currentUID.toString())
+        .collection('workoutData')
+        .doc('weightsData')
+        .set({
+          'Workout Time': format(duration),
+        })
+        .then((value) => print('Time added'))
+        .catchError((error) => print('Failed to add time to database'));
   }
 
   void reset() {
@@ -131,39 +142,37 @@ class _StopwatchState extends State<Stopwatch> {
     final isCompleted = duration.inSeconds == 0;
 
     return isRunning || !isCompleted
-        ? Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                ButtonWidget(
-                  text: 'SAVE',
-                  onClicked: () {
-                    addUserTime();
-                    print(duration);
-                    stopTimer();
-                  },
-                ),
-                const SizedBox(width: 12),
-                ButtonWidget(
-                  text: isRunning ? 'STOP' : 'RESUME',
-                  onClicked: () {
-                    if (isRunning) {
-                      stopTimer(resets: false);
-                    } else {
-                      startTimer(resets: false);
-                    }
-                  },
-                ),
-                const SizedBox(width: 12),
-                ButtonWidget(
-                  text: 'CANCEL',
-                  onClicked: () {
-                    stopTimer();
-                  },
-                ),
-              ],
-            ),
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ButtonWidget(
+                text: 'SAVE',
+                onClicked: () async {
+                  await addUserTime();
+                  print(duration);
+                  stopTimer();
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonWidget(
+                text: isRunning ? 'STOP' : 'RESUME',
+                onClicked: () {
+                  if (isRunning) {
+                    stopTimer(resets: false);
+                  } else {
+                    startTimer(resets: false);
+                  }
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonWidget(
+                text: 'CANCEL',
+                onClicked: () {
+                  stopTimer();
+                },
+              ),
+            ],
           )
         : ButtonWidget(
             text: 'Start Timer',

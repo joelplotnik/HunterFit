@@ -2,9 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/provider/location_provider.dart';
 import 'package:hunter_fit/widgets/button_widget.dart';
-import 'package:provider/provider.dart';
-import 'dart:math' show cos, sqrt, asin;
-
 
 class CardioStopwatch extends StatefulWidget {
   const CardioStopwatch({Key? key}) : super(key: key);
@@ -18,7 +15,6 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
   Timer? timer;
 
   late LocationProvider locProv;
-
 
   @override
   void initState() {
@@ -120,40 +116,37 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
 
     return isRunning || !isCompleted
         ? Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ButtonWidget(
-          text: isRunning ? 'STOP' : 'RESUME',
-          onClicked: () {
-            if (isRunning) {
-              print("STOP GETTING USER POSITION");
-              stopTimer(resets: false);
-            } else {
-              print("START GETTING USER POSITION");
-              startTimer(resets: false);
-            }
-          },
-        ),
-        const SizedBox(width: 12),
-        ButtonWidget(
-          text: 'CANCEL',
-          onClicked: () {
-            print("STOP GETTING USER POSITION");
-            stopTimer();
-          },
-        ),
-      ],
-    )
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonWidget(
+                text: isRunning ? 'STOP' : 'RESUME',
+                onClicked: () {
+                  if (isRunning) {
+                    print("STOP GETTING USER POSITION");
+                    stopTimer(resets: false);
+                  } else {
+                    print("START GETTING USER POSITION");
+                    startTimer(resets: false);
+                  }
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonWidget(
+                text: 'CANCEL',
+                onClicked: () {
+                  print("STOP GETTING USER POSITION");
+                  stopTimer();
+                },
+              ),
+            ],
+          )
         : ButtonWidget(
-      text: 'Start Timer',
-      onClicked: () {
+            text: 'Start Timer',
+            onClicked: () {
+              startTimer();
 
-        startTimer();
-
-        print("START GETTING USER POSITION");
-
-
-      },
-    );
+              print("START GETTING USER POSITION");
+            },
+          );
   }
 }

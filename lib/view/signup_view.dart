@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
-import 'fire_auth.dart';
+import 'package:hunter_fit/database/fire_auth.dart';
 import 'navigation_view.dart';
-import 'validator.dart';
-
+import '../database/validator.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -36,7 +34,7 @@ class _SignupPageState extends State<SignupPage> {
         _focusPassword.unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset : false,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Log in'),
           backgroundColor: const Color(0xFF47ABD1),
@@ -72,8 +70,8 @@ class _SignupPageState extends State<SignupPage> {
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Name',
-                          contentPadding:
-                          EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                          contentPadding: EdgeInsets.only(
+                              left: 14.0, bottom: 8.0, top: 8.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.only(
@@ -130,8 +128,8 @@ class _SignupPageState extends State<SignupPage> {
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Email',
-                          contentPadding:
-                          EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                          contentPadding: EdgeInsets.only(
+                              left: 14.0, bottom: 8.0, top: 8.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.only(
@@ -189,8 +187,8 @@ class _SignupPageState extends State<SignupPage> {
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'Password',
-                          contentPadding:
-                          EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                          contentPadding: EdgeInsets.only(
+                              left: 14.0, bottom: 8.0, top: 8.0),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.only(
@@ -236,68 +234,70 @@ class _SignupPageState extends State<SignupPage> {
                       _isProcessing
                           ? const CircularProgressIndicator()
                           : Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                setState(() {
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      setState(() {
+                                        //_isProcessing = true; currently bugged
+                                      });
 
-                                  //_isProcessing = true; currently bugged
-                                });
+                                      if (_registerFormKey.currentState!
+                                          .validate()) {
+                                        User? user = await FireAuth
+                                            .registerUsingEmailPassword(
+                                          name: _nameTextController.text,
+                                          email: _emailTextController.text,
+                                          password:
+                                              _passwordTextController.text,
+                                        );
 
-                                if (_registerFormKey.currentState!
-                                    .validate()) {
-                                  User? user = await FireAuth
-                                      .registerUsingEmailPassword(
-                                    name: _nameTextController.text,
-                                    email: _emailTextController.text,
-                                    password:
-                                    _passwordTextController.text,
-                                  );
+                                        setState(() {
+                                          _isProcessing = false;
+                                        });
 
-                                  setState(() {
-                                    _isProcessing = false;
-                                  });
-
-                                  if (user != null) {
-                                    Navigator.of(context)
-                                        .pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            Navigation(user: user),
+                                        if (user != null) {
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Navigation(user: user),
+                                            ),
+                                            ModalRoute.withName('/'),
+                                          );
+                                        }
+                                      }
+                                    },
+                                    child: const Text(
+                                      'Sign up',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize:
+                                          const Size(double.infinity, 40),
+                                      primary: const Color(0xFF7ebbd7),
+                                      padding: const EdgeInsets.only(
+                                          left: 40,
+                                          right: 40,
+                                          bottom: 8.0,
+                                          top: 8.0),
+                                      textStyle: const TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.normal),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5),
+                                          topRight: Radius.circular(5),
+                                          bottomLeft: Radius.circular(5),
+                                          bottomRight: Radius.circular(5),
+                                        ),
                                       ),
-                                      ModalRoute.withName('/'),
-                                    );
-                                  }
-                                }
-                              },
-                              child: const Text(
-                                'Sign up',
-                                style: TextStyle(color: Colors.white),
-
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(double.infinity, 40),
-                                primary: const Color(0xFF7ebbd7),
-                                padding: const EdgeInsets.only(
-                                    left: 40, right: 40, bottom: 8.0, top: 8.0),
-                                textStyle: const TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.normal),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(5),
-                                    topRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5),
-                                    bottomRight: Radius.circular(5),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
+                              ],
+                            )
                     ],
                   ),
                 )

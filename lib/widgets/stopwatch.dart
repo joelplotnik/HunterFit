@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/widgets/button_widget.dart';
-import 'package:hunter_fit/view/database.dart';
+import 'package:hunter_fit/database/getUserData.dart';
+import 'package:hunter_fit/database/insertUserData.dart';
 
 class Stopwatch extends StatefulWidget {
   const Stopwatch({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class Stopwatch extends StatefulWidget {
 }
 
 class _StopwatchState extends State<Stopwatch> {
+  insertUserData insertToDB = insertUserData();
   Duration duration = const Duration();
   Timer? timer;
 
@@ -22,32 +24,23 @@ class _StopwatchState extends State<Stopwatch> {
     reset();
   }
 
-  format(Duration d) {
-    return d.toString().split('.').first.padLeft(8, "0");
+  Duration parseDuration(String s) {
+    int hours = 0;
+    int minutes = 0;
+    int micros;
+    List<String> parts = s.split(':');
+    if (parts.length > 2) {
+      hours = int.parse(parts[parts.length - 3]);
+    }
+    if (parts.length > 1) {
+      minutes = int.parse(parts[parts.length - 2]);
+    }
+    micros = (double.parse(parts[parts.length - 1]) * 1000000).round();
+    return Duration(hours: hours, minutes: minutes, microseconds: micros);
   }
 
-  Future<void> addUserTime() async {
-    Database database =
-        await Database(); //wait to initialize an instance if Firestore
-    var currentUID =
-        await database.getCurrentUserID(); //wait to fetch user ID from DB
-    var time = format(duration);
-    print('Time is : $duration');
-
-    return database
-        .workoutCollection //users > UID > workoutData > weightsData >
-        .doc(currentUID.toString())
-        .collection('workoutData')
-        .doc('weightsData')
-
-        .set({
-          'DATE HERE': FieldValue.arrayUnion([time])},
-            SetOptions(merge:true)
-
-        )
-        .then((value) => print('Time added'))
-        .catchError(
-            (error) => print('Failed to add time to database because: $error'));
+  format(Duration d) {
+    return d.toString().split('.').first.padLeft(8, "0");
   }
 
   void reset() {
@@ -155,7 +148,7 @@ class _StopwatchState extends State<Stopwatch> {
               ButtonWidget(
                 text: 'SAVE',
                 onClicked: () async {
-                  await addUserTime();
+                  await insertToDB.addUserTime(format(duration));
                   print(duration);
                   stopTimer();
                 },

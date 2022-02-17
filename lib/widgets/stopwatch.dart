@@ -27,10 +27,11 @@ class _StopwatchState extends State<Stopwatch> {
 
   Future<void> addUserTime() async {
     Database database =
-        await Database(); //wait to initialize an instance if firestore
+        await Database(); //wait to initialize an instance if Firestore
     var currentUID =
         await database.getCurrentUserID(); //wait to fetch user ID from DB
-    print('Time is : ${format(duration)}');
+    var time = format(duration);
+    print('Time is : $duration');
 
     return database
         .workoutCollection //users > UID > workoutData > weightsData >
@@ -38,10 +39,13 @@ class _StopwatchState extends State<Stopwatch> {
         .collection('workoutData')
         .doc('weightsData')
         .set({
-          'Workout Time': format(duration),
+          'DATE HERE': {
+            'Time': time,
+          }
         })
         .then((value) => print('Time added'))
-        .catchError((error) => print('Failed to add time to database'));
+        .catchError(
+            (error) => print('Failed to add time to database becasue: $error'));
   }
 
   void reset() {

@@ -4,12 +4,31 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hunter_fit/widgets/stopwatch.dart';
 
 class insertUserData {
+  Duration parseDuration(String s) {
+    int hours = 0;
+    int minutes = 0;
+    int micros;
+    List<String> parts = s.split(':');
+    if (parts.length > 2) {
+      hours = int.parse(parts[parts.length - 3]);
+    }
+    if (parts.length > 1) {
+      minutes = int.parse(parts[parts.length - 2]);
+    }
+    micros = (double.parse(parts[parts.length - 1]) * 1000000).round();
+    return Duration(hours: hours, minutes: minutes, microseconds: micros);
+  }
+
+  format(Duration d) {
+    return d.toString().split('.').first.padLeft(8, "0");
+  }
+
   Future<void> addUserTime(Duration duration) async {
     getUserData database =
         await getUserData(); //wait to initialize an instance if Firestore
     var currentUID =
         await database.getCurrentUserID(); //wait to fetch user ID from DB
-    var time = duration;
+    var time = format(duration);
     // var parsedTime = parseDuration(time);
     // print('Time unparsed is: $duration');
     // print('Time parsed is: ${parseDuration(time)}');

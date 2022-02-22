@@ -23,19 +23,20 @@ class insertUserData {
     return d.toString().split('.').first.padLeft(8, "0");
   }
 
-  Future<void> addUserTime(Duration duration) async {
-    getUserData database =
+  Future<void> insertWeightTime(Duration duration) async {
+    getUserData getData =
         await getUserData(); //wait to initialize an instance if Firestore
     var currentUID =
-        await database.getCurrentUserID(); //wait to fetch user ID from DB
+        await getData.getCurrentUserID(); //wait to fetch user ID from DB
     var time = format(duration);
     // var parsedTime = parseDuration(time);
     // print('Time unparsed is: $duration');
     // print('Time parsed is: ${parseDuration(time)}');
     // print('Time parsed + parsed: ${parsedTime + parsedTime}');
 
-    return database
-        .workoutCollection //users > UID > workoutData > weightsData >
+    await getData.getTotalWeightTime();
+
+    return getData.workoutCollection //users > UID > workoutData > weightsData >
         .doc(currentUID.toString())
         .collection('workoutData')
         .doc('weightsData')

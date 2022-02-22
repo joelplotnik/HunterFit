@@ -129,7 +129,7 @@ class _StopwatchState extends State<Stopwatch> {
               ButtonWidget(
                 text: 'SAVE',
                 onClicked: () async {
-                  await insertToDB.addUserTime(duration);
+                  await insertToDB.insertWeightTime(duration);
                   print(duration);
                   stopTimer();
                 },

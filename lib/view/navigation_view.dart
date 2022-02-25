@@ -107,7 +107,7 @@ final User user = auth.currentUser!;
             children: [
               const ActivityView(),
               const GoogleMapPage(),
-              const GroupsView(),
+              GroupsView(user: user),
               const WeightsView(),
 
              ProfilePage(user: user),

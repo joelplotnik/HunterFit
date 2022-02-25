@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/database/insertUserData.dart';
 import 'package:hunter_fit/widgets/button_widget.dart';
 import 'package:hunter_fit/database/getUserData.dart';
 import 'package:hunter_fit/database/insertUserData.dart';

@@ -1,12 +1,15 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class getUserData {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   CollectionReference workoutCollection =
       FirebaseFirestore.instance.collection('users');
-
+CollectionReference groupsCollection = FirebaseFirestore.instance.collection('groups');
   getCurrentUserID() async {
     final user = await auth.currentUser;
     final uid = await user?.uid;
@@ -34,5 +37,14 @@ class getUserData {
     //   print(tempArray);
     // }).catchError((error) =>
     //         print('Failed to retrieve weightsData from DB because: $error'));
+  }
+  getUsersGroupsListStreamSnapshots() async {
+    var data = await workoutCollection
+        .doc(getCurrentUserID().toString())
+        .collection('groups')
+        .doc('mygroups')
+        .get();
+    return data;
+
   }
 }

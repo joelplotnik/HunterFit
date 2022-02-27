@@ -37,7 +37,7 @@ class insertUserData {
     await getData.getTotalWeightTime();
 
     return getData.workoutCollection //users > UID > workoutData > weightsData >
-        .doc(currentUID.toString())
+        .doc(currentUID)
         .collection('workoutData')
         .doc('weightsData')
         .set({

@@ -10,29 +10,27 @@ class getUserData {
   getCurrentUserID() async {
     final user = await auth.currentUser;
     final uid = await user?.uid;
-    //print('This is Current user ID: $uid');
     return uid;
   }
 
   getTotalWeightTime() async {
-    var tempArray = [];
-    var temp;
-    await workoutCollection //users > UID > workoutData > weightsData >
-        .doc(getCurrentUserID().toString())
+    String UID = await getCurrentUserID();
+    var snapshot = await workoutCollection
+        .doc(UID)
         .collection('workoutData')
         .doc('weightsData')
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        print('Document exists');
-      } else
-        print(documentSnapshot.data());
-    }).catchError((error) => print("failed bc $error"));
-    //     .then((value) {
-    //   print('Retrieved data DB: weightsData');
-    //   tempArray = value.data()['TIMES'];
-    //   print(tempArray);
-    // }).catchError((error) =>
-    //         print('Failed to retrieve weightsData from DB because: $error'));
+        .get();
+
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+        var times = data['TIMES'];
+        print(times);
+      } else {
+        print('Error getTotalweightTime: Document does not exist');
+      }
+    } catch (error) {
+      print("Error: $error");
+    }
   }
 }

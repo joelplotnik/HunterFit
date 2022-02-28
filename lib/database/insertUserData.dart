@@ -47,4 +47,38 @@ class insertUserData {
         .catchError(
             (error) => print('Failed to add time to database because: $error'));
   }
+  Future<void> insertNewGroupIntoDB(String groupname) async{
+    getUserData getData =
+    await getUserData(); //wait to initialize an instance if Firestore
+    var currentUID =
+
+    await getData.getCurrentUserID();
+    return getData.groupsCollection
+        .doc('groups-social')
+        .collection('groups')
+        .doc(groupname)
+        .set({
+      'Members': FieldValue.arrayUnion([currentUID])
+    }, SetOptions(merge: true))
+        .then((value) => print('Member added'))
+        .catchError(
+            (error) => print('Failed to add to database because: $error'));
+  }
+  Future<void> insertNewGroupIntoUserlist(String groupname) async{
+    getUserData getData =
+    await getUserData(); //wait to initialize an instance if Firestore
+    var currentUID =
+
+    await getData.getCurrentUserID();
+    return getData.workoutCollection
+        .doc(currentUID.toString())
+        .collection('groups')
+        .doc('mygroups')
+        .set({
+      'Groups': FieldValue.arrayUnion([groupname])
+    }, SetOptions(merge: true))
+        .then((value) => print('Group added'))
+        .catchError(
+            (error) => print('Failed to add to database because: $error'));
+  }
 }

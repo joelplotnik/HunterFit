@@ -36,6 +36,7 @@ class Validator {
       return 'Enter a password with length at least 6';
     }
 
-    return null;
+
+    return 'Incorrect Password';
   }
 }

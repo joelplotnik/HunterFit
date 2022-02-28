@@ -1,7 +1,6 @@
+import 'package:hunter_fit/database/getUserData.dart';
 import 'getUserData.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hunter_fit/widgets/stopwatch.dart';
 
 class insertUserData {
   Duration parseDuration(String s) {
@@ -47,36 +46,34 @@ class insertUserData {
         .catchError(
             (error) => print('Failed to add time to database because: $error'));
   }
-  Future<void> insertNewGroupIntoDB(String groupname) async{
-    getUserData getData =
-    await getUserData(); //wait to initialize an instance if Firestore
-    var currentUID =
 
-    await getData.getCurrentUserID();
+  Future<void> insertNewGroupIntoDB(String groupname) async {
+    getUserData getData =
+        await getUserData(); //wait to initialize an instance if Firestore
+    var currentUID = await getData.getCurrentUserID();
     return getData.groupsCollection
         .doc('groups-social')
         .collection('groups')
         .doc(groupname)
         .set({
-      'Members': FieldValue.arrayUnion([currentUID])
-    }, SetOptions(merge: true))
+          'Members': FieldValue.arrayUnion([currentUID])
+        }, SetOptions(merge: true))
         .then((value) => print('Member added'))
         .catchError(
             (error) => print('Failed to add to database because: $error'));
   }
-  Future<void> insertNewGroupIntoUserlist(String groupname) async{
-    getUserData getData =
-    await getUserData(); //wait to initialize an instance if Firestore
-    var currentUID =
 
-    await getData.getCurrentUserID();
+  Future<void> insertNewGroupIntoUserlist(String groupname) async {
+    getUserData getData =
+        await getUserData(); //wait to initialize an instance if Firestore
+    var currentUID = await getData.getCurrentUserID();
     return getData.workoutCollection
         .doc(currentUID.toString())
         .collection('groups')
         .doc('mygroups')
         .set({
-      'Groups': FieldValue.arrayUnion([groupname])
-    }, SetOptions(merge: true))
+          'Groups': FieldValue.arrayUnion([groupname])
+        }, SetOptions(merge: true))
         .then((value) => print('Group added'))
         .catchError(
             (error) => print('Failed to add to database because: $error'));

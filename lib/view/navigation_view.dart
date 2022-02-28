@@ -11,22 +11,18 @@ import 'package:hunter_fit/view/groups_view.dart';
 class Navigation extends StatefulWidget {
   const Navigation({Key? key, required this.user}) : super(key: key);
 //final FireAuth auth;
-final User user;
+  final User user;
   @override
-
   _NavigationState createState() => _NavigationState();
 }
-enum AuthStatus {
-  notSignedIn,
-  signedIn
-}
+
+enum AuthStatus { notSignedIn, signedIn }
+
 class _NavigationState extends State<Navigation> {
   //final AuthStatus _authStatus = AuthStatus.notSignedIn;
   int _selectedPage = 0; // Value of the selected page
   late String _title;
   PageController pageController = PageController();
-
-
 
   @override
   void initState() {
@@ -41,7 +37,6 @@ class _NavigationState extends State<Navigation> {
   }
 
   void onTapped(int page) {
-
     setState(() {
       _selectedPage = page;
 
@@ -90,8 +85,8 @@ class _NavigationState extends State<Navigation> {
     return LoginPage();
 
 }*/
-FirebaseAuth auth = FirebaseAuth.instance;
-final User user = auth.currentUser!;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final User user = auth.currentUser!;
 
     return WillPopScope(
       onWillPop: () async => !Navigator.of(context).userGestureInProgress,
@@ -107,10 +102,9 @@ final User user = auth.currentUser!;
             children: [
               const ActivityView(),
               const GoogleMapPage(),
-              const GroupsView(),
+              GroupsView(user: user),
               const WeightsView(),
-
-             ProfilePage(user: user),
+              ProfilePage(user: user),
             ],
           ),
           bottomNavigationBar: Theme(

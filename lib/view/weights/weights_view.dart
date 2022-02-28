@@ -22,7 +22,7 @@ class _WeightsViewState extends State<WeightsView> {
             height: 60,
             alignment: Alignment.center,
             child: const Text(
-              '1',
+              "1",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -95,8 +95,10 @@ class _WeightsViewState extends State<WeightsView> {
                       fontWeight: FontWeight.w500,
                       color: Colors.white),
                 ),
-                const SizedBox(
-                  width: 125,
+                Expanded(
+                  child: const SizedBox(
+                    width: double.infinity,
+                  ),
                 ),
                 RotatedBox(
                   quarterTurns: 1,
@@ -130,8 +132,8 @@ class _WeightsViewState extends State<WeightsView> {
             height: 1,
             thickness: 1,
           ),
-          SizedBox(
-            height: 150,
+          Expanded(
+            flex: 2,
             child: ListView.separated(
               shrinkWrap: true,
               itemCount: _setsList.length,
@@ -160,7 +162,7 @@ class _WeightsViewState extends State<WeightsView> {
               children: [
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    elevation: 8,
+                    elevation: 3,
                     primary: constants.kHunterColor,
                   ),
                   onPressed: () {
@@ -176,101 +178,7 @@ class _WeightsViewState extends State<WeightsView> {
               ],
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  height: 65,
-                  width: 130,
-                  decoration: constants.kWeightsDataBoxDecoration,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Total Reps",
-                        style: constants.kWeightsDataTitle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: const [
-                          Text(
-                            '58',
-                            style: constants.kWeightsData,
-                          ),
-                          Text('reps'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  height: 65,
-                  width: 130,
-                  decoration: constants.kWeightsDataBoxDecoration,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Total Weight",
-                        style: constants.kWeightsDataTitle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: const [
-                          Text(
-                            '40',
-                            style: constants.kWeightsData,
-                          ),
-                          Text('lbs'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  height: 65,
-                  width: 130,
-                  decoration: constants.kWeightsDataBoxDecoration,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Average Weight",
-                        style: constants.kWeightsDataTitle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: const [
-                          Text(
-                            '85.8',
-                            style: constants.kWeightsData,
-                          ),
-                          Text('lbs'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Container(
-            width: double.infinity,
-            height: 20,
-            color: Colors.grey.shade300,
-          ),
           Expanded(
-            flex: 4,
             child: stopwatch,
           )
         ],
@@ -278,3 +186,91 @@ class _WeightsViewState extends State<WeightsView> {
     );
   }
 }
+// Row(
+// children: [
+// Expanded(
+// child: Container(
+// height: 65,
+// width: 130,
+// decoration: constants.kWeightsDataBoxDecoration,
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// const Text(
+// "Total Reps",
+// style: constants.kWeightsDataTitle,
+// ),
+// Row(
+// mainAxisAlignment: MainAxisAlignment.center,
+// crossAxisAlignment: CrossAxisAlignment.baseline,
+// textBaseline: TextBaseline.alphabetic,
+// children: const [
+// Text(
+// '58',
+// style: constants.kWeightsData,
+// ),
+// Text('reps'),
+// ],
+// ),
+// ],
+// ),
+// ),
+// ),
+// Expanded(
+// child: Container(
+// height: 65,
+// width: 130,
+// decoration: constants.kWeightsDataBoxDecoration,
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// const Text(
+// "Total Weight",
+// style: constants.kWeightsDataTitle,
+// ),
+// Row(
+// mainAxisAlignment: MainAxisAlignment.center,
+// crossAxisAlignment: CrossAxisAlignment.baseline,
+// textBaseline: TextBaseline.alphabetic,
+// children: const [
+// Text(
+// '40',
+// style: constants.kWeightsData,
+// ),
+// Text('lbs'),
+// ],
+// ),
+// ],
+// ),
+// ),
+// ),
+// Expanded(
+// child: Container(
+// height: 65,
+// width: 130,
+// decoration: constants.kWeightsDataBoxDecoration,
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// const Text(
+// "Average Weight",
+// style: constants.kWeightsDataTitle,
+// ),
+// Row(
+// mainAxisAlignment: MainAxisAlignment.center,
+// crossAxisAlignment: CrossAxisAlignment.baseline,
+// textBaseline: TextBaseline.alphabetic,
+// children: const [
+// Text(
+// '85.8',
+// style: constants.kWeightsData,
+// ),
+// Text('lbs'),
+// ],
+// ),
+// ],
+// ),
+// ),
+// ),
+// ],
+// ),

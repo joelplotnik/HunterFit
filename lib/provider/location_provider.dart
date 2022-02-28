@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -10,9 +11,13 @@ class LocationProvider with ChangeNotifier {
 
   bool locationServiceActive = true;
 
+  late final List<LatLng> _coordinateList;
+  List<LatLng> get coordinateList => _coordinateList;
+
   LocationProvider() {
     _location = Location();
     _locationPosition = const LatLng(33.1295, -117.1596);
+    _coordinateList = <LatLng>[];
   }
 
   initialization() async {
@@ -44,9 +49,52 @@ class LocationProvider with ChangeNotifier {
       _locationPosition = LatLng(currentLocation.latitude!,
           currentLocation.longitude!); // CHANGES MADE HERE
 
-      print(_locationPosition);
-
       notifyListeners();
+
+      /*
+      // PRINTING OUT COORDINATES AS THEY COME IN
+      _coordinateList.add(_locationPosition);
+      for (int i = 0; i < coordinateList.length ; i++){
+        print(_coordinateList[i]);
+      }*/
+
+      //print(_locationPosition);
+
+
+      /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      XXXXXXXXXX  WORKING ON LIST OF COORDINATES HERE  XXXXXXXXXX
+      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+       */
+
+      // if the list is empty
+      if (_coordinateList.isEmpty) {
+        // add LatLng position to the list
+        _coordinateList.add(_locationPosition);
+        // print the coordinate
+        print("COORD " +
+            (_coordinateList.length).toString() +
+            ": " +
+            _coordinateList[_coordinateList.length - 1].toString());
+      }
+      else if ((_coordinateList[_coordinateList.length - 1]) != _locationPosition) {
+        // add LatLng position to the list
+        _coordinateList.add(_locationPosition);
+        // print the coordinate
+        print("COORD " +
+            (_coordinateList.length).toString() +
+            ": " +
+            (_coordinateList[_coordinateList.length - 1]).toString());
+      }
+      // print the repeated coordinates coming in
+      else {
+        print("COORD " +
+            (_coordinateList.length).toString() +
+            " REPEATED: " +
+            (_coordinateList[_coordinateList.length - 1]).toString());
+      }
     });
   }
+
 }

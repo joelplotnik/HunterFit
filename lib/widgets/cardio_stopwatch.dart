@@ -13,7 +13,8 @@ class CardioStopwatch extends StatefulWidget {
 class _CardioStopwatchState extends State<CardioStopwatch> {
   Duration duration = const Duration();
   Timer? timer;
-  LocationProvider locationProvider =LocationProvider();
+
+  late LocationProvider locProv;
 
   @override
   void initState() {
@@ -115,32 +116,37 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
 
     return isRunning || !isCompleted
         ? Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ButtonWidget(
-          text: isRunning ? 'STOP' : 'RESUME',
-          onClicked: () {
-            if (isRunning) {
-              stopTimer(resets: false);
-            } else {
-              startTimer(resets: false);
-            }
-          },
-        ),
-        const SizedBox(width: 12),
-        ButtonWidget(
-          text: 'CANCEL',
-          onClicked: () {
-            stopTimer();
-          },
-        ),
-      ],
-    )
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonWidget(
+                text: isRunning ? 'STOP' : 'RESUME',
+                onClicked: () {
+                  if (isRunning) {
+                    print("STOP GETTING USER POSITION");
+                    stopTimer(resets: false);
+                  } else {
+                    print("START GETTING USER POSITION");
+                    startTimer(resets: false);
+                  }
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonWidget(
+                text: 'CANCEL',
+                onClicked: () {
+                  print("STOP GETTING USER POSITION");
+                  stopTimer();
+                },
+              ),
+            ],
+          )
         : ButtonWidget(
-      text: 'Start Timer',
-      onClicked: () {
-        startTimer();
-      },
-    );
+            text: 'Start Timer',
+            onClicked: () {
+              startTimer();
+
+              print("START GETTING USER POSITION");
+            },
+          );
   }
 }

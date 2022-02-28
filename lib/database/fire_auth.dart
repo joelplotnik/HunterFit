@@ -14,6 +14,7 @@ class FireAuth {
         email: email,
         password: password,
       );
+
       user = userCredential.user;
       await user!.updateDisplayName(name);
       await user.reload();

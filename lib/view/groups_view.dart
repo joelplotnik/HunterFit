@@ -1,35 +1,46 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/database/insertUserData.dart';
+import 'package:hunter_fit/database/getUserData.dart';
 
 class GroupsView extends StatefulWidget {
-  const GroupsView({Key? key}) : super(key: key);
+  final User user;
+  const GroupsView({Key? key, required this.user}) : super(key: key);
 
   @override
   State<GroupsView> createState() => _GroupsViewState();
-
 }
 
 class _GroupsViewState extends State<GroupsView> {
-  int segmentedControlGroupValue=0;
+  insertUserData insertToDB = insertUserData();
+  getUserData getFromDB = getUserData();
+  int segmentedControlGroupValue = 0;
   final Map<int, Widget> myTabs = const <int, Widget>{
     0: Text("Item 1"),
     1: Text("Item 2")
   };
 
-  final List<String> names = <String>['Nicks Group', 'Fitness Fire', 'Athletes & All Stars',  'Greatest Group', ];
-  final List<int> memCount = <int>[2, 0, 10, 6, ];
+  Future<dynamic> names = getUserData().getUsersGroupsListStreamSnapshots();
+
   TextEditingController nameController = TextEditingController();
 
-  void addItemToList(){
+  void addItemToList() {
     setState(() {
-      names.insert(0,nameController.text);
-      memCount.insert(0, 0);
+      insertToDB.insertNewGroupIntoUserlist(nameController.toString());
+      insertToDB.insertNewGroupIntoDB(nameController.toString());
     });
   }
 
-
+  late User _currentUser;
+  @override
+  void initState() {
+    _currentUser = widget.user;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    names = getFromDB.getUsersGroupsListStreamSnapshots();
     return Scaffold(
       backgroundColor: Colors.white70,
       body: Column(
@@ -50,31 +61,27 @@ class _GroupsViewState extends State<GroupsView> {
               addItemToList();
             },
           ),
-         Expanded(
-             child: ListView.builder(
-               padding: const EdgeInsets.all(8),
-                 itemCount: names.length,
-                 itemBuilder: (BuildContext context, int index) {
-                   return Container(
-                     height: 75,
-                     margin: const EdgeInsets.all(2),
-                     color: const Color(0xFF47ABD1),
-                     child: Center(
-                         child: Text('${names[index]} (${memCount[index]})',
-                           style: const TextStyle(fontSize: 18),
-                         )
-                     ),
-                   );
-                 }
-    )),
-
+          Expanded(
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: 75,
+                      margin: const EdgeInsets.all(2),
+                      color: const Color(0xFF47ABD1),
+                      child: Center(
+                          child: Text(
+                        '${names} ',
+                        style: const TextStyle(fontSize: 18),
+                      )),
+                    );
+                  })),
         ],
-
       ),
     );
   }
 }
-
 
 /*
 Expanded(

@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hunter_fit/view/validator.dart';
-import 'fire_auth.dart';
+import 'package:hunter_fit/database/validator.dart';
+import 'package:hunter_fit/database/fire_auth.dart';
 import 'signup_view.dart';
 import 'navigation_view.dart';
 
@@ -70,8 +70,8 @@ class LoginPage extends StatelessWidget {
                             filled: true,
                             fillColor: Colors.white,
                             hintText: 'Email',
-                            contentPadding:
-                            EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                            contentPadding: EdgeInsets.only(
+                                left: 14.0, bottom: 8.0, top: 8.0),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.only(
@@ -131,8 +131,8 @@ class LoginPage extends StatelessWidget {
                             filled: true,
                             fillColor: Colors.white,
                             hintText: 'Password',
-                            contentPadding:
-                            EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                            contentPadding: EdgeInsets.only(
+                                left: 14.0, bottom: 8.0, top: 8.0),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                               borderRadius: BorderRadius.only(
@@ -177,7 +177,6 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(
                           height: 25,
                         ),
-
                         ElevatedButton(
                           child: const Text(
                             'Log in',
@@ -186,11 +185,10 @@ class LoginPage extends StatelessWidget {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               User? user =
-                              await FireAuth.signInUsingEmailPassword(
-                                  email: _emailTextController.text,
-                                  password:
-                                  _passwordTextController.text,
-                                  context: context);
+                                  await FireAuth.signInUsingEmailPassword(
+                                      email: _emailTextController.text,
+                                      password: _passwordTextController.text,
+                                      context: context);
                               if (user != null) {
                                 Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
@@ -226,16 +224,17 @@ class LoginPage extends StatelessWidget {
                           child: const Text(
                             'Sign up',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.normal),
                           ),
                           style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
                           ),
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                  const SignupPage()),
+                                  builder: (context) => const SignupPage()),
                             );
                           },
                         ),

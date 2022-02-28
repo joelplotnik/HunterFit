@@ -1,6 +1,10 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/database/insertUserData.dart';
 import 'package:hunter_fit/widgets/button_widget.dart';
+import 'package:hunter_fit/database/getUserData.dart';
+import 'package:hunter_fit/database/insertUserData.dart';
 
 class Stopwatch extends StatefulWidget {
   const Stopwatch({Key? key}) : super(key: key);
@@ -10,6 +14,7 @@ class Stopwatch extends StatefulWidget {
 }
 
 class _StopwatchState extends State<Stopwatch> {
+  insertUserData insertToDB = insertUserData();
   Duration duration = const Duration();
   Timer? timer;
 
@@ -72,17 +77,16 @@ class _StopwatchState extends State<Stopwatch> {
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
     return Expanded(
-      flex: 2,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           buildTimeCard(time: hours, header: 'HOURS'),
           const SizedBox(
-            width: 8,
+            width: 4,
           ),
           buildTimeCard(time: minutes, header: 'MINUTES'),
           const SizedBox(
-            width: 8,
+            width: 4,
           ),
           buildTimeCard(time: seconds, header: 'SECONDS'),
         ],
@@ -91,10 +95,11 @@ class _StopwatchState extends State<Stopwatch> {
   }
 
   Widget buildTimeCard({required String time, required String header}) =>
-      Column(
-        children: [
-          Expanded(
-            child: Container(
+      FittedBox(
+        child: Column(
+          children: [
+            Container(
+              height: 70,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.blueGrey.shade200,
@@ -103,45 +108,52 @@ class _StopwatchState extends State<Stopwatch> {
               child: Text(
                 time,
                 style: const TextStyle(
-                    fontSize: 50,
+                    fontSize: 43,
                     color: Colors.black,
                     fontWeight: FontWeight.w400),
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(header),
-        ],
+            const SizedBox(height: 10),
+            Text(header),
+          ],
+        ),
       );
   Widget buildButtons() {
     final isRunning = timer == null ? false : timer!.isActive;
     final isCompleted = duration.inSeconds == 0;
 
     return isRunning || !isCompleted
-        ? Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                ButtonWidget(
-                  text: isRunning ? 'STOP' : 'RESUME',
-                  onClicked: () {
-                    if (isRunning) {
-                      stopTimer(resets: false);
-                    } else {
-                      startTimer(resets: false);
-                    }
-                  },
-                ),
-                const SizedBox(width: 12),
-                ButtonWidget(
-                  text: 'CANCEL',
-                  onClicked: () {
-                    stopTimer();
-                  },
-                ),
-              ],
-            ),
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ButtonWidget(
+                text: 'SAVE',
+                onClicked: () async {
+                  await insertToDB.insertWeightTime(duration);
+                  print(duration);
+                  stopTimer();
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonWidget(
+                text: isRunning ? 'STOP' : 'RESUME',
+                onClicked: () {
+                  if (isRunning) {
+                    stopTimer(resets: false);
+                  } else {
+                    startTimer(resets: false);
+                  }
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonWidget(
+                text: 'CANCEL',
+                onClicked: () {
+                  stopTimer();
+                },
+              ),
+            ],
           )
         : ButtonWidget(
             text: 'Start Timer',

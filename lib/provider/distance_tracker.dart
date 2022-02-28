@@ -9,16 +9,32 @@ class DistanceTracker extends StatefulWidget {
   _DistanceTrackerState createState() => _DistanceTrackerState();
 
   var listOfLocation = <LatLng>[];
+  var runningTotalInKm = 0.0;
 
   double calculateDistanceKilometers(LatLng location) {
+
+    if(listOfLocation.length == 0)
+      {
+        listOfLocation.add(location);
+        return 0.0;
+      }
+    var prevLastLocation = listOfLocation.last;
     listOfLocation.add(location);
     var firstLocation = listOfLocation.first;
     var lastLocation = listOfLocation.last;
 
+
+
+    // compare each coordinate in the list to the previous
+    runningTotalInKm += calculateDistance(prevLastLocation.latitude, prevLastLocation.longitude, location.latitude, location.longitude);
+    // add to running total
+    // return running total
+
     var finalDistance = calculateDistance(firstLocation.latitude,
         firstLocation.longitude, lastLocation.latitude, lastLocation.longitude);
 
-    return finalDistance;
+    //return finalDistance;
+    return runningTotalInKm;
   }
 
   double calculateDistance(lat1, lon1, lat2, lon2) {

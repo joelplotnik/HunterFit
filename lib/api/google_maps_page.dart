@@ -50,7 +50,8 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
           Expanded(
             flex: 1,
             child: cardioStopwatch,
-          )
+          ),
+          Text(model.distanceTraveled, textAlign: TextAlign.left),
         ],
       );
     });

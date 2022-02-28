@@ -1,10 +1,18 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hunter_fit/provider/distance_tracker.dart';
 import 'package:location/location.dart';
 
 class LocationProvider with ChangeNotifier {
   late Location _location;
+
+  late final DistanceTracker _distanceTracker;
+
+  late double _distanceTraveled = 0.0;
+  // String get distanceTraveled => _distanceTraveled == null ? _distanceTraveled.toString() : '0.00';
+  String get distanceTraveled => _distanceTraveled.toString();
+
   Location get location => _location;
   late LatLng _locationPosition;
   LatLng get locationPosition => _locationPosition;
@@ -14,10 +22,14 @@ class LocationProvider with ChangeNotifier {
   late final List<LatLng> _coordinateList;
   List<LatLng> get coordinateList => _coordinateList;
 
+  double simulatedTravelPerSecond = 0.0;
+
+
   LocationProvider() {
     _location = Location();
     _locationPosition = const LatLng(33.1295, -117.1596);
     _coordinateList = <LatLng>[];
+    _distanceTracker = DistanceTracker();
   }
 
   initialization() async {
@@ -46,9 +58,13 @@ class LocationProvider with ChangeNotifier {
     }
 
     location.onLocationChanged.listen((LocationData currentLocation) {
-      _locationPosition = LatLng(currentLocation.latitude!,
+      _locationPosition = LatLng(currentLocation.latitude! + simulatedTravelPerSecond,
           currentLocation.longitude!); // CHANGES MADE HERE
 
+      print(simulatedTravelPerSecond);
+
+      simulatedTravelPerSecond++;
+      _distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition);
       notifyListeners();
 
       /*
@@ -59,7 +75,6 @@ class LocationProvider with ChangeNotifier {
       }*/
 
       //print(_locationPosition);
-
 
       /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -96,5 +111,4 @@ class LocationProvider with ChangeNotifier {
       }
     });
   }
-
 }

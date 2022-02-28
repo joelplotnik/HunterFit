@@ -39,5 +39,18 @@ void main() {
 
       expect(result2?.toInt(), 1);
     });
+
+    test(
+        'Should return a distance of 1 km when total distance is 2 km '
+        'but first and last location is the same', () {
+      distanceTracker
+          ?.calculateDistanceKilometers(const LatLng(33.1295, -117.1596));
+      var result2 = distanceTracker
+          ?.calculateDistanceKilometers(const LatLng(33.1295, -117.1704));
+      var result3 = distanceTracker
+          ?.calculateDistanceKilometers(const LatLng(33.1295, -117.1596));
+
+      expect(result3?.toInt(), 2);
+    });
   });
 }

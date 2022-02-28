@@ -37,12 +37,27 @@ CollectionReference groupsCollection = FirebaseFirestore.instance.collection('gr
     }
   }
   getUsersGroupsListStreamSnapshots() async {
-    var data = await workoutCollection
-        .doc(getCurrentUserID().toString())
+    String UID = await getCurrentUserID();
+    var snapshot = await workoutCollection
+        .doc(UID)
         .collection('groups')
         .doc('mygroups')
         .get();
-    return data;
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> groups = snapshot.data()!;
+        var mygroups = groups['Groups'];
+        print(mygroups);
+List groupss = mygroups;
+        return groupss;
+      } else {
+        print('Error Document does not exist');
+      }
+    } catch (error) {
+      print("Error: $error");
+    }
+
+
 
   }
 }

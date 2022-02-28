@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class Validator {
   static String? validateName({required String name}) {
     if (name == null) {
@@ -27,6 +29,7 @@ class Validator {
   }
 
   static String? validatePassword({required String password}) {
+
     if (password == null) {
       return null;
     }
@@ -36,6 +39,7 @@ class Validator {
     } else if (password.length < 6) {
       return 'Enter a password with length at least 6';
     }
+
 
     return null;
   }

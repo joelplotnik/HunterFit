@@ -26,8 +26,8 @@ class _GroupsViewState extends State<GroupsView> {
 
   void addItemToList() {
     setState(() {
-      insertToDB.insertNewGroupIntoUserlist(nameController.toString());
-      insertToDB.insertNewGroupIntoDB(nameController.toString());
+      insertToDB.insertNewGroupIntoUserlist(nameController.text);
+      insertToDB.insertNewGroupIntoDB(nameController.text);
     });
   }
 

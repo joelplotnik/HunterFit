@@ -49,13 +49,17 @@ class LocationProvider with ChangeNotifier {
       _locationPosition = LatLng(currentLocation.latitude!,
           currentLocation.longitude!); // CHANGES MADE HERE
 
+      notifyListeners();
+
       /*
+      // PRINTING OUT COORDINATES AS THEY COME IN
       _coordinateList.add(_locationPosition);
       for (int i = 0; i < coordinateList.length ; i++){
         print(_coordinateList[i]);
       }*/
 
-      notifyListeners();
+      //print(_locationPosition);
+
 
       /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -64,41 +68,27 @@ class LocationProvider with ChangeNotifier {
       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
        */
 
-      //print(_locationPosition);
-
-      // if the list is empty OR only has one coordinate, there is not
-      // enough coordinates in the list to make a comparison
+      // if the list is empty
       if (_coordinateList.isEmpty) {
+        // add LatLng position to the list
         _coordinateList.add(_locationPosition);
-
+        // print the coordinate
         print("COORD " +
             (_coordinateList.length).toString() +
             ": " +
             _coordinateList[_coordinateList.length - 1].toString());
-
-        // if there are at least 2 elements in the list, compare the coordinates
-        // if they are different, add the new coordinate to the list
       }
-      else if (_coordinateList.length == 1) {
-
-        if ((_coordinateList[_coordinateList.length - 1]) !=
-            (_coordinateList[_coordinateList.length - 2])) {
-
-          print("COORD " +
-              (_coordinateList.length).toString() +
-              ": " +
-              (_coordinateList[_coordinateList.length - 1]).toString());
-        }
-
-      }
-      else if ((_coordinateList[_coordinateList.length - 1]) !=
-          (_coordinateList[_coordinateList.length - 2])) {
+      else if ((_coordinateList[_coordinateList.length - 1]) != _locationPosition) {
+        // add LatLng position to the list
         _coordinateList.add(_locationPosition);
+        // print the coordinate
         print("COORD " +
             (_coordinateList.length).toString() +
             ": " +
             (_coordinateList[_coordinateList.length - 1]).toString());
-      } else {
+      }
+      // print the repeated coordinates coming in
+      else {
         print("COORD " +
             (_coordinateList.length).toString() +
             " REPEATED: " +
@@ -107,12 +97,4 @@ class LocationProvider with ChangeNotifier {
     });
   }
 
-  double calculateDistance(lat1, lon1, lat2, lon2) {
-    var p = 0.017453292519943295;
-    var c = cos;
-    var a = 0.5 -
-        c((lat2 - lat1) * p) / 2 +
-        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
-    return 12742 * asin(sqrt(a));
-  }
 }

@@ -59,4 +59,25 @@ class getUserData {
       print("Error: $error");
     }
   }
+
+  getUsername() async {
+    String UID = await getCurrentUserID();
+    var snapshot = await userCollection
+        .doc(UID)
+        .collection('userData')
+        .doc('name')
+        .get();
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+        return data['Name'][0];
+      } else {
+        print('Error getUsername: Document does not exist');
+      }
+    } catch (error) {
+      print("Error: $error");
+    }
+  }
+
+
 }

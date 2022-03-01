@@ -13,8 +13,14 @@ class ActivityView extends StatefulWidget {
 
 class _ActivityViewState extends State<ActivityView> {
 
-  //
+  //get from db instantiating the class
   getUserData getFromDB = getUserData();
+  var name =  getUserData().getUsername();
+
+  void display(){
+    print(name.runtimeType);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +41,9 @@ class _ActivityViewState extends State<ActivityView> {
                   Row(children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          'Hi, User',
+                          'Hi, user',
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
@@ -48,6 +54,7 @@ class _ActivityViewState extends State<ActivityView> {
                         ),
                       ],
                     ),
+                    TextButton(onPressed: display, child: Text("print name")),
                     const SizedBox(
                       width: 50,
                     ),

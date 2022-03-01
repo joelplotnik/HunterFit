@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hunter_fit/database/getUserData.dart';
 
 class ActivityView extends StatefulWidget {
   static String routeName = "/activity";
@@ -11,6 +12,10 @@ class ActivityView extends StatefulWidget {
 }
 
 class _ActivityViewState extends State<ActivityView> {
+
+  //
+  getUserData getFromDB = getUserData();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

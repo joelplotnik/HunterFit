@@ -36,6 +36,7 @@ class getUserData {
       print("Error: $error");
     }
   }
+
   getUsersGroupsListStreamSnapshots() async {
     String UID = await getCurrentUserID();
     var snapshot = await workoutCollection

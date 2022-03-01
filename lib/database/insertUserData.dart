@@ -35,7 +35,7 @@ class insertUserData {
 
     await getData.getTotalWeightTime();
 
-    return getData.workoutCollection //users > UID > workoutData > weightsData >
+    return getData.userCollection //users > UID > workoutData > weightsData >
         .doc(currentUID)
         .collection('workoutData')
         .doc('weightsData')
@@ -67,7 +67,7 @@ class insertUserData {
     getUserData getData =
         await getUserData(); //wait to initialize an instance if Firestore
     var currentUID = await getData.getCurrentUserID();
-    return getData.workoutCollection
+    return getData.userCollection
         .doc(currentUID.toString())
         .collection('groups')
         .doc('mygroups')
@@ -81,15 +81,15 @@ class insertUserData {
 
   Future<void> insertUserName(String userName) async {
     getUserData getData =
-    await getUserData(); //wait to initialize an instance if Firestore
+        await getUserData(); //wait to initialize an instance if Firestore
     var currentUID = await getData.getCurrentUserID();
-    return getData.workoutCollection //users > UID > userData > weightsData >
+    return getData.userCollection //users > UID > userData > weightsData >
         .doc(currentUID)
         .collection('userData')
         .doc('name')
         .set({
-      'Name': FieldValue.arrayUnion([userName])
-    }, SetOptions(merge: true))
+          'Name': FieldValue.arrayUnion([userName])
+        }, SetOptions(merge: true))
         .then((value) => print('Name added'))
         .catchError(
             (error) => print('Failed to add time to database because: $error'));

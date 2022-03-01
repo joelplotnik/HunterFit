@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,8 +6,10 @@ import 'package:flutter/cupertino.dart';
 class getUserData {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  CollectionReference workoutCollection = FirebaseFirestore.instance.collection('users');
-  CollectionReference groupsCollection = FirebaseFirestore.instance.collection('groups');
+  CollectionReference userCollection =
+      FirebaseFirestore.instance.collection('users');
+  CollectionReference groupsCollection =
+      FirebaseFirestore.instance.collection('groups');
 
   getCurrentUserID() async {
     final user = await auth.currentUser;
@@ -18,7 +19,7 @@ class getUserData {
 
   getTotalWeightTime() async {
     String UID = await getCurrentUserID();
-    var snapshot = await workoutCollection
+    var snapshot = await userCollection
         .doc(UID)
         .collection('workoutData')
         .doc('weightsData')
@@ -39,7 +40,7 @@ class getUserData {
 
   getUsersGroupsListStreamSnapshots() async {
     String UID = await getCurrentUserID();
-    var snapshot = await workoutCollection
+    var snapshot = await userCollection
         .doc(UID)
         .collection('groups')
         .doc('mygroups')
@@ -49,7 +50,7 @@ class getUserData {
         Map<String, dynamic> groups = snapshot.data()!;
         var mygroups = groups['Groups'];
         print(mygroups);
-List groupss = mygroups;
+        List groupss = mygroups;
         return groupss;
       } else {
         print('Error Document does not exist');
@@ -57,8 +58,5 @@ List groupss = mygroups;
     } catch (error) {
       print("Error: $error");
     }
-
-
-
   }
 }

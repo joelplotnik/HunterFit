@@ -19,8 +19,8 @@ class _GroupsViewState extends State<GroupsView> {
     0: Text("Item 1"),
     1: Text("Item 2")
   };
-
-  Future<dynamic> names = getUserData().getUsersGroupsListStreamSnapshots();
+  Future<dynamic> groupNames =
+      getUserData().getUsersGroupsListStreamSnapshots();
 
   TextEditingController nameController = TextEditingController();
 
@@ -40,7 +40,6 @@ class _GroupsViewState extends State<GroupsView> {
 
   @override
   Widget build(BuildContext context) {
-    names = getFromDB.getUsersGroupsListStreamSnapshots();
     return Scaffold(
       backgroundColor: Colors.white70,
       body: Column(
@@ -72,7 +71,7 @@ class _GroupsViewState extends State<GroupsView> {
                       color: const Color(0xFF47ABD1),
                       child: Center(
                           child: Text(
-                        '${names} ',
+                        '${groupNames} ',
                         style: const TextStyle(fontSize: 18),
                       )),
                     );

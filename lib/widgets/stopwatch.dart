@@ -131,7 +131,6 @@ class _StopwatchState extends State<Stopwatch> {
                 text: 'SAVE',
                 onClicked: () async {
                   await insertToDB.insertWeightTime(duration);
-                  print(duration);
                   stopTimer();
                 },
               ),

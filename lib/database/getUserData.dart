@@ -7,9 +7,9 @@ import 'package:flutter/cupertino.dart';
 class getUserData {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  CollectionReference workoutCollection =
-      FirebaseFirestore.instance.collection('users');
-CollectionReference groupsCollection = FirebaseFirestore.instance.collection('groups');
+  CollectionReference workoutCollection = FirebaseFirestore.instance.collection('users');
+  CollectionReference groupsCollection = FirebaseFirestore.instance.collection('groups');
+
   getCurrentUserID() async {
     final user = await auth.currentUser;
     final uid = await user?.uid;

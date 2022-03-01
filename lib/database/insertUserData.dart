@@ -78,4 +78,20 @@ class insertUserData {
         .catchError(
             (error) => print('Failed to add to database because: $error'));
   }
+
+  Future<void> insertUserName(String userName) async {
+    getUserData getData =
+    await getUserData(); //wait to initialize an instance if Firestore
+    var currentUID = await getData.getCurrentUserID();
+    return getData.workoutCollection //users > UID > userData > weightsData >
+        .doc(currentUID)
+        .collection('userData')
+        .doc('name')
+        .set({
+      'Name': FieldValue.arrayUnion([userName])
+    }, SetOptions(merge: true))
+        .then((value) => print('Name added'))
+        .catchError(
+            (error) => print('Failed to add time to database because: $error'));
+  }
 }

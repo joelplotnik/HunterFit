@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hunter_fit/database/fire_auth.dart';
 import 'navigation_view.dart';
 import '../database/validator.dart';
+import 'package:hunter_fit/database/insertUserData.dart';
+
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -22,6 +24,7 @@ class _SignupPageState extends State<SignupPage> {
   final _focusName = FocusNode();
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
+  insertUserData insertToDB = insertUserData();
 
   bool _isProcessing = false;
 
@@ -265,6 +268,8 @@ class _SignupPageState extends State<SignupPage> {
                                             ),
                                             ModalRoute.withName('/'),
                                           );
+                                          //insert name to db
+                                          await insertToDB.insertUserName(_nameTextController.text);
                                         }
                                       }
                                     },

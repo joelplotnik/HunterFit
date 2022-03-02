@@ -15,11 +15,15 @@ class _ActivityViewState extends State<ActivityView> {
 
   //get from db instantiating the class
   getUserData getFromDB = getUserData();
-  var name =  getUserData().getUsername();
+  var name;
 
-  void display(){
-    print(name.runtimeType);
+  Future fetchUserData() async{
+    name = await getUserData().getUsername();
   }
+  void initState(){
+    fetchUserData();
+  }
+
 
 
   @override
@@ -43,7 +47,7 @@ class _ActivityViewState extends State<ActivityView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hi, user',
+                          'Hi, ${name}',
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
@@ -54,7 +58,7 @@ class _ActivityViewState extends State<ActivityView> {
                         ),
                       ],
                     ),
-                    TextButton(onPressed: display, child: Text("print name")),
+                    // TextButton(onPressed: fetchUserData, child: Text('help')),
                     const SizedBox(
                       width: 50,
                     ),

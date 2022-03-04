@@ -14,7 +14,6 @@ class GoogleMapPage extends StatefulWidget {
 class _GoogleMapPageState extends State<GoogleMapPage> {
   CardioStopwatch cardioStopwatch = const CardioStopwatch();
 
-
   @override
   void initState() {
     super.initState();
@@ -25,6 +24,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: googleMapUI(),
+      backgroundColor: Colors.grey.shade300,
     );
   }
 
@@ -53,8 +53,37 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
             flex: 1,
             child: cardioStopwatch,
           ),
-          Text(model.distanceTraveled + " kilometers", textAlign: TextAlign.left),
-          Text(model.distanceTraveledMiles + " miles", textAlign: TextAlign.left),
+          RichText(
+              text: TextSpan(
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                TextSpan(
+                    text: model.distanceTraveledMiles,
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        backgroundColor: Colors.grey.shade300,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 46))
+              ])),
+          RichText(
+              text: TextSpan(
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: "MILES",
+                        style: TextStyle(
+                            color: Colors.grey.shade800,
+                            decoration: TextDecoration.none,
+                            backgroundColor: Colors.grey.shade300,
+                            //color: ,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18))
+                  ])),
+          const SizedBox( height: 20,)
+          /*Text(model.distanceTraveled + " kilometers",
+              textAlign: TextAlign.left),*/
+          /*Text(model.distanceTraveledMiles + " miles",
+              textAlign: TextAlign.left),*/
         ],
       );
     });

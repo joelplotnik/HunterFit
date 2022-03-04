@@ -122,7 +122,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
                 text: isRunning ? 'STOP' : 'RESUME',
                 onClicked: () {
                   if (isRunning) {
-                    print("STOP GETTING USER POSITION");
+                    print("STOP GETTING USER POSITION... MAYBE");
                     stopTimer(resets: false);
                   } else {
                     print("START GETTING USER POSITION");

@@ -60,6 +60,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
                 TextSpan(
                     text: model.distanceTraveledMiles,
                     style: TextStyle(
+                        fontStyle: FontStyle.italic,
                         decoration: TextDecoration.underline,
                         backgroundColor: Colors.grey.shade300,
                         fontWeight: FontWeight.bold,

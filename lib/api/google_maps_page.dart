@@ -32,7 +32,9 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
     return Consumer<LocationProvider>(builder: (consumerContext, model, child) {
       return Column(
         children: [
-          Expanded(
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 350,
             child: GoogleMap(
               mapType: MapType.normal,
               initialCameraPosition:

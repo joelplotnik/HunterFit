@@ -25,7 +25,7 @@ class LocationProvider with ChangeNotifier {
   late final List<LatLng> _coordinateList;
   List<LatLng> get coordinateList => _coordinateList;
 
-  double simulatedTravelPerSecond = 0.5;
+  double simulatedTravelPerSecond = 0.0001;
   //double simulatedTravelPerSecond = 0.0;
 
   // to convert km to miles
@@ -69,7 +69,7 @@ class LocationProvider with ChangeNotifier {
 
       print(simulatedTravelPerSecond);
 
-      simulatedTravelPerSecond++;
+      simulatedTravelPerSecond += 0.0001;
       _distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition);
 
       _distanceTraveledMiles = _distanceTraveled/ conversionFactor; // convert km to miles

@@ -24,7 +24,6 @@ class LocationProvider with ChangeNotifier {
 
   double simulatedTravelPerSecond = 0.0;
 
-
   LocationProvider() {
     _location = Location();
     _locationPosition = const LatLng(33.1295, -117.1596);

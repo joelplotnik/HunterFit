@@ -11,7 +11,10 @@ class LocationProvider with ChangeNotifier {
 
   late double _distanceTraveled = 0.0;
   // String get distanceTraveled => _distanceTraveled == null ? _distanceTraveled.toString() : '0.00';
-  String get distanceTraveled => _distanceTraveled.toString();
+  String get distanceTraveled => _distanceTraveled.toStringAsFixed(2);
+
+  late double _distanceTraveledMiles = 0.0;
+  String get distanceTraveledMiles => _distanceTraveledMiles.toStringAsFixed(2);
 
   Location get location => _location;
   late LatLng _locationPosition;
@@ -22,7 +25,11 @@ class LocationProvider with ChangeNotifier {
   late final List<LatLng> _coordinateList;
   List<LatLng> get coordinateList => _coordinateList;
 
-  double simulatedTravelPerSecond = 0.0;
+  double simulatedTravelPerSecond = 0.5;
+  //double simulatedTravelPerSecond = 0.0;
+
+  // to convert km to miles
+  var conversionFactor = 1.609344;
 
   LocationProvider() {
     _location = Location();
@@ -64,6 +71,9 @@ class LocationProvider with ChangeNotifier {
 
       simulatedTravelPerSecond++;
       _distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition);
+
+      _distanceTraveledMiles = _distanceTraveled/ conversionFactor; // convert km to miles
+      
       notifyListeners();
 
       /*

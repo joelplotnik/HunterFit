@@ -51,7 +51,8 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
             flex: 1,
             child: cardioStopwatch,
           ),
-          Text(model.distanceTraveled, textAlign: TextAlign.left),
+          Text(model.distanceTraveled + " kilometers", textAlign: TextAlign.left),
+          Text(model.distanceTraveledMiles + " miles", textAlign: TextAlign.left),
         ],
       );
     });

@@ -10,10 +10,11 @@ class DistanceTracker extends StatefulWidget {
 
   var listOfLocation = <LatLng>[];
   var runningTotalInKm = 0.0;
+  var runningTotalInMi = 0.0;
 
   double calculateDistanceKilometers(LatLng location) {
 
-    if(listOfLocation.length == 0)
+    if(listOfLocation.isEmpty)
       {
         listOfLocation.add(location);
         return 0.0;
@@ -33,10 +34,9 @@ class DistanceTracker extends StatefulWidget {
     var finalDistance = calculateDistance(firstLocation.latitude,
         firstLocation.longitude, lastLocation.latitude, lastLocation.longitude);
 
-
-
     //return finalDistance;
     return runningTotalInKm;
+
   }
 
   double calculateDistance(lat1, lon1, lat2, lon2) {
@@ -47,14 +47,6 @@ class DistanceTracker extends StatefulWidget {
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
-
-  double convertKMtoMiles(runningTotalInKm) {
-    var miles = 0.0;
-    var conversionFactor = 1.609344;
-    miles = runningTotalInKm/ conversionFactor;
-    return miles;
-  }
-
 
 }
 

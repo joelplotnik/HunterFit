@@ -39,6 +39,7 @@ class DistanceTracker extends StatefulWidget {
 
   }
 
+  // Haversine Formula
   double calculateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;
     var c = cos;

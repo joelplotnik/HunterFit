@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:math';
 
+//ignore: must_be_immutable
 class DistanceTracker extends StatefulWidget {
   DistanceTracker({Key? key}) : super(key: key);
 
@@ -23,8 +24,6 @@ class DistanceTracker extends StatefulWidget {
     listOfLocation.add(location);
     var firstLocation = listOfLocation.first;
     var lastLocation = listOfLocation.last;
-
-
 
     // compare each coordinate in the list to the previous
     runningTotalInKm += calculateDistance(prevLastLocation.latitude, prevLastLocation.longitude, location.latitude, location.longitude);

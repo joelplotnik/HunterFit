@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hunter_fit/database/getUserData.dart';
@@ -12,19 +13,17 @@ class ActivityView extends StatefulWidget {
 }
 
 class _ActivityViewState extends State<ActivityView> {
-
   //get from db instantiating the class
   getUserData getFromDB = getUserData();
   var name;
 
-  Future fetchUserData() async{
-    name = await getUserData().getUsername();
-  }
-  void initState(){
-    fetchUserData();
+  Future<dynamic> fetchUserData() async {
+    return await getFromDB.getUsername();
   }
 
-
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +45,33 @@ class _ActivityViewState extends State<ActivityView> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Hi, ${name}',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
+                        FutureBuilder(
+                          future: fetchUserData(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot) {
+                            if (snapshot.hasData) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              } else {
+                                return Text(
+                                  'Hi, ${snapshot.data['Name'][0]}',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }
+                            } else if (snapshot.hasError) {
+                              return Text(
+                                '${snapshot.error}',
+                                style: TextStyle(fontSize: 10),
+                              );
+                            } else {
+                              return CircularProgressIndicator();
+                            }
+                          },
                         ),
                         SizedBox(height: 10),
                         Text(
@@ -72,8 +94,6 @@ class _ActivityViewState extends State<ActivityView> {
                   const SizedBox(
                     height: 50,
                   ),
-                  
-    
                   Row(
                     children: [
                       Column(
@@ -89,8 +109,8 @@ class _ActivityViewState extends State<ActivityView> {
                                   Container(
                                     padding: const EdgeInsets.all(15),
                                     height: 200,
-                                    width:
-                                        (MediaQuery.of(context).size.width) * 0.30,
+                                    width: (MediaQuery.of(context).size.width) *
+                                        0.30,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.white,
@@ -154,11 +174,9 @@ class _ActivityViewState extends State<ActivityView> {
                           )
                         ],
                       ),
-
                       const SizedBox(
                         width: 20,
                       ),
-
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -177,8 +195,8 @@ class _ActivityViewState extends State<ActivityView> {
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     height: 90,
-                                    width:
-                                        (MediaQuery.of(context).size.width) * 0.5,
+                                    width: (MediaQuery.of(context).size.width) *
+                                        0.5,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.white,
@@ -191,7 +209,8 @@ class _ActivityViewState extends State<ActivityView> {
                                       ],
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(20,5,20,0),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 20, 0),
                                       child: Column(
                                         children: [
                                           Row(
@@ -216,7 +235,7 @@ class _ActivityViewState extends State<ActivityView> {
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(height:10),
+                                          const SizedBox(height: 10),
                                           Row(
                                             children: const [
                                               Text(
@@ -263,8 +282,8 @@ class _ActivityViewState extends State<ActivityView> {
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     height: 90,
-                                    width:
-                                        (MediaQuery.of(context).size.width) * 0.5,
+                                    width: (MediaQuery.of(context).size.width) *
+                                        0.5,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.white,
@@ -277,7 +296,8 @@ class _ActivityViewState extends State<ActivityView> {
                                       ],
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(20,5,20,0),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 20, 0),
                                       child: Column(
                                         children: [
                                           Row(
@@ -302,7 +322,7 @@ class _ActivityViewState extends State<ActivityView> {
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(height:10),
+                                          const SizedBox(height: 10),
                                           Row(
                                             children: const [
                                               Text(
@@ -338,7 +358,7 @@ class _ActivityViewState extends State<ActivityView> {
                     ],
                   ),
                 ],
-              ),       
+              ),
             ],
           ),
         ),

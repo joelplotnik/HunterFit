@@ -33,7 +33,8 @@ class insertUserData {
     // print('Time parsed is: ${parseDuration(time)}');
     // print('Time parsed + parsed: ${parsedTime + parsedTime}');
 
-    await getData.getTotalWeightTime();
+    var times = await getData.getTotalWeightTime();
+    print(times);
 
     return getData.userCollection //users > UID > workoutData > weightsData >
         .doc(currentUID)

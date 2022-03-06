@@ -11,6 +11,21 @@ class getUserData {
   CollectionReference groupsCollection =
       FirebaseFirestore.instance.collection('groups');
 
+  Duration parseDuration(String s) {
+    int hours = 0;
+    int minutes = 0;
+    int micros;
+    List<String> parts = s.split(':');
+    if (parts.length > 2) {
+      hours = int.parse(parts[parts.length - 3]);
+    }
+    if (parts.length > 1) {
+      minutes = int.parse(parts[parts.length - 2]);
+    }
+    micros = (double.parse(parts[parts.length - 1]) * 1000000).round();
+    return Duration(hours: hours, minutes: minutes, microseconds: micros);
+  }
+
   getCurrentUserID() async {
     final user = await auth.currentUser;
     final uid = await user?.uid;
@@ -28,10 +43,13 @@ class getUserData {
     try {
       if (snapshot.exists) {
         Map<String, dynamic> data = snapshot.data()!;
+        print(data);
         var times = data['TIMES'];
-        print(times);
-      } else {
-        print('Error getTotalweightTime: Document does not exist');
+
+        return times;
+      } else if (!snapshot.exists) {
+        print(
+            'Error getTotalweightTime: Document does not exist yet. Creating...');
       }
     } catch (error) {
       print("Error: $error");
@@ -62,22 +80,20 @@ class getUserData {
 
   getUsername() async {
     String UID = await getCurrentUserID();
-    var snapshot = await userCollection
+    return await userCollection
         .doc(UID)
         .collection('userData')
         .doc('name')
         .get();
-    try {
-      if (snapshot.exists) {
-        Map<String, dynamic> data = snapshot.data()!;
-        return data['Name'][0];
-      } else {
-        print('Error getUsername: Document does not exist');
-      }
-    } catch (error) {
-      print("Error: $error");
-    }
+    // try {
+    //   if (snapshot.exists) {
+    //     Map<String, dynamic> data = snapshot.data()!;
+    //     return data['Name'].toString();
+    //   } else {
+    //     print('Error getUsername: Document does not exist');
+    //   }
+    // } catch (error) {
+    //   print("Error: $error");
+    // }
   }
-
-
 }

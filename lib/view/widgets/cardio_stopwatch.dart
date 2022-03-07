@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
 import 'package:hunter_fit/view/widgets/button_widget.dart';
 
+import '../../viewmodel/provider/distance_tracker.dart';
+
 class CardioStopwatch extends StatefulWidget {
   const CardioStopwatch({Key? key}) : super(key: key);
 
@@ -28,9 +30,18 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
   }
 
   void startTimer({bool resets = true}) {
+
     if (resets) {
       reset();
     }
+    /*
+    - Create singleton that has a public property on it that
+    is called isTrackingDistance
+    - Instantiate the singleton in the cardio_stopwatch widget
+    - When user clicks start on stopwatch, set the singletons property
+    to true
+    - In the location provider instantiate the same singleton
+     */
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 

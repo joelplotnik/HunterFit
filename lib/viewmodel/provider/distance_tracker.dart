@@ -14,6 +14,11 @@ class DistanceTracker extends StatefulWidget {
   var runningTotalInMi = 0.0;
 
   double calculateDistanceKilometers(LatLng location) {
+    /*
+    double calculateDistanceKilometers(LatLng location, bool isTrackingTurnedOn)
+    if (!isTrackingTurnedOn) {
+      return 0.0;
+    }*/
 
     if(listOfLocation.isEmpty)
       {

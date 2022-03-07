@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hunter_fit/database/fire_auth.dart';
+import 'package:hunter_fit/model/database/fire_auth.dart';
 import 'navigation_view.dart';
-import '../database/validator.dart';
-import 'package:hunter_fit/database/insertUserData.dart';
+import '../model/database/validator.dart';
+import 'package:hunter_fit/model/database/insertUserData.dart';
 
 
 class SignupPage extends StatefulWidget {

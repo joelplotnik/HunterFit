@@ -1,4 +1,4 @@
-import 'package:hunter_fit/database/getUserData.dart';
+import 'package:hunter_fit/model/database/getUserData.dart';
 import 'getUserData.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

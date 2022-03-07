@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/database/insertUserData.dart';
-import 'package:hunter_fit/database/getUserData.dart';
+import 'package:hunter_fit/model/database/insertUserData.dart';
+import 'package:hunter_fit/model/database/getUserData.dart';
 
 class GroupsView extends StatefulWidget {
   final User user;

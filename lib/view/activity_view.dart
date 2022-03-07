@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hunter_fit/database/getUserData.dart';
+import 'package:hunter_fit/model/database/getUserData.dart';
 
 class ActivityView extends StatefulWidget {
   static String routeName = "/activity";

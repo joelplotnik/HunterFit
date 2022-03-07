@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/database/insertUserData.dart';
-import 'package:hunter_fit/widgets/button_widget.dart';
-import 'package:hunter_fit/database/getUserData.dart';
-import 'package:hunter_fit/database/insertUserData.dart';
+import 'package:hunter_fit/model/database/insertUserData.dart';
+import 'package:hunter_fit/view/widgets/button_widget.dart';
+import 'package:hunter_fit/model/database/getUserData.dart';
+import 'package:hunter_fit/model/database/insertUserData.dart';
 
 class Stopwatch extends StatefulWidget {
   const Stopwatch({Key? key}) : super(key: key);

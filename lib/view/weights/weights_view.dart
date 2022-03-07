@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
-import 'package:hunter_fit/constants.dart' as constants;
+import 'package:hunter_fit/view/weights/weights_constants.dart' as constants;
 import 'workouts_list.dart';
-import 'package:hunter_fit/widgets/stopwatch.dart';
+import 'package:hunter_fit/view/widgets/stopwatch.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);

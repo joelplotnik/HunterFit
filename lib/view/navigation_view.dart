@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/api/google_maps_page.dart';
+import 'package:hunter_fit/view/api/google_maps_page.dart';
 import 'package:hunter_fit/view/profile_view.dart';
 import 'package:hunter_fit/view/weights/weights_view.dart';
 import 'package:hunter_fit/view/activity_view.dart';

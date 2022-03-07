@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hunter_fit/database/validator.dart';
-import 'package:hunter_fit/database/fire_auth.dart';
+import 'package:hunter_fit/model/database/validator.dart';
+import 'package:hunter_fit/model/database/fire_auth.dart';
 import 'signup_view.dart';
 import 'navigation_view.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/constants.dart' as constants;
+import 'package:hunter_fit/view/weights/weights_constants.dart' as constants;
 
 class WorkoutsList extends StatefulWidget {
   const WorkoutsList({Key? key}) : super(key: key);

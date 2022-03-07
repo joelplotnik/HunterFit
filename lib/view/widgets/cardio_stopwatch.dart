@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/provider/location_provider.dart';
-import 'package:hunter_fit/widgets/button_widget.dart';
+import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
+import 'package:hunter_fit/view/widgets/button_widget.dart';
 
 class CardioStopwatch extends StatefulWidget {
   const CardioStopwatch({Key? key}) : super(key: key);

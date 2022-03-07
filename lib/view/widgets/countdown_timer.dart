@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hunter_fit/widgets/round_button.dart';
+import 'package:hunter_fit/view/widgets/round_button.dart';
 class CountdownTimer extends StatefulWidget {
   const CountdownTimer({Key? key}) : super(key: key);
 

@@ -70,6 +70,7 @@ class LocationProvider with ChangeNotifier {
       print(simulatedTravelPerSecond);
 
       simulatedTravelPerSecond += 0.0001;
+      //_distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition, singleton.isDistanceTrackingturnedOn);
       _distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition);
 
       _distanceTraveledMiles = _distanceTraveled/ conversionFactor; // convert km to miles

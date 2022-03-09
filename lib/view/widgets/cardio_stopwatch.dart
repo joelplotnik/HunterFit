@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
-import 'package:hunter_fit/view/widgets/button_widget.dart';
+import 'package:hunter_fit/view/widgets/button_text_widget.dart';
 
 class CardioStopwatch extends StatefulWidget {
   const CardioStopwatch({Key? key}) : super(key: key);
@@ -118,7 +118,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ButtonWidget(
+              ButtonTextWidget(
                 text: isRunning ? 'STOP' : 'RESUME',
                 onClicked: () {
                   if (isRunning) {
@@ -131,7 +131,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
                 },
               ),
               const SizedBox(width: 12),
-              ButtonWidget(
+              ButtonTextWidget(
                 text: 'CANCEL',
                 onClicked: () {
                   print("STOP GETTING USER POSITION");
@@ -140,7 +140,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
               ),
             ],
           )
-        : ButtonWidget(
+        : ButtonTextWidget(
             text: 'Start Timer',
             onClicked: () {
               startTimer();

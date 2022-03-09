@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weights/weights_constants.dart' as constants;
 
-class ButtonWidget extends StatelessWidget {
+class ButtonTextWidget extends StatelessWidget {
   final VoidCallback onClicked;
   final String text;
 
-  const ButtonWidget({
+  const ButtonTextWidget({
     Key? key,
     required this.text,
     required this.onClicked,

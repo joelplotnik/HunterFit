@@ -58,24 +58,24 @@ class getUserData {
 
   getUsersGroupsListStreamSnapshots() async {
     String UID = await getCurrentUserID();
-    var snapshot = await userCollection
+    return await userCollection
         .doc(UID)
         .collection('groups')
         .doc('mygroups')
         .get();
-    try {
-      if (snapshot.exists) {
-        Map<String, dynamic> groups = snapshot.data()!;
-        var mygroups = groups['Groups'];
-        print(mygroups);
-        List groupss = mygroups;
-        return groupss;
-      } else {
-        print('Error Document does not exist');
-      }
-    } catch (error) {
-      print("Error: $error");
-    }
+    // try {
+    //   if (snapshot.exists) {
+    //     Map<String, dynamic> groups = snapshot.data()!;
+    //     var mygroups = groups['Groups'];
+    //     print(mygroups);
+    //     List groupss = mygroups;
+    //     return groupss;
+    //   } else {
+    //     print('Error Document does not exist');
+    //   }
+    // } catch (error) {
+    //   print("Error: $error");
+    // }
   }
 
   getUsername() async {

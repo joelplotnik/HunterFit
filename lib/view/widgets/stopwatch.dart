@@ -2,9 +2,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
-import 'package:hunter_fit/view/widgets/button_widget.dart';
+import 'package:hunter_fit/view/widgets/button_text_widget.dart';
 import 'package:hunter_fit/model/database/getUserData.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
+
+import 'button_icon_widget.dart';
 
 class Stopwatch extends StatefulWidget {
   const Stopwatch({Key? key}) : super(key: key);
@@ -127,15 +129,7 @@ class _StopwatchState extends State<Stopwatch> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ButtonWidget(
-                text: 'SAVE',
-                onClicked: () async {
-                  await insertToDB.insertWeightTime(duration);
-                  stopTimer();
-                },
-              ),
-              const SizedBox(width: 12),
-              ButtonWidget(
+              ButtonTextWidget(
                 text: isRunning ? 'STOP' : 'RESUME',
                 onClicked: () {
                   if (isRunning) {
@@ -146,7 +140,15 @@ class _StopwatchState extends State<Stopwatch> {
                 },
               ),
               const SizedBox(width: 12),
-              ButtonWidget(
+              ButtonTextWidget(
+                text: 'Finish Workout',
+                onClicked: () async {
+                  await insertToDB.insertWeightTime(duration);
+                  stopTimer();
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonTextWidget(
                 text: 'CANCEL',
                 onClicked: () {
                   stopTimer();
@@ -154,8 +156,8 @@ class _StopwatchState extends State<Stopwatch> {
               ),
             ],
           )
-        : ButtonWidget(
-            text: 'Start Timer',
+        : ButtonTextWidget(
+            text: 'Start Workout',
             onClicked: () {
               startTimer();
             },

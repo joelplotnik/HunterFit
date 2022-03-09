@@ -41,7 +41,7 @@ class _WeightsViewState extends State<WeightsView> {
               isDense: true,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "Reps",
+              hintText: "0",
               suffix: Text('reps'),
               counterText: "",
               border: InputBorder.none,
@@ -58,7 +58,7 @@ class _WeightsViewState extends State<WeightsView> {
               isDense: true,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "Weight",
+              hintText: "0",
               counterText: "",
               border: InputBorder.none,
               suffix: Text('lbs'),

@@ -19,8 +19,9 @@ class _GroupsViewState extends State<GroupsView> {
     0: Text("Item 1"),
     1: Text("Item 2")
   };
-  Future<dynamic> groupNames =
-      getUserData().getUsersGroupsListStreamSnapshots();
+  Future<dynamic> fetchGroupList() async {
+    return await getFromDB.getUsersGroupsListStreamSnapshots();
+  }
 
   TextEditingController nameController = TextEditingController();
 
@@ -62,18 +63,44 @@ class _GroupsViewState extends State<GroupsView> {
           ),
           Expanded(
               child: ListView.builder(
+                  //slap future builder ontop of the listviewBuilder
                   padding: const EdgeInsets.all(8),
-                  itemCount: 3,
+                  itemCount: 2,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       height: 75,
                       margin: const EdgeInsets.all(2),
                       color: const Color(0xFF47ABD1),
                       child: Center(
-                          child: Text(
-                        '${groupNames} ',
-                        style: const TextStyle(fontSize: 18),
-                      )),
+                        child: FutureBuilder(
+                          future: fetchGroupList(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot) {
+                            if (snapshot.hasData) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              } else {
+                                return Text(
+                                  '${snapshot.data['Groups'][index]}',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }
+                            } else if (snapshot.hasError) {
+                              return Text(
+                                '${snapshot.error}',
+                                style: TextStyle(fontSize: 10),
+                              );
+                            } else {
+                              return CircularProgressIndicator();
+                            }
+                          },
+                        ),
+                      ),
                     );
                   })),
         ],

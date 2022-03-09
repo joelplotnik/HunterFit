@@ -30,7 +30,6 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
   }
 
   void startTimer({bool resets = true}) {
-
     if (resets) {
       reset();
     }

@@ -1,21 +1,23 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/view/widgets/button_text_widget.dart';
 import 'package:hunter_fit/model/database/getUserData.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 import 'button_icon_widget.dart';
 
-class Stopwatch extends StatefulWidget {
-  const Stopwatch({Key? key}) : super(key: key);
+class WeightsStopwatch extends StatefulWidget {
+  const WeightsStopwatch({Key? key}) : super(key: key);
 
   @override
-  _StopwatchState createState() => _StopwatchState();
+  _WeightsStopwatchState createState() => _WeightsStopwatchState();
 }
 
-class _StopwatchState extends State<Stopwatch> {
+class _WeightsStopwatchState extends State<WeightsStopwatch> {
   insertUserData insertToDB = insertUserData();
   Duration duration = const Duration();
   Timer? timer;
@@ -129,8 +131,9 @@ class _StopwatchState extends State<Stopwatch> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ButtonTextWidget(
-                text: isRunning ? 'STOP' : 'RESUME',
+              ButtonIconWidget(
+                icon: isRunning ? Icons.pause : CupertinoIcons.play_arrow_solid,
+                color: Colors.white,
                 onClicked: () {
                   if (isRunning) {
                     stopTimer(resets: false);
@@ -148,8 +151,9 @@ class _StopwatchState extends State<Stopwatch> {
                 },
               ),
               const SizedBox(width: 12),
-              ButtonTextWidget(
-                text: 'CANCEL',
+              ButtonIconWidget(
+                icon: CupertinoIcons.arrow_counterclockwise,
+                color: Colors.white,
                 onClicked: () {
                   stopTimer();
                 },

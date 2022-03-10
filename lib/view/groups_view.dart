@@ -15,6 +15,7 @@ class GroupsView extends StatefulWidget {
 class _GroupsViewState extends State<GroupsView> {
   insertUserData insertToDB = insertUserData();
   getUserData getFromDB = getUserData();
+  late List<dynamic> groups;
   int segmentedControlGroupValue = 0;
   final Map<int, Widget> myTabs = const <int, Widget>{
     0: Text("Item 1"),
@@ -83,13 +84,24 @@ class _GroupsViewState extends State<GroupsView> {
 
                               } else
                               {
+                                groups=snapshot.data['Groups'];
+                                return Expanded(child: ListView.builder(
+                                    itemCount : groups.length,
+                                    itemBuilder: (context,index){
+                                  return Container(
+                                    height: 50,
+                                    color: Colors.white70,
+                                    child: Center(child: Text('${groups[index]}')),
 
-                                return Text(
-                                  '${snapshot.data['Groups']}',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                );
+                                  );
+index--;
+                                }));
+                                  //Text(
+                                  //'${snapshot.data['Groups']}',
+                                  //style: TextStyle(
+                                 //     fontSize: 20,
+                                 //     fontWeight: FontWeight.bold),
+                              //  );
                               }
 
                             }  else {

@@ -89,16 +89,19 @@ class _WeightsViewState extends State<WeightsView> {
                 const SizedBox(
                   width: 10,
                 ),
-                const Text(
-                  "Barbell Bench press",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
-                ),
                 Expanded(
-                  child: const SizedBox(
-                    width: double.infinity,
+                  child: TextField(
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Enter Workout name',
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                      ),
+                      border: InputBorder.none,
+                    ),
                   ),
                 ),
                 Material(

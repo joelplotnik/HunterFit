@@ -4,9 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/view/widgets/button_text_widget.dart';
-import 'package:hunter_fit/model/database/getUserData.dart';
-import 'package:hunter_fit/model/database/insertUserData.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:hunter_fit/constants.dart' as constant;
 
 import 'button_icon_widget.dart';
 
@@ -132,8 +130,10 @@ class _WeightsStopwatchState extends State<WeightsStopwatch> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ButtonIconWidget(
-                icon: isRunning ? Icons.pause : CupertinoIcons.play_arrow_solid,
-                color: Colors.white,
+                icon: isRunning
+                    ? Icons.pause
+                    : CupertinoIcons.play_arrow_solid, //PLAY & PAUSE
+                color: constant.kHunterColor,
                 onClicked: () {
                   if (isRunning) {
                     stopTimer(resets: false);
@@ -152,8 +152,8 @@ class _WeightsStopwatchState extends State<WeightsStopwatch> {
               ),
               const SizedBox(width: 12),
               ButtonIconWidget(
-                icon: CupertinoIcons.arrow_counterclockwise,
-                color: Colors.white,
+                icon: CupertinoIcons.arrow_counterclockwise, //CANCEL
+                color: constant.kHunterColor,
                 onClicked: () {
                   stopTimer();
                 },

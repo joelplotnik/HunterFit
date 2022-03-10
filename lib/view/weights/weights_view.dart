@@ -21,9 +21,9 @@ class _WeightsViewState extends State<WeightsView> {
           child: Container(
             height: 60,
             alignment: Alignment.center,
-            child: const Text(
+            child: Text(
               "1",
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
@@ -41,12 +41,15 @@ class _WeightsViewState extends State<WeightsView> {
               isDense: true,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "0",
-              suffix: Text('reps'),
+              hintText: "reps",
+              // suffix: Text('reps'),
               counterText: "",
               border: InputBorder.none,
             ),
           ),
+        ),
+        const Expanded(
+          child: Center(child: Text("x")),
         ),
         const Expanded(
           flex: 3,
@@ -58,16 +61,14 @@ class _WeightsViewState extends State<WeightsView> {
               isDense: true,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "0",
+              hintText: "lbs",
+              suffix: Text("lbs"),
               counterText: "",
               border: InputBorder.none,
-              suffix: Text('lbs'),
+              //suffix: Text('lbs'),
             ),
           ),
         ),
-        const SizedBox(
-          width: 20,
-        )
       ],
     ),
   ];
@@ -100,30 +101,28 @@ class _WeightsViewState extends State<WeightsView> {
                     width: double.infinity,
                   ),
                 ),
-                RotatedBox(
-                  quarterTurns: 1,
-                  child: Material(
-                    color: Colors.transparent,
-                    child: IconButton(
-                      splashColor: Colors.white,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.only(bottom: 10, top: 5),
-                      icon: const Icon(
-                        Icons.fitness_center,
-                        size: 40,
-                        color: Colors.black,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const WorkoutsList(),
-                          ),
-                        );
-                      },
+                Material(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.transparent,
+                  child: IconButton(
+                    iconSize: 30,
+                    onPressed: () {
+                      setState(() {
+                        SetCard card = SetCard(setNumber);
+                        _setsList.add(card.createSetCard());
+                        setNumber++;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 22,
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: 10,
+                )
               ],
             ),
           ),
@@ -158,22 +157,10 @@ class _WeightsViewState extends State<WeightsView> {
             color: Colors.grey.shade300,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 3,
-                    primary: constants.kHunterColor,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      SetCard card = SetCard(setNumber);
-                      _setsList.add(card.createSetCard());
-                      setNumber++;
-                    });
-                  },
-                  icon: const Icon(Icons.add),
-                  label: const Text('Add Set'),
+                SizedBox(
+                  width: 1,
                 ),
               ],
             ),

@@ -18,7 +18,7 @@ class ButtonIconWidget extends StatelessWidget {
         child: Icon(
           icon,
           color: color,
-          size: 20,
+          size: 25,
         ),
         style: ElevatedButton.styleFrom(primary: Colors.transparent),
         onPressed: onClicked,

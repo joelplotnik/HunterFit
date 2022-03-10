@@ -58,13 +58,33 @@ class getUserData {
 
   getUsersGroupsListStreamSnapshots() async {
     String UID = await getCurrentUserID();
-    return await userCollection
-        .doc(UID)
-        .collection('groups')
-        .doc('mygroups')
-        .get();
-    // try {
-    //   if (snapshot.exists) {
+
+
+    var snapshot = await userCollection
+          .doc(UID)
+          .collection('groups')
+          .doc('mygroups')
+          .get();
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+        print(data);
+
+
+        return snapshot;
+      } else if (!snapshot.exists) {
+
+        print(
+            'Error getTotalweightTime: Document does not exist yet. Creating...');
+        return null;
+      }
+    } catch (error) {
+      print("Error: $error");
+      return null;
+    }
+
+
+
     //     Map<String, dynamic> groups = snapshot.data()!;
     //     var mygroups = groups['Groups'];
     //     print(mygroups);
@@ -80,11 +100,28 @@ class getUserData {
 
   getUsername() async {
     String UID = await getCurrentUserID();
-    return await userCollection
+    var snapshot = await userCollection
         .doc(UID)
         .collection('userData')
         .doc('name')
         .get();
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+        print(data);
+
+
+        return snapshot;
+      } else if (!snapshot.exists) {
+
+        print(
+            'Error getTotalweightTime: Document does not exist yet. Creating...');
+        return null;
+      }
+    } catch (error) {
+      print("Error: $error");
+      return null;
+    }
     // try {
     //   if (snapshot.exists) {
     //     Map<String, dynamic> data = snapshot.data()!;

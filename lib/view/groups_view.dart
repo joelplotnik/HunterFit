@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/model/database/getUserData.dart';
+import 'package:sqflite/sqflite.dart';
 
 class GroupsView extends StatefulWidget {
   final User user;
@@ -20,6 +21,7 @@ class _GroupsViewState extends State<GroupsView> {
     1: Text("Item 2")
   };
   Future<dynamic> fetchGroupList() async {
+
     return await getFromDB.getUsersGroupsListStreamSnapshots();
   }
 
@@ -29,6 +31,8 @@ class _GroupsViewState extends State<GroupsView> {
     setState(() {
       insertToDB.insertNewGroupIntoUserlist(nameController.text);
       insertToDB.insertNewGroupIntoDB(nameController.text);
+      @override
+      State<GroupsView> createState() => _GroupsViewState();
     });
   }
 
@@ -62,16 +66,7 @@ class _GroupsViewState extends State<GroupsView> {
             },
           ),
           Expanded(
-              child: ListView.builder(
-                  //slap future builder ontop of the listviewBuilder
-                  padding: const EdgeInsets.all(8),
-                  itemCount: 2,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: 75,
-                      margin: const EdgeInsets.all(2),
-                      color: const Color(0xFF47ABD1),
-                      child: Center(
+
                         child: FutureBuilder(
                           future: fetchGroupList(),
                           builder: (BuildContext context,
@@ -82,27 +77,33 @@ class _GroupsViewState extends State<GroupsView> {
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
-                              } else {
+                              }
+                              else if (snapshot.hasError ) {
+                                return CircularProgressIndicator();
+
+                              } else
+                              {
+
                                 return Text(
-                                  '${snapshot.data['Groups'][index]}',
+                                  '${snapshot.data['Groups']}',
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 );
                               }
-                            } else if (snapshot.hasError) {
+
+                            }  else {
                               return Text(
-                                '${snapshot.error}',
-                                style: TextStyle(fontSize: 10),
+                                'Hello, Join or create a group!',
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               );
-                            } else {
-                              return CircularProgressIndicator();
                             }
                           },
                         ),
-                      ),
-                    );
-                  })),
+
+  ),
         ],
       ),
     );

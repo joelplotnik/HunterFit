@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 
 class GroupsView extends StatefulWidget {
   final User user;
-  const GroupsView({Key? key, required this.user}) : super(key: key);
+   const GroupsView({Key? key, required this.user}) : super(key: key);
 
   @override
   State<GroupsView> createState() => _GroupsViewState();
@@ -41,6 +41,9 @@ class _GroupsViewState extends State<GroupsView> {
   @override
   void initState() {
     _currentUser = widget.user;
+
+    @override
+    State<GroupsView> createState() => _GroupsViewState();
     super.initState();
   }
 
@@ -63,59 +66,85 @@ class _GroupsViewState extends State<GroupsView> {
           ElevatedButton(
             child: const Text('Add'),
             onPressed: () {
+
               addItemToList();
             },
           ),
           Expanded(
 
                         child: FutureBuilder(
-                          future: fetchGroupList(),
+                          //future: fetchGroupList(),
                           builder: (BuildContext context,
                               AsyncSnapshot<dynamic> snapshot) {
-                            if (snapshot.hasData) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
+
+                            try {
+                              if (ConnectionState.active != null && !snapshot.hasData) {
+                                //print('project snapshot data is: ${projectSnap.data}');
+
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
                               }
-                              else if (snapshot.hasError ) {
-                                return CircularProgressIndicator();
+                              if (snapshot.hasData) {
+                                if (ConnectionState.done != null && snapshot.hasError) {
+                                  return Container();
+                                }
+                                else  {
+                                  groups = snapshot.data['Groups'];
+                                  return  ListView.builder(
+                                      itemCount: groups.length,
+                                      addAutomaticKeepAlives: true,
+                                      shrinkWrap: true,
 
-                              } else
-                              {
-                                groups=snapshot.data['Groups'];
-                                return Expanded(child: ListView.builder(
-                                    itemCount : groups.length,
-                                    itemBuilder: (context,index){
-                                  return Container(
-                                    height: 50,
-                                    color: Colors.white70,
-                                    child: Center(child: Text('${groups[index]}')),
+                                      itemBuilder: (BuildContext context,
+                                          int index) {
+                                        return Container(
 
-                                  );
-index--;
-                                }));
+                                          height: 50,
+                                          margin: const EdgeInsets.all(2),
+                                          width: 200,
+                                          color: const Color(0xFF47ABD1),
+                                          child: Center(
+                                              child: Text('${groups[index]}')),
+
+
+                                        );
+                                      });
                                   //Text(
                                   //'${snapshot.data['Groups']}',
                                   //style: TextStyle(
-                                 //     fontSize: 20,
-                                 //     fontWeight: FontWeight.bold),
-                              //  );
-                              }
+                                  //     fontSize: 20,
+                                  //     fontWeight: FontWeight.bold),
+                                  //  );
+                                }
 
-                            }  else {
-                              return Text(
-                                'Hello, Join or create a group!',
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              );
+                              }
+                              else if (snapshot.hasError) {
+                                return Text(
+                                  '${snapshot.error}',
+                                  style: TextStyle(fontSize: 10),
+                                );
+                              }
+                              else {
+                                return Text(
+                                  'Hello, Join or create a group!',
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }
+                            } catch(error){
+                              return CircularProgressIndicator();
+
                             }
                           },
+                          future: fetchGroupList(),
                         ),
 
+
   ),
+
         ],
       ),
     );

@@ -1,11 +1,13 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hunter_fit/view/widgets/stopwatch_state.dart';
 import 'package:hunter_fit/viewmodel/provider/distance_tracker.dart';
 import 'package:location/location.dart';
 
 class LocationProvider with ChangeNotifier {
   late Location _location;
+  StopwatchState stopwatchState = StopwatchState();
 
   late final DistanceTracker _distanceTracker;
 
@@ -64,17 +66,26 @@ class LocationProvider with ChangeNotifier {
     }
 
     location.onLocationChanged.listen((LocationData currentLocation) {
-      _locationPosition = LatLng(currentLocation.latitude! + simulatedTravelPerSecond,
+      _locationPosition = LatLng(
+          currentLocation.latitude! + simulatedTravelPerSecond,
           currentLocation.longitude!); // CHANGES MADE HERE
 
       print(simulatedTravelPerSecond);
 
       simulatedTravelPerSecond += 0.0001;
       //_distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition, singleton.isDistanceTrackingturnedOn);
-      _distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition);
 
-      _distanceTraveledMiles = _distanceTraveled/ conversionFactor; // convert km to miles
-      
+      /*
+      if (stopwatchState.isStopWatchRunning == false) {
+        distance
+      }*/
+
+      _distanceTraveled = _distanceTracker.calculateDistanceKilometers(
+          _locationPosition, stopwatchState.isStopWatchRunning);
+
+      _distanceTraveledMiles =
+          _distanceTraveled / conversionFactor; // convert km to miles
+
       notifyListeners();
 
       /*
@@ -102,8 +113,8 @@ class LocationProvider with ChangeNotifier {
             (_coordinateList.length).toString() +
             ": " +
             _coordinateList[_coordinateList.length - 1].toString());
-      }
-      else if ((_coordinateList[_coordinateList.length - 1]) != _locationPosition) {
+      } else if ((_coordinateList[_coordinateList.length - 1]) !=
+          _locationPosition) {
         // add LatLng position to the list
         _coordinateList.add(_locationPosition);
         // print the coordinate

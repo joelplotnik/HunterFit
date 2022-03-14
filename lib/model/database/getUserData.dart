@@ -32,6 +32,10 @@ class getUserData {
     return uid;
   }
 
+  String getLogo() => false ? "assets/logo-hunter-fit.svg" : "assets/logo-hunter-fit.svg";
+
+  //String getLogo() => "assets/logo-hunter-fit.svg";
+
   getTotalWeightTime() async {
     String UID = await getCurrentUserID();
     var snapshot = await userCollection

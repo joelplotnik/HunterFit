@@ -13,66 +13,10 @@ class WeightsView extends StatefulWidget {
 
 class _WeightsViewState extends State<WeightsView> {
   WeightsStopwatch stopwatch = WeightsStopwatch();
+  TextEditingController workoutName = TextEditingController();
 
-  final List<Widget> _setsList = [
-    Row(
-      children: [
-        Expanded(
-          child: Container(
-            height: 60,
-            alignment: Alignment.center,
-            child: Text(
-              "1",
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            decoration: myBoxDecoration(),
-          ),
-        ),
-        const Expanded(
-          flex: 3,
-          child: TextField(
-            textAlign: TextAlign.center,
-            maxLength: 3,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "reps",
-              // suffix: Text('reps'),
-              counterText: "",
-              border: InputBorder.none,
-            ),
-          ),
-        ),
-        const Expanded(
-          child: Center(child: Text("x")),
-        ),
-        const Expanded(
-          flex: 3,
-          child: TextField(
-            textAlign: TextAlign.center,
-            maxLength: 3,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "lbs",
-              suffix: Text("lbs"),
-              counterText: "",
-              border: InputBorder.none,
-              //suffix: Text('lbs'),
-            ),
-          ),
-        ),
-      ],
-    ),
-  ];
-  int setNumber = 2;
+  final List<Widget> _setsList = [];
+  int setNumber = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +35,15 @@ class _WeightsViewState extends State<WeightsView> {
                 ),
                 Expanded(
                   child: TextField(
-                    style: TextStyle(
+                    controller: workoutName,
+                    style: const TextStyle(
                       fontSize: 25,
                       color: Colors.white,
                     ),
-                    decoration: InputDecoration(
-                      hintText: 'Enter Workout name',
+                    decoration: const InputDecoration(
+                      hintText: 'Enter workout name...',
                       hintStyle: TextStyle(
+                        color: Colors.white,
                         fontSize: 18,
                       ),
                       border: InputBorder.none,
@@ -110,11 +56,7 @@ class _WeightsViewState extends State<WeightsView> {
                   child: IconButton(
                     iconSize: 30,
                     onPressed: () {
-                      setState(() {
-                        SetCard card = SetCard(setNumber);
-                        _setsList.add(card.createSetCard());
-                        setNumber++;
-                      });
+                      openDialog();
                     },
                     icon: Icon(
                       Icons.add,
@@ -175,92 +117,36 @@ class _WeightsViewState extends State<WeightsView> {
       ),
     );
   }
+
+  Future openDialog() => showDialog(
+        context: context,
+        builder: (context) => !workoutName.text.isEmpty
+            ? AlertDialog(
+                title: Text('Log Previous Set?'),
+                actions: [
+                  TextButton(
+                    child: Text('CANCEL'),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  TextButton(
+                    child: Text('YES'),
+                    onPressed: () => setState(() {
+                      SetCard card = SetCard(setNumber);
+                      _setsList.add(card.createSetCard());
+                      setNumber++;
+                      Navigator.pop(context);
+                    }),
+                  )
+                ],
+              )
+            : AlertDialog(
+                title: Text('Enter a workout name...'),
+                actions: [
+                  TextButton(
+                    child: Text('Close'),
+                    onPressed: () => Navigator.pop(context),
+                  )
+                ],
+              ),
+      );
 }
-// Row(
-// children: [
-// Expanded(
-// child: Container(
-// height: 65,
-// width: 130,
-// decoration: constants.kWeightsDataBoxDecoration,
-// child: Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// const Text(
-// "Total Reps",
-// style: constants.kWeightsDataTitle,
-// ),
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.baseline,
-// textBaseline: TextBaseline.alphabetic,
-// children: const [
-// Text(
-// '58',
-// style: constants.kWeightsData,
-// ),
-// Text('reps'),
-// ],
-// ),
-// ],
-// ),
-// ),
-// ),
-// Expanded(
-// child: Container(
-// height: 65,
-// width: 130,
-// decoration: constants.kWeightsDataBoxDecoration,
-// child: Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// const Text(
-// "Total Weight",
-// style: constants.kWeightsDataTitle,
-// ),
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.baseline,
-// textBaseline: TextBaseline.alphabetic,
-// children: const [
-// Text(
-// '40',
-// style: constants.kWeightsData,
-// ),
-// Text('lbs'),
-// ],
-// ),
-// ],
-// ),
-// ),
-// ),
-// Expanded(
-// child: Container(
-// height: 65,
-// width: 130,
-// decoration: constants.kWeightsDataBoxDecoration,
-// child: Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// const Text(
-// "Average Weight",
-// style: constants.kWeightsDataTitle,
-// ),
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.baseline,
-// textBaseline: TextBaseline.alphabetic,
-// children: const [
-// Text(
-// '85.8',
-// style: constants.kWeightsData,
-// ),
-// Text('lbs'),
-// ],
-// ),
-// ],
-// ),
-// ),
-// ),
-// ],
-// ),

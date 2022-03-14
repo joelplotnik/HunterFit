@@ -98,7 +98,10 @@ class _GroupsViewState extends State<GroupsView> {
                               AsyncSnapshot<dynamic> snapshot) {
 
                             try {
+                             // if (ConnectionState.waiting != null ) {
+                             //   return CircularProgressIndicator();
 
+                            //  }
                               if (snapshot.hasData) {
                                 if (ConnectionState.done != null && snapshot.hasError) {
                                   return Container();
@@ -225,17 +228,19 @@ class _GroupsViewState extends State<GroupsView> {
                                 );
                               }
                               else {
-                                return Text(
-                                  'Hello, Join or create a group!',
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
+                                return const Center(
+                                  child: CircularProgressIndicator(),
                                 );
                               }
                             } catch(error){
-                              return CircularProgressIndicator();
 
+                              return Text(
+                                'Hello, Join or create a group!',
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              );
                             }
                           },
                           future: fetchGroupList(),

@@ -13,6 +13,8 @@ class GroupsView extends StatefulWidget {
 }
 
 class _GroupsViewState extends State<GroupsView> {
+  var heightexpanse=50.0;
+  final _formKey = GlobalKey<FormState>();
   insertUserData insertToDB = insertUserData();
   getUserData getFromDB = getUserData();
   late List<dynamic> groups;
@@ -93,16 +95,93 @@ class _GroupsViewState extends State<GroupsView> {
                                       itemBuilder: (BuildContext context,
                                           int index) {
                                         return Container(
+                                          //height: heightexpanse,
+                                          margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xFF47ABD1),
 
-                                          height: 50,
-                                          margin: const EdgeInsets.all(2),
-                                          width: 200,
-                                          color: const Color(0xFF47ABD1),
-                                          child: Center(
-                                              child: Text('${groups[index]}')),
+                                              border: Border.all(
+
+                                                color: const Color(0xFF47ABD1),
+                                              ),
+                                              borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
+                                          ),
+
+                                          child: ListTile(
+                                              title: Text('${groups[index]}'),
+                                            onTap: (){
+                                               showDialog(context: context, builder: (BuildContext context) {
+                                                 return Scaffold(
+                                                   appBar: AppBar(
+                                                     title: Text('${groups[index]}'),
+                                                   ),
+                                                   body: Center(
+                                                     child: RaisedButton(
+                                                       onPressed: () {
+                                                         showDialog(
+                                                             context: context,
+                                                             builder: (BuildContext context) {
+                                                               return AlertDialog(
+                                                                 content: Stack(
+                                                                   overflow: Overflow.visible,
+                                                                   children: <Widget>[
+                                                                     Positioned(
+                                                                       right: -40.0,
+                                                                       top: -40.0,
+                                                                       child: InkResponse(
+                                                                         onTap: () {
+                                                                           Navigator.of(context).pop();
+                                                                         },
+                                                                         child: CircleAvatar(
+                                                                           child: Icon(Icons.close),
+                                                                           backgroundColor: Colors.red,
+                                                                         ),
+                                                                       ),
+                                                                     ),
+                                                                     Form(
+                                                                       key: _formKey,
+                                                                       child: Column(
+                                                                         mainAxisSize: MainAxisSize.min,
+                                                                         children: <Widget>[
+                                                                           Padding(
+                                                                             padding: EdgeInsets.all(8.0),
+                                                                             child: TextFormField(),
+                                                                           ),
+                                                                           Padding(
+                                                                             padding: EdgeInsets.all(8.0),
+                                                                             child: TextFormField(),
+                                                                           ),
+                                                                           Padding(
+                                                                             padding: const EdgeInsets.all(8.0),
+                                                                             child: RaisedButton(
+                                                                               child: Text("Submit"),
+                                                                               onPressed: () {
+                                                                                 if (_formKey.currentState!.validate()) {
+                                                                                   _formKey.currentState!.save();
+                                                                                 }
+                                                                               },
+                                                                             ),
+                                                                           )
+                                                                         ],
+                                                                       ),
+                                                                     ),
+                                                                   ],
+                                                                 ),
+                                                               );
+                                                             });
+                                                       },
+                                                       child: Text("Open Popup"),
+                                                     ),
+                                                   ),
+                                                 );
+                                               });
+
+                                            },
+
+                                          ),
 
 
-                                        );
+                                          height: heightexpanse,);
                                       });
                                   //Text(
                                   //'${snapshot.data['Groups']}',

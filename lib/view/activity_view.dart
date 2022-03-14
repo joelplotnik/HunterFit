@@ -21,7 +21,12 @@ class _ActivityViewState extends State<ActivityView> {
     name = await getUserData().getUsername();
   }
   void initState(){
-    fetchUserData();
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_){
+      setState(() {
+        fetchUserData();
+      });
+    });
   }
 
 

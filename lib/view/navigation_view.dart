@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/api/google_maps_page.dart';
 import 'package:hunter_fit/view/profile_view.dart';
 import 'package:hunter_fit/view/weights/weights_view.dart';
-import 'package:hunter_fit/view/activity_view.dart';
+import 'package:hunter_fit/view/activity/activity_view.dart';
 import 'package:hunter_fit/view/groups_view.dart';
 
 //final _formKey = GlobalKey<FormState>();

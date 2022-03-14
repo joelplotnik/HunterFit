@@ -15,12 +15,10 @@ class ActivityView extends StatefulWidget {
 class _ActivityViewState extends State<ActivityView> {
   //get from db instantiating the class
   getUserData getFromDB = getUserData();
-  var name;
 
   Future<dynamic> fetchUserData() async {
     return await getFromDB.getUsername();
   }
-
   void initState() {
     super.initState();
   }
@@ -73,8 +71,8 @@ class _ActivityViewState extends State<ActivityView> {
                             }
                           },
                         ),
-                        SizedBox(height: 10),
-                        Text(
+                        const SizedBox(height: 10),
+                        const Text(
                           'Let\'s check your activities.',
                           style: TextStyle(fontSize: 16),
                         ),

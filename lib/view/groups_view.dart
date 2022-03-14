@@ -135,7 +135,11 @@ class _GroupsViewState extends State<GroupsView> {
                                                      title: Text('${groups[index]}'),
                                                    ),
 
-                                                   body: Center(
+                                                   body: Column(
+                                                     children: <Widget>[
+                                                       Padding(padding: const EdgeInsets.all(20),
+
+                                                     child: Center(
                                                      child: RaisedButton(
                                                        onPressed: () {
                                                          showDialog(
@@ -190,9 +194,9 @@ class _GroupsViewState extends State<GroupsView> {
                                                                );
                                                              });
                                                        },
-                                                       child: Text("Open Popup"),
-                                                     ),
-                                                   ),
+                                                       child: Text("Invite a new Member"),
+                                                     ),),
+                                                 ), ], ),
                                                  );
                                                });
 
@@ -202,7 +206,9 @@ class _GroupsViewState extends State<GroupsView> {
 
 
                                           height: heightexpanse,);
+
                                       });
+
                                   //Text(
                                   //'${snapshot.data['Groups']}',
                                   //style: TextStyle(
@@ -237,8 +243,9 @@ class _GroupsViewState extends State<GroupsView> {
 
 
   ),
-
+          const SizedBox(height: 2.0),
         ],
+
       ),
     );
   }

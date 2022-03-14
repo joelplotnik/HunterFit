@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hunter_fit/provider/distance_tracker.dart';
+import 'package:hunter_fit/viewmodel/provider/distance_tracker.dart';
 
 void main() {
   group('DistanceTracker', () {
@@ -10,7 +10,7 @@ void main() {
       distanceTracker = DistanceTracker();
     });
 
-    test('Should return a distance of 0 when its the first location received',
+    test('Should return a distance of 0 when  the first location is received',
         () {
       var result = distanceTracker
           ?.calculateDistanceKilometers(const LatLng(33.1295, -117.1596));
@@ -41,7 +41,7 @@ void main() {
     });
 
     test(
-        'Should return a distance of 1 km when total distance is 2 km '
+        'Should return a distance of 2 km when total distance is 2 km '
         'but first and last location is the same', () {
       distanceTracker
           ?.calculateDistanceKilometers(const LatLng(33.1295, -117.1596));
@@ -52,5 +52,6 @@ void main() {
 
       expect(result3?.toInt(), 2);
     });
+
   });
 }

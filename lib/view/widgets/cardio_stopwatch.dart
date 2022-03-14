@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/provider/location_provider.dart';
-import 'package:hunter_fit/widgets/button_widget.dart';
+import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
+import 'package:hunter_fit/view/widgets/button_text_widget.dart';
+
+import '../../viewmodel/provider/distance_tracker.dart';
 
 class CardioStopwatch extends StatefulWidget {
   const CardioStopwatch({Key? key}) : super(key: key);
@@ -31,6 +33,14 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
     if (resets) {
       reset();
     }
+    /*
+    - Create singleton that has a public property on it that
+    is called isTrackingDistance
+    - Instantiate the singleton in the cardio_stopwatch widget
+    - When user clicks start on stopwatch, set the singletons property
+    to true
+    - In the location provider instantiate the same singleton
+     */
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 
@@ -118,11 +128,11 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ButtonWidget(
+              ButtonTextWidget(
                 text: isRunning ? 'STOP' : 'RESUME',
                 onClicked: () {
                   if (isRunning) {
-                    print("STOP GETTING USER POSITION");
+                    print("STOP GETTING USER POSITION... MAYBE");
                     stopTimer(resets: false);
                   } else {
                     print("START GETTING USER POSITION");
@@ -131,7 +141,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
                 },
               ),
               const SizedBox(width: 12),
-              ButtonWidget(
+              ButtonTextWidget(
                 text: 'CANCEL',
                 onClicked: () {
                   print("STOP GETTING USER POSITION");
@@ -140,7 +150,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
               ),
             ],
           )
-        : ButtonWidget(
+        : ButtonTextWidget(
             text: 'Start Timer',
             onClicked: () {
               startTimer();

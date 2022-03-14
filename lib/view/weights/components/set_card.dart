@@ -36,12 +36,15 @@ class SetCard {
               isDense: true,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "Reps",
-              suffix: Text('reps'),
+              hintText: "reps",
+              // suffix: Text('reps'),
               counterText: "",
               border: InputBorder.none,
             ),
           ),
+        ),
+        const Expanded(
+          child: Center(child: Text("x")),
         ),
         const Expanded(
           flex: 3,
@@ -53,16 +56,14 @@ class SetCard {
               isDense: true,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "Weight",
+              hintText: "lbs",
+              suffix: Text("lbs"),
               counterText: "",
               border: InputBorder.none,
-              suffix: Text('lbs'),
+              //suffix: Text('lbs'),
             ),
           ),
         ),
-        const SizedBox(
-          width: 20,
-        )
       ],
     );
   }

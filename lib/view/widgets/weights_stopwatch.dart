@@ -1,19 +1,21 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/database/insertUserData.dart';
-import 'package:hunter_fit/widgets/button_widget.dart';
-import 'package:hunter_fit/database/getUserData.dart';
-import 'package:hunter_fit/database/insertUserData.dart';
+import 'package:hunter_fit/model/database/insertUserData.dart';
+import 'package:hunter_fit/view/widgets/button_text_widget.dart';
+import 'package:hunter_fit/constants.dart' as constant;
 
-class Stopwatch extends StatefulWidget {
-  const Stopwatch({Key? key}) : super(key: key);
+import 'button_icon_widget.dart';
+
+class WeightsStopwatch extends StatefulWidget {
+  const WeightsStopwatch({Key? key}) : super(key: key);
 
   @override
-  _StopwatchState createState() => _StopwatchState();
+  _WeightsStopwatchState createState() => _WeightsStopwatchState();
 }
 
-class _StopwatchState extends State<Stopwatch> {
+class _WeightsStopwatchState extends State<WeightsStopwatch> {
   insertUserData insertToDB = insertUserData();
   Duration duration = const Duration();
   Timer? timer;
@@ -127,16 +129,11 @@ class _StopwatchState extends State<Stopwatch> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ButtonWidget(
-                text: 'SAVE',
-                onClicked: () async {
-                  await insertToDB.insertWeightTime(duration);
-                  stopTimer();
-                },
-              ),
-              const SizedBox(width: 12),
-              ButtonWidget(
-                text: isRunning ? 'STOP' : 'RESUME',
+              ButtonIconWidget(
+                icon: isRunning
+                    ? Icons.pause
+                    : CupertinoIcons.play_arrow_solid, //PLAY & PAUSE
+                color: constant.kHunterColor,
                 onClicked: () {
                   if (isRunning) {
                     stopTimer(resets: false);
@@ -146,16 +143,25 @@ class _StopwatchState extends State<Stopwatch> {
                 },
               ),
               const SizedBox(width: 12),
-              ButtonWidget(
-                text: 'CANCEL',
+              ButtonTextWidget(
+                text: 'Finish Workout',
+                onClicked: () async {
+                  await insertToDB.insertWeightTime(duration);
+                  stopTimer();
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonIconWidget(
+                icon: CupertinoIcons.arrow_counterclockwise, //CANCEL
+                color: constant.kHunterColor,
                 onClicked: () {
                   stopTimer();
                 },
               ),
             ],
           )
-        : ButtonWidget(
-            text: 'Start Timer',
+        : ButtonTextWidget(
+            text: 'Start Workout',
             onClicked: () {
               startTimer();
             },

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:math';
 
+//ignore: must_be_immutable
 class DistanceTracker extends StatefulWidget {
   DistanceTracker({Key? key}) : super(key: key);
 
@@ -10,10 +11,16 @@ class DistanceTracker extends StatefulWidget {
 
   var listOfLocation = <LatLng>[];
   var runningTotalInKm = 0.0;
+  var runningTotalInMi = 0.0;
 
   double calculateDistanceKilometers(LatLng location) {
+    /*
+    double calculateDistanceKilometers(LatLng location, bool isTrackingTurnedOn)
+    if (!isTrackingTurnedOn) {
+      return 0.0;
+    }*/
 
-    if(listOfLocation.length == 0)
+    if(listOfLocation.isEmpty)
       {
         listOfLocation.add(location);
         return 0.0;
@@ -22,8 +29,6 @@ class DistanceTracker extends StatefulWidget {
     listOfLocation.add(location);
     var firstLocation = listOfLocation.first;
     var lastLocation = listOfLocation.last;
-
-
 
     // compare each coordinate in the list to the previous
     runningTotalInKm += calculateDistance(prevLastLocation.latitude, prevLastLocation.longitude, location.latitude, location.longitude);
@@ -35,8 +40,10 @@ class DistanceTracker extends StatefulWidget {
 
     //return finalDistance;
     return runningTotalInKm;
+
   }
 
+  // Haversine Formula
   double calculateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;
     var c = cos;
@@ -45,6 +52,7 @@ class DistanceTracker extends StatefulWidget {
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
+
 }
 
 class _DistanceTrackerState extends State<DistanceTracker> {

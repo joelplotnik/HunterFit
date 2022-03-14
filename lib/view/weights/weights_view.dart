@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
 import 'workouts_list.dart';
-import 'package:hunter_fit/widgets/stopwatch.dart';
+import 'package:hunter_fit/view/widgets/weights_stopwatch.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -12,66 +12,11 @@ class WeightsView extends StatefulWidget {
 }
 
 class _WeightsViewState extends State<WeightsView> {
-  Stopwatch stopwatch = const Stopwatch();
+  WeightsStopwatch stopwatch = WeightsStopwatch();
+  TextEditingController workoutName = TextEditingController();
 
-  final List<Widget> _setsList = [
-    Row(
-      children: [
-        Expanded(
-          child: Container(
-            height: 60,
-            alignment: Alignment.center,
-            child: const Text(
-              "1",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            decoration: myBoxDecoration(),
-          ),
-        ),
-        const Expanded(
-          flex: 3,
-          child: TextField(
-            textAlign: TextAlign.center,
-            maxLength: 3,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "Reps",
-              suffix: Text('reps'),
-              counterText: "",
-              border: InputBorder.none,
-            ),
-          ),
-        ),
-        const Expanded(
-          flex: 3,
-          child: TextField(
-            textAlign: TextAlign.center,
-            maxLength: 3,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              hintText: "Weight",
-              counterText: "",
-              border: InputBorder.none,
-              suffix: Text('lbs'),
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 20,
-        )
-      ],
-    ),
-  ];
-  int setNumber = 2;
+  final List<Widget> _setsList = [];
+  int setNumber = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -88,42 +33,41 @@ class _WeightsViewState extends State<WeightsView> {
                 const SizedBox(
                   width: 10,
                 ),
-                const Text(
-                  "Barbell Bench press",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
-                ),
                 Expanded(
-                  child: const SizedBox(
-                    width: double.infinity,
-                  ),
-                ),
-                RotatedBox(
-                  quarterTurns: 1,
-                  child: Material(
-                    color: Colors.transparent,
-                    child: IconButton(
-                      splashColor: Colors.white,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.only(bottom: 10, top: 5),
-                      icon: const Icon(
-                        Icons.fitness_center,
-                        size: 40,
-                        color: Colors.black,
+                  child: TextField(
+                    controller: workoutName,
+                    style: const TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: 'Enter workout name...',
+                      hintStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const WorkoutsList(),
-                          ),
-                        );
-                      },
+                      border: InputBorder.none,
                     ),
                   ),
                 ),
+                Material(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.transparent,
+                  child: IconButton(
+                    iconSize: 30,
+                    onPressed: () {
+                      openDialog();
+                    },
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 22,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                )
               ],
             ),
           ),
@@ -158,22 +102,10 @@ class _WeightsViewState extends State<WeightsView> {
             color: Colors.grey.shade300,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 3,
-                    primary: constants.kHunterColor,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      SetCard card = SetCard(setNumber);
-                      _setsList.add(card.createSetCard());
-                      setNumber++;
-                    });
-                  },
-                  icon: const Icon(Icons.add),
-                  label: const Text('Add Set'),
+                SizedBox(
+                  width: 1,
                 ),
               ],
             ),
@@ -185,92 +117,36 @@ class _WeightsViewState extends State<WeightsView> {
       ),
     );
   }
+
+  Future openDialog() => showDialog(
+        context: context,
+        builder: (context) => !workoutName.text.isEmpty
+            ? AlertDialog(
+                title: Text('Log Previous Set?'),
+                actions: [
+                  TextButton(
+                    child: Text('CANCEL'),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  TextButton(
+                    child: Text('YES'),
+                    onPressed: () => setState(() {
+                      SetCard card = SetCard(setNumber);
+                      _setsList.add(card.createSetCard());
+                      setNumber++;
+                      Navigator.pop(context);
+                    }),
+                  )
+                ],
+              )
+            : AlertDialog(
+                title: Text('Enter a workout name...'),
+                actions: [
+                  TextButton(
+                    child: Text('Close'),
+                    onPressed: () => Navigator.pop(context),
+                  )
+                ],
+              ),
+      );
 }
-// Row(
-// children: [
-// Expanded(
-// child: Container(
-// height: 65,
-// width: 130,
-// decoration: constants.kWeightsDataBoxDecoration,
-// child: Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// const Text(
-// "Total Reps",
-// style: constants.kWeightsDataTitle,
-// ),
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.baseline,
-// textBaseline: TextBaseline.alphabetic,
-// children: const [
-// Text(
-// '58',
-// style: constants.kWeightsData,
-// ),
-// Text('reps'),
-// ],
-// ),
-// ],
-// ),
-// ),
-// ),
-// Expanded(
-// child: Container(
-// height: 65,
-// width: 130,
-// decoration: constants.kWeightsDataBoxDecoration,
-// child: Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// const Text(
-// "Total Weight",
-// style: constants.kWeightsDataTitle,
-// ),
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.baseline,
-// textBaseline: TextBaseline.alphabetic,
-// children: const [
-// Text(
-// '40',
-// style: constants.kWeightsData,
-// ),
-// Text('lbs'),
-// ],
-// ),
-// ],
-// ),
-// ),
-// ),
-// Expanded(
-// child: Container(
-// height: 65,
-// width: 130,
-// decoration: constants.kWeightsDataBoxDecoration,
-// child: Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// const Text(
-// "Average Weight",
-// style: constants.kWeightsDataTitle,
-// ),
-// Row(
-// mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.baseline,
-// textBaseline: TextBaseline.alphabetic,
-// children: const [
-// Text(
-// '85.8',
-// style: constants.kWeightsData,
-// ),
-// Text('lbs'),
-// ],
-// ),
-// ],
-// ),
-// ),
-// ),
-// ],
-// ),

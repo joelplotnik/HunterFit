@@ -1,4 +1,4 @@
-import 'package:hunter_fit/database/getUserData.dart';
+import 'package:hunter_fit/model/database/getUserData.dart';
 import 'getUserData.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -33,7 +33,7 @@ class insertUserData {
     // print('Time parsed is: ${parseDuration(time)}');
     // print('Time parsed + parsed: ${parsedTime + parsedTime}');
 
-    await getData.getTotalWeightTime();
+    var times = await getData.getTotalWeightTime();
 
     return getData.userCollection //users > UID > workoutData > weightsData >
         .doc(currentUID)

@@ -62,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: const Text('Verify email'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(200, 40),
-                primary: const Color(0xFF7ebbd7),
+                primary: const Color(0xFF47ABD1),
                 padding: const EdgeInsets.only(
                     left: 40, right: 40, bottom: 8.0, top: 8.0),
                 textStyle: const TextStyle(
@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: const Text('Log out'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(200, 40),
-                primary: const Color(0xFF7ebbd7),
+                primary: const Color(0xFF47ABD1),
                 padding: const EdgeInsets.only(
                     left: 40, right: 40, bottom: 8.0, top: 8.0),
                 textStyle: const TextStyle(

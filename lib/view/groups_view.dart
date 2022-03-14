@@ -66,7 +66,25 @@ class _GroupsViewState extends State<GroupsView> {
             ),
           ),
           ElevatedButton(
+
             child: const Text('Add'),
+            style: ElevatedButton.styleFrom(
+
+              primary:  const Color(0xFF47ABD1),
+
+              textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.normal),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                ),
+              ),
+            ),
             onPressed: () {
 
               addItemToList();
@@ -113,8 +131,10 @@ class _GroupsViewState extends State<GroupsView> {
                                                showDialog(context: context, builder: (BuildContext context) {
                                                  return Scaffold(
                                                    appBar: AppBar(
+                                                     backgroundColor: const Color(0xFF47ABD1),
                                                      title: Text('${groups[index]}'),
                                                    ),
+
                                                    body: Center(
                                                      child: RaisedButton(
                                                        onPressed: () {

@@ -78,13 +78,7 @@ class _GroupsViewState extends State<GroupsView> {
                               AsyncSnapshot<dynamic> snapshot) {
 
                             try {
-                              if (ConnectionState.active != null && !snapshot.hasData) {
-                                //print('project snapshot data is: ${projectSnap.data}');
 
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              }
                               if (snapshot.hasData) {
                                 if (ConnectionState.done != null && snapshot.hasError) {
                                   return Container();

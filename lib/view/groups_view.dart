@@ -28,6 +28,11 @@ class _GroupsViewState extends State<GroupsView> {
     return await getFromDB.getUsersGroupsListStreamSnapshots();
   }
 
+  Future<dynamic> fetchMemberList(String group) async {
+
+    return await getFromDB.getGroupsMembersListStreamSnapshots(group);
+  }
+
   TextEditingController nameController = TextEditingController();
 
   void addItemToList() {
@@ -140,9 +145,162 @@ class _GroupsViewState extends State<GroupsView> {
 
                                                    body: Column(
                                                      children: <Widget>[
+                                                       FutureBuilder(builder: (BuildContext context,
+                                                       AsyncSnapshot<dynamic> snapshot) {
+
+                                                 try {
+                                                 // if (ConnectionState.waiting != null ) {
+                                                 //   return CircularProgressIndicator();
+
+                                                 //  }
+                                                 if (snapshot.hasData) {
+                                                 if (ConnectionState.done != null && snapshot.hasError) {
+                                                 return Container();
+                                                 }
+                                                 else  {
+                                                 groups = snapshot.data['Members'];
+                                                 return  ListView.builder(
+                                                 itemCount: groups.length,
+                                                 addAutomaticKeepAlives: true,
+                                                 shrinkWrap: true,
+
+                                                 itemBuilder: (BuildContext context,
+                                                 int index) {
+                                                 return Container(
+                                                 //height: heightexpanse,
+                                                 margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+                                                 decoration: BoxDecoration(
+                                                 color: const Color(0xFF47ABD1),
+
+                                                 border: Border.all(
+
+                                                 color: const Color(0xFF47ABD1),
+                                                 ),
+                                                 borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
+                                                 ),
+
+                                                 child: ListTile(
+                                                 title: Text('members'),
+                                                 onTap: (){
+                                                 showDialog(context: context, builder: (BuildContext context) {
+                                                 return Scaffold(
+                                                 appBar: AppBar(
+                                                 backgroundColor: const Color(0xFF47ABD1),
+                                                 title: Text('members'),
+                                                 ),
+
+                                                 body: Column(
+                                                 children: <Widget>[
+
+                                                 Padding(padding: const EdgeInsets.all(20),
+
+
+                                                 child: RaisedButton(
+                                                 onPressed: () {
+                                                 showDialog(
+                                                 context: context,
+                                                 builder: (BuildContext context) {
+                                                 return AlertDialog(
+                                                 content: Stack(
+                                                 overflow: Overflow.visible,
+                                                 children: <Widget>[
+                                                 Positioned(
+                                                 right: -40.0,
+                                                 top: -40.0,
+                                                 child: InkResponse(
+                                                 onTap: () {
+                                                 Navigator.of(context).pop();
+                                                 },
+                                                 child: CircleAvatar(
+                                                 child: Icon(Icons.close),
+                                                 backgroundColor: Colors.red,
+                                                 ),
+                                                 ),
+                                                 ),
+                                                 Form(
+                                                 key: _formKey,
+                                                 child: Column(
+                                                 mainAxisSize: MainAxisSize.min,
+                                                 children: <Widget>[
+                                                 Padding(
+                                                 padding: EdgeInsets.all(8.0),
+                                                 child: TextFormField(),
+                                                 ),
+                                                 Padding(
+                                                 padding: EdgeInsets.all(8.0),
+                                                 child: TextFormField(),
+                                                 ),
+                                                 Padding(
+                                                 padding: const EdgeInsets.all(8.0),
+                                                 child: RaisedButton(
+                                                 child: Text("Submit"),
+                                                 onPressed: () {
+                                                 if (_formKey.currentState!.validate()) {
+                                                 _formKey.currentState!.save();
+                                                 }
+                                                 },
+                                                 ),
+                                                 )
+                                                 ],
+                                                 ),
+                                                 ),
+                                                 ],
+                                                 ),
+                                                 );
+                                                 });
+                                                 },
+                                                 child: Text("Invite a new Member"),
+                                                 ),
+
+                                                 ), ], ),
+                                                 );
+                                                 });
+
+                                                 },
+
+                                                 ),
+
+
+                                                 height: heightexpanse,);
+
+                                                 });
+
+                                                 //Text(
+                                                 //'${snapshot.data['Groups']}',
+                                                 //style: TextStyle(
+                                                 //     fontSize: 20,
+                                                 //     fontWeight: FontWeight.bold),
+                                                 //  );
+                                                 }
+
+                                                 }
+                                                 else if (snapshot.hasError) {
+                                                 return Text(
+                                                 '${snapshot.error}',
+                                                 style: TextStyle(fontSize: 10),
+                                                 );
+                                                 }
+                                                 else {
+                                                 return const Center(
+                                                 child: CircularProgressIndicator(),
+                                                 );
+                                                 }
+                                                 } catch(error){
+
+                                                 return Text(
+                                                 'Hello, Join or create a group!',
+                                                 textAlign: TextAlign.center,
+                                                 overflow: TextOverflow.ellipsis,
+                                                 style: const TextStyle(
+                                                 fontWeight: FontWeight.bold),
+                                                 );
+                                                 }
+                                                 },
+                                                   future: fetchMemberList(groups[index]),
+                                                 ),
                                                        Padding(padding: const EdgeInsets.all(20),
 
-                                                     child: Center(
+
                                                      child: RaisedButton(
                                                        onPressed: () {
                                                          showDialog(
@@ -198,7 +356,8 @@ class _GroupsViewState extends State<GroupsView> {
                                                              });
                                                        },
                                                        child: Text("Invite a new Member"),
-                                                     ),),
+                                                     ),
+
                                                  ), ], ),
                                                  );
                                                });

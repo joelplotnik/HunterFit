@@ -97,8 +97,8 @@ class getUserData {
     // }
   }
 
-  getUsername() async {
-    String UID = await getCurrentUserID();
+  getUsername(var UID) async {
+    //var UID = await getCurrentUserID();
     var snapshot =
         await userCollection.doc(UID).collection('userData').doc('name').get();
     try {
@@ -127,4 +127,42 @@ class getUserData {
     //   print("Error: $error");
     // }
   }
+
+  getGroupsMembersListStreamSnapshots(String group) async {
+    String UID = await getCurrentUserID();
+
+    var snapshot = await groupsCollection
+        .doc('groups-social')
+        .collection('groups')
+        .doc(group)
+        .get();
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+        print(data);
+
+        return snapshot;
+      } else if (!snapshot.exists) {
+        print(
+            'Error getTotalweightTime: Document does not exist yet. Creating...');
+        return null;
+      }
+    } catch (error) {
+      print("Error: $error");
+      return null;
+    }
+
+    //     Map<String, dynamic> groups = snapshot.data()!;
+    //     var mygroups = groups['Groups'];
+    //     print(mygroups);
+    //     List groupss = mygroups;
+    //     return groupss;
+    //   } else {
+    //     print('Error Document does not exist');
+    //   }
+    // } catch (error) {
+    //   print("Error: $error");
+    // }
+  }
+
 }

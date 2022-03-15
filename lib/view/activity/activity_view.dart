@@ -17,7 +17,7 @@ class _ActivityViewState extends State<ActivityView> {
   getUserData getFromDB = getUserData();
 
   Future<dynamic> fetchUserData() async {
-    return await getFromDB.getUsername();
+    return await getFromDB.getUsername(await getFromDB.getCurrentUserID());
   }
   void initState() {
     super.initState();

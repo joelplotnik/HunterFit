@@ -73,7 +73,7 @@ insertToDB.sendGroupsInvitation(Newuser, _currentGroup);
   void initState() {
     setState(() {
       _currentUser = widget.user;
-
+nameController.clear();
       @override
       State<GroupsView> createState() => _GroupsViewState();
       //Navigator.of(context).pop();
@@ -553,8 +553,10 @@ insertToDB.sendGroupsInvitation(Newuser, _currentGroup);
                                                                              padding: const EdgeInsets.all(8.0),
                                                                              child: RaisedButton(
                                                                                child: Text("Submit"),
-                                                                               onPressed: () {
-                                                                                inviteNewUser(nameController.text.toString());
+                                                                               onPressed: ()=> {Navigator.of(context).pop(),
+                                                                                 inviteNewUser(nameController.text.toString()),
+                                                                               initState(),
+                                                                                //inviteNewUser(nameController.text.toString()),
                                                                                },
                                                                              ),
                                                                            )

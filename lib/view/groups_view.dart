@@ -243,6 +243,7 @@ insertToDB.sendGroupsInvitation(Newuser, _currentGroup);
                                                       ),
                                                       onPressed: () {
 acceptInvitation(groups[index].toString());
+declineInvitation(groups[index].toString());
 
                                                       },
                                                     ),

@@ -359,8 +359,7 @@ declineInvitation(groups[index].toString());
 
                                       itemBuilder: (BuildContext context,
                                           int index) {
-                                        var group = groups[index];
-                                        _currentGroup= group as String;
+
                                         return Container(
                                           //height: heightexpanse,
                                           margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
@@ -377,6 +376,8 @@ declineInvitation(groups[index].toString());
                                           child: ListTile(
                                               title: Text('${groups[index]}'),
                                             onTap: (){
+                                              var group = groups[index];
+                                              _currentGroup= group as String;
                                                showDialog(context: context, builder: (BuildContext context) {
                                                  return Scaffold(
                                                    appBar: AppBar(

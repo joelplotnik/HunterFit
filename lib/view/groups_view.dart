@@ -52,7 +52,7 @@ class _GroupsViewState extends State<GroupsView> {
 
       @override
       State<GroupsView> createState() => _GroupsViewState();
-      Navigator.of(context).pop();
+      //Navigator.of(context).pop();
       // super.initState();
     });
 
@@ -146,7 +146,9 @@ class _GroupsViewState extends State<GroupsView> {
                                                    appBar: AppBar(
                                                      leading: IconButton(
                                                        icon: Icon(Icons.arrow_back, color: Colors.white),
-                                                       onPressed: () => initState(),
+                                                       onPressed: () => {Navigator.of(context).pop(),
+                                                       initState(),}
+
 
                                                      ),
 

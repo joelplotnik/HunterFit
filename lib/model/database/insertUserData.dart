@@ -80,6 +80,41 @@ class insertUserData {
             (error) => print('Failed to add to database because: $error'));
   }
 
+
+  Future<void> insertNewUserIntoGroupIntoDB(String groupname,String user) async {
+    getUserData getData =
+    await getUserData(); //wait to initialize an instance if Firestore
+    //var currentUID = await getData.getCurrentUserID();
+
+    return getData.groupsCollection
+        .doc('groups-social')
+        .collection('groups')
+        .doc(groupname)
+        .set({
+      'Members': FieldValue.arrayUnion([user])
+    }, SetOptions(merge: true))
+        .then((value) => print('Member added'))
+        .catchError(
+            (error) => print('Failed to add to database because: $error'));
+  }
+
+  Future<void> insertNewUserIntoGroupIntoUserlist(String groupname,String currentUID) async {
+    getUserData getData =
+    await getUserData(); //wait to initialize an instance if Firestore
+    //var currentUID = await getData.getCurrentUserID();
+    return getData.userCollection
+        .doc(currentUID)
+        .collection('groups')
+        .doc('mygroups')
+        .set({
+      'Groups': FieldValue.arrayUnion([groupname])
+    }, SetOptions(merge: true))
+        .then((value) => print('Group added'))
+        .catchError(
+            (error) => print('Failed to add to database because: $error'));
+  }
+
+
   Future<void> insertUserName(String userName) async {
     getUserData getData =
         await getUserData(); //wait to initialize an instance if Firestore
@@ -95,4 +130,21 @@ class insertUserData {
         .catchError(
             (error) => print('Failed to add time to database because: $error'));
   }
+
+  Future<void> sendGroupsInvitation(String displayName, String groupname) async{
+    getUserData getData =
+    await getUserData(); //wait to initialize an instance if Firestore
+    var currentUID = await getData.getCurrentUserID();
+    return getData.messagesCollection //users > UID > userData > weightsData >
+        .doc('names')
+        .collection(displayName)
+        .doc('messages')
+        .set({
+      'message': FieldValue.arrayUnion([groupname])
+    }, SetOptions(merge: true))
+        .then((value) => print('Name added'))
+        .catchError(
+            (error) => print('Failed to add time to database because: $error'));
+  }
+
 }

@@ -29,6 +29,11 @@ class _GroupsViewState extends State<GroupsView> {
     return await getFromDB.getUsersGroupsListStreamSnapshots();
   }
 
+  Future<dynamic> fetchMessageList(String displayName) async {
+
+    return await getFromDB.getMessages(displayName);
+  }
+
   Future<dynamic> fetchMemberList(String group) async {
 
     return await getFromDB.getGroupsMembersListStreamSnapshots(group);
@@ -46,8 +51,20 @@ class _GroupsViewState extends State<GroupsView> {
       State<GroupsView> createState() => _GroupsViewState();
     });
   }
-
+  void acceptInvitation(String newGroup){
+    insertToDB.insertNewUserIntoGroupIntoDB(newGroup, _currentUser.displayName.toString());
+    insertToDB.insertNewUserIntoGroupIntoUserlist(newGroup,_currentUser.uid.toString() );
+  }
+void inviteNewUser(String Newuser ){
+    setState(() {
+     // insertToDB.insertNewUserIntoGroup(_currentGroup, Newuser);
+//insertToDB.insertNewUserIntoGroupIntoDB(_currentGroup, Newuser);
+//insertToDB.insertNewUserIntoGroupIntoUserlist(_currentGroup, );
+insertToDB.sendGroupsInvitation(Newuser, _currentGroup);
+    });
+}
   late User _currentUser;
+  late String _currentGroup;
   @override
   void initState() {
     setState(() {
@@ -68,6 +85,7 @@ class _GroupsViewState extends State<GroupsView> {
       backgroundColor: Colors.white70,
       body: Column(
         children: <Widget>[
+
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextField(
@@ -103,6 +121,212 @@ class _GroupsViewState extends State<GroupsView> {
               addItemToList();
             },
           ),
+          ElevatedButton(
+
+            child: const Text('Messages'),
+            style: ElevatedButton.styleFrom(
+
+              primary:  const Color(0xFF47ABD1),
+
+              textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.normal),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5),
+                  topRight: Radius.circular(5),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
+                ),
+              ),
+            ),
+            onPressed: () {
+
+//getFromDB.getMessages(_currentUser.displayName.toString());
+
+
+              
+                showDialog(context: context, builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      leading: IconButton(
+                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                          onPressed: () => {Navigator.of(context).pop(),
+                            initState(),}
+
+
+                      ),
+
+                      backgroundColor: const Color(0xFF47ABD1),
+                      title: Text('Messages'),
+                    ),
+
+                    body: Column(
+                      children: <Widget>[
+                        FutureBuilder(builder: (BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot) {
+
+                          try {
+                            // if (ConnectionState.waiting != null ) {
+                            //   return CircularProgressIndicator();
+
+                            //  }
+                            if (snapshot.hasData) {
+                              if (snapshot.hasError) {
+                                return Container();
+                              }
+                              else  {
+                                groups = snapshot.data['message'];
+                                return  ListView.builder(
+                                    itemCount: groups.length,
+                                    addAutomaticKeepAlives: true,
+                                    shrinkWrap: true,
+
+                                    itemBuilder: (BuildContext context,
+                                        int index) {
+                                      return Container(
+                                        //height: heightexpanse,
+                                        margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFF47ABD1),
+
+                                            border: Border.all(
+
+                                              color: const Color(0xFF47ABD1),
+                                            ),
+                                            borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
+                                        ),
+
+                                        child: ListTile(
+
+                                          title: Text('${groups[index]}'),
+                                          onTap: (){
+                                            showDialog(context: context, builder: (BuildContext context) {
+                                              return Scaffold(
+                                                appBar: AppBar(
+
+                                                  backgroundColor: const Color(0xFF47ABD1),
+                                                  title: Text('${groups[index]}'),
+                                                ),
+
+                                                body: Column(
+                                                  children: <Widget>[
+                                                    Center(
+                                                    child: Text('You have been invited to join ${groups[index]}'),
+
+                                                    ),
+                                                    Center(
+                                                      child: ElevatedButton(
+
+                                                      child: const Text('Accept'),
+                                                      style: ElevatedButton.styleFrom(
+
+                                                        primary:  const Color(0xFF47ABD1),
+
+                                                        textStyle: const TextStyle(
+                                                            fontSize: 18,
+                                                            fontFamily: 'Roboto',
+                                                            fontWeight: FontWeight.normal),
+                                                        shape: const RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                            topLeft: Radius.circular(5),
+                                                            topRight: Radius.circular(5),
+                                                            bottomLeft: Radius.circular(5),
+                                                            bottomRight: Radius.circular(5),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      onPressed: () {
+acceptInvitation(groups[index].toString());
+
+                                                      },
+                                                    ),
+                                                     ),
+                                                    Center( child: ElevatedButton(
+
+                                                      child: const Text('Decline'),
+                                                      style: ElevatedButton.styleFrom(
+
+                                                        primary:  const Color(0xFF47ABD1),
+
+                                                        textStyle: const TextStyle(
+                                                            fontSize: 18,
+                                                            fontFamily: 'Roboto',
+                                                            fontWeight: FontWeight.normal),
+                                                        shape: const RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                            topLeft: Radius.circular(5),
+                                                            topRight: Radius.circular(5),
+                                                            bottomLeft: Radius.circular(5),
+                                                            bottomRight: Radius.circular(5),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      onPressed: () {
+
+                                                        addItemToList();
+                                                      },
+                                                    ),),
+                                                    Padding(padding: const EdgeInsets.all(20),
+
+
+
+
+                                                    ), ], ),
+                                              );
+                                            });
+
+                                          },
+
+                                        ),
+
+
+                                        height: heightexpanse,);
+
+                                    });
+
+                                //Text(
+                                //'${snapshot.data['Groups']}',
+                                //style: TextStyle(
+                                //     fontSize: 20,
+                                //     fontWeight: FontWeight.bold),
+                                //  );
+                              }
+
+                            }
+                            else if (snapshot.hasError) {
+                              return Text(
+                                '${snapshot.error}',
+                                style: TextStyle(fontSize: 10),
+                              );
+                            }
+                            else {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          } catch(error){
+
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                          future: fetchMessageList(_currentUser.displayName.toString()),
+                        ),
+                        Padding(padding: const EdgeInsets.all(20),
+
+
+
+
+                        ), ], ),
+                  );
+                });
+                //initState();
+              
+            },
+          ),
           Expanded(
 
                         child: FutureBuilder(
@@ -111,13 +335,16 @@ class _GroupsViewState extends State<GroupsView> {
                               AsyncSnapshot<dynamic> snapshot) {
 
                             try {
-                             // if (ConnectionState.waiting != null ) {
-                             //   return CircularProgressIndicator();
 
-                            //  }
                               if (snapshot.hasData) {
-                                if (ConnectionState.done != null && snapshot.hasError) {
-                                  return Container();
+                                if (snapshot.hasError) {
+                                  return Text(
+                                    'Hello, Join or create a group!',
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  );
                                 }
                                 else  {
                                   groups = snapshot.data['Groups'];
@@ -128,6 +355,8 @@ class _GroupsViewState extends State<GroupsView> {
 
                                       itemBuilder: (BuildContext context,
                                           int index) {
+                                        var group = groups[index];
+                                        _currentGroup= group as String;
                                         return Container(
                                           //height: heightexpanse,
                                           margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
@@ -170,7 +399,7 @@ class _GroupsViewState extends State<GroupsView> {
 
                                                  //  }
                                                  if (snapshot.hasData) {
-                                                 if (ConnectionState.done != null && snapshot.hasError) {
+                                                 if (snapshot.hasError) {
                                                  return Container();
                                                  }
                                                  else  {
@@ -250,13 +479,9 @@ class _GroupsViewState extends State<GroupsView> {
                                                  }
                                                  } catch(error){
 
-                                                 return Text(
-                                                 'Hello, Join or create a group!',
-                                                 textAlign: TextAlign.center,
-                                                 overflow: TextOverflow.ellipsis,
-                                                 style: const TextStyle(
-                                                 fontWeight: FontWeight.bold),
-                                                 );
+                                                   return const Center(
+                                                     child: CircularProgressIndicator(),
+                                                   );
                                                  }
                                                  },
                                                    future: fetchMemberList(groups[index]),
@@ -293,7 +518,13 @@ class _GroupsViewState extends State<GroupsView> {
                                                                          children: <Widget>[
                                                                            Padding(
                                                                              padding: EdgeInsets.all(8.0),
-                                                                             child: TextFormField(),
+                                                                             child: TextField(
+                                                                               controller: nameController,
+                                                                               decoration: const InputDecoration(
+                                                                                 border: OutlineInputBorder(),
+                                                                                 labelText: 'User Name',
+                                                                               ),
+                                                                             ),
                                                                            ),
                                                                            Padding(
                                                                              padding: EdgeInsets.all(8.0),
@@ -304,9 +535,7 @@ class _GroupsViewState extends State<GroupsView> {
                                                                              child: RaisedButton(
                                                                                child: Text("Submit"),
                                                                                onPressed: () {
-                                                                                 if (_formKey.currentState!.validate()) {
-                                                                                   _formKey.currentState!.save();
-                                                                                 }
+                                                                                inviteNewUser(nameController.text.toString());
                                                                                },
                                                                              ),
                                                                            )
@@ -349,11 +578,23 @@ class _GroupsViewState extends State<GroupsView> {
                                   style: TextStyle(fontSize: 10),
                                 );
                               }
+                              else if (ConnectionState.none!=null ) {
+                                return Text(
+                                  'Hello, Join or create a group!',
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }
                               else if(snapshot.inState(ConnectionState.waiting)!=null){
+
                                 return const Center(
+
                                   child: CircularProgressIndicator(),
                                 );
                               }
+
                               else {
                                 return Text(
                                   'Hello, Join or create a group!',
@@ -366,6 +607,7 @@ class _GroupsViewState extends State<GroupsView> {
                             } catch(error){
 
                               return const Center(
+
                                 child: CircularProgressIndicator(),
                               );
                             }

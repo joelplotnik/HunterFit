@@ -10,6 +10,8 @@ class getUserData {
       FirebaseFirestore.instance.collection('users');
   CollectionReference groupsCollection =
       FirebaseFirestore.instance.collection('groups');
+  CollectionReference messagesCollection =
+  FirebaseFirestore.instance.collection('messages');
 
   Duration parseDuration(String s) {
     int hours = 0;
@@ -164,5 +166,28 @@ class getUserData {
     //   print("Error: $error");
     // }
   }
+  getMessages(String name) async {
+    // String UID = await getCurrentUserID();
 
+    var snapshot = await messagesCollection
+        .doc('names')
+        .collection(name)
+        .doc('messages')
+        .get();
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+        print(data);
+
+        return snapshot;
+      } else if (!snapshot.exists) {
+        print(
+            'Error getTotalweightTime: Document does not exist yet. Creating...');
+        return null;
+      }
+    } catch (error) {
+      print("Error: $error");
+      return null;
+    }
+  }
 }

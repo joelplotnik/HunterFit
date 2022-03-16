@@ -190,4 +190,19 @@ class getUserData {
       return null;
     }
   }
+  deleteMessages(String name,String subject) async {
+    // String UID = await getCurrentUserID();
+
+    var snapshot = await messagesCollection
+        .doc('names')
+        .collection(name)
+        .doc('messages')
+    .set({
+      'message': FieldValue.arrayRemove([subject])
+    }, SetOptions(merge: true))
+        .then((value) => print('message deleted'))
+        .catchError(
+            (error) => print('Failed to delete database because: $error'));
+return snapshot;
+  }
 }

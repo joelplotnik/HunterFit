@@ -24,6 +24,7 @@ class _GroupsViewState extends State<GroupsView> {
     0: Text("Item 1"),
     1: Text("Item 2")
   };
+
   Future<dynamic> fetchGroupList() async {
 
     return await getFromDB.getUsersGroupsListStreamSnapshots();
@@ -55,6 +56,9 @@ class _GroupsViewState extends State<GroupsView> {
     insertToDB.insertNewUserIntoGroupIntoDB(newGroup, _currentUser.displayName.toString());
     insertToDB.insertNewUserIntoGroupIntoUserlist(newGroup,_currentUser.uid.toString() );
   }
+void declineInvitation(String group){
+    getFromDB.deleteMessages(_currentUser.displayName.toString(), group);
+}
 void inviteNewUser(String Newuser ){
     setState(() {
      // insertToDB.insertNewUserIntoGroup(_currentGroup, Newuser);
@@ -264,7 +268,7 @@ acceptInvitation(groups[index].toString());
                                                         ),
                                                       ),
                                                       onPressed: () {
-
+declineInvitation(groups[index].toString());
 
                                                       },
                                                     ),),

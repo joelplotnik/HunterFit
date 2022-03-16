@@ -265,7 +265,7 @@ acceptInvitation(groups[index].toString());
                                                       ),
                                                       onPressed: () {
 
-                                                        addItemToList();
+
                                                       },
                                                     ),),
                                                     Padding(padding: const EdgeInsets.all(20),

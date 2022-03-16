@@ -127,7 +127,7 @@ insertToDB.sendGroupsInvitation(Newuser, _currentGroup);
           ),
           ElevatedButton(
 
-            child: const Text('Messages'),
+            child: const Text('Invitations'),
             style: ElevatedButton.styleFrom(
 
               primary:  const Color(0xFF47ABD1),
@@ -163,7 +163,7 @@ insertToDB.sendGroupsInvitation(Newuser, _currentGroup);
                       ),
 
                       backgroundColor: const Color(0xFF47ABD1),
-                      title: Text('Messages'),
+                      title: Text('Invitations'),
                     ),
 
                     body: Column(
@@ -241,11 +241,18 @@ insertToDB.sendGroupsInvitation(Newuser, _currentGroup);
                                                           ),
                                                         ),
                                                       ),
-                                                      onPressed: () {
-acceptInvitation(groups[index].toString());
-declineInvitation(groups[index].toString());
+                                                      onPressed: ()=> {Navigator.of(context).pop(),Navigator.of(context).pop(),
+    initState(),
+                                                        {
+                                                          acceptInvitation(
+                                                              groups[index]
+                                                                  .toString()),
+                                                          declineInvitation(
+                                                              groups[index]
+                                                                  .toString()),
 
-                                                      },
+
+                                                        }},
                                                     ),
                                                      ),
                                                     Center( child: ElevatedButton(
@@ -268,10 +275,16 @@ declineInvitation(groups[index].toString());
                                                           ),
                                                         ),
                                                       ),
-                                                      onPressed: () {
-declineInvitation(groups[index].toString());
+                                                      onPressed: ()=> {Navigator.of(context).pop(),Navigator.of(context).pop(),
+                                                        initState(),
+                                                        {
 
-                                                      },
+                                                          declineInvitation(
+                                                              groups[index]
+                                                                  .toString()),
+
+
+                                                        }},
                                                     ),),
                                                     Padding(padding: const EdgeInsets.all(20),
 

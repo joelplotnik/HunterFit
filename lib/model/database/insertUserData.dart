@@ -47,17 +47,17 @@ class insertUserData {
             (error) => print('Failed to add time to database because: $error'));
   }
 
-  Future<void> insertNewGroupIntoDB(String groupname) async {
+  Future<void> insertNewGroupIntoDB(String groupname,String user) async {
     getUserData getData =
         await getUserData(); //wait to initialize an instance if Firestore
-    var currentUID = await getData.getCurrentUserID();
+    //var currentUID = await getData.getCurrentUserID();
 
     return getData.groupsCollection
         .doc('groups-social')
         .collection('groups')
         .doc(groupname)
         .set({
-          'Members': FieldValue.arrayUnion([currentUID])
+          'Members': FieldValue.arrayUnion([user])
         }, SetOptions(merge: true))
         .then((value) => print('Member added'))
         .catchError(

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/model/database/getUserData.dart';
 import 'package:sqflite/sqflite.dart';
@@ -37,8 +38,10 @@ class _GroupsViewState extends State<GroupsView> {
 
   void addItemToList() {
     setState(() {
+
+      String? username = _currentUser.displayName;
       insertToDB.insertNewGroupIntoUserlist(nameController.text);
-      insertToDB.insertNewGroupIntoDB(nameController.text);
+      insertToDB.insertNewGroupIntoDB(nameController.text,username!);
       @override
       State<GroupsView> createState() => _GroupsViewState();
     });

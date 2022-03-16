@@ -47,15 +47,20 @@ class _GroupsViewState extends State<GroupsView> {
   late User _currentUser;
   @override
   void initState() {
-    _currentUser = widget.user;
+    setState(() {
+      _currentUser = widget.user;
 
-    @override
-    State<GroupsView> createState() => _GroupsViewState();
-    super.initState();
+      @override
+      State<GroupsView> createState() => _GroupsViewState();
+      Navigator.of(context).pop();
+      // super.initState();
+    });
+
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white70,
       body: Column(
@@ -139,6 +144,12 @@ class _GroupsViewState extends State<GroupsView> {
                                                showDialog(context: context, builder: (BuildContext context) {
                                                  return Scaffold(
                                                    appBar: AppBar(
+                                                     leading: IconButton(
+                                                       icon: Icon(Icons.arrow_back, color: Colors.white),
+                                                       onPressed: () => initState(),
+
+                                                     ),
+
                                                      backgroundColor: const Color(0xFF47ABD1),
                                                      title: Text('${groups[index]}'),
                                                    ),
@@ -180,13 +191,15 @@ class _GroupsViewState extends State<GroupsView> {
                                                  ),
 
                                                  child: ListTile(
-                                                 title: Text('members'),
+
+                                                 title: Text('${groups[index]}'),
                                                  onTap: (){
                                                  showDialog(context: context, builder: (BuildContext context) {
                                                  return Scaffold(
                                                  appBar: AppBar(
+
                                                  backgroundColor: const Color(0xFF47ABD1),
-                                                 title: Text('members'),
+                                                 title: Text('${groups[index]}'),
                                                  ),
 
                                                  body: Column(
@@ -361,7 +374,7 @@ class _GroupsViewState extends State<GroupsView> {
                                                  ), ], ),
                                                  );
                                                });
-
+                                               //initState();
                                             },
 
                                           ),
@@ -386,19 +399,24 @@ class _GroupsViewState extends State<GroupsView> {
                                   style: TextStyle(fontSize: 10),
                                 );
                               }
-                              else {
+                              else if(snapshot.inState(ConnectionState.waiting)!=null){
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
                               }
+                              else {
+                                return Text(
+                                  'Hello, Join or create a group!',
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }
                             } catch(error){
 
-                              return Text(
-                                'Hello, Join or create a group!',
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                              return const Center(
+                                child: CircularProgressIndicator(),
                               );
                             }
                           },
@@ -412,6 +430,7 @@ class _GroupsViewState extends State<GroupsView> {
 
       ),
     );
+    //initState();
   }
 }
 

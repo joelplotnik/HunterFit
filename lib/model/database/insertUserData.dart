@@ -51,6 +51,7 @@ class insertUserData {
     getUserData getData =
         await getUserData(); //wait to initialize an instance if Firestore
     var currentUID = await getData.getCurrentUserID();
+
     return getData.groupsCollection
         .doc('groups-social')
         .collection('groups')

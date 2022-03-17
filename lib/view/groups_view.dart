@@ -41,7 +41,7 @@ class _GroupsViewState extends State<GroupsView> {
   }
 
   TextEditingController nameController = TextEditingController();
-
+  TextEditingController usernameController = TextEditingController();
   void addItemToList() {
     setState(() {
 
@@ -74,6 +74,7 @@ insertToDB.sendGroupsInvitation(Newuser, _currentGroup);
     setState(() {
       _currentUser = widget.user;
 nameController.clear();
+usernameController.clear();
       @override
       State<GroupsView> createState() => _GroupsViewState();
       //Navigator.of(context).pop();
@@ -538,7 +539,7 @@ nameController.clear();
                                                                            Padding(
                                                                              padding: EdgeInsets.all(8.0),
                                                                              child: TextField(
-                                                                               controller: nameController,
+                                                                               controller: usernameController,
                                                                                decoration: const InputDecoration(
                                                                                  border: OutlineInputBorder(),
                                                                                  labelText: 'User Name',
@@ -554,7 +555,7 @@ nameController.clear();
                                                                              child: RaisedButton(
                                                                                child: Text("Submit"),
                                                                                onPressed: () async => {Navigator.of(context).pop(),
-                                                                                 if(await getFromDB.personExists(nameController.text.toString())!=null){inviteNewUser(nameController.text.toString())},
+                                                                                 if(await getFromDB.personExists(usernameController.text.toString())!=null){inviteNewUser(usernameController.text.toString())},
 
                                                                                initState(),
                                                                                 //inviteNewUser(nameController.text.toString()),

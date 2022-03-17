@@ -247,7 +247,7 @@ getUserData getFromDB= getUserData();
                                       });
 
                                       if (_registerFormKey.currentState!
-                                          .validate()&&await getFromDB.getMessages(_nameTextController.text.toString())==null) {
+                                          .validate()&&await getFromDB.personExists(_nameTextController.text.toString())==null) {
 
                                         User? user = await FireAuth
                                             .registerUsingEmailPassword(

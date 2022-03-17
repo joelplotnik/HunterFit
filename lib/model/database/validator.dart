@@ -6,7 +6,7 @@ class Validator {
       return null;
     }
     if (name.isEmpty) {
-      return 'Name can\'t be empty';
+      return 'Name cannot be empty';
     }
 
     return null;

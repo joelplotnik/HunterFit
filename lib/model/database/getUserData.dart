@@ -205,4 +205,29 @@ class getUserData {
             (error) => print('Failed to delete database because: $error'));
 return snapshot;
   }
+  personExists(String name) async {
+    // String UID = await getCurrentUserID();
+
+    var snapshot = await messagesCollection
+        .doc('names')
+        .collection(name)
+        .doc('messages')
+        .get();
+
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+        print(data);
+
+        return snapshot;
+      } else if (!snapshot.exists) {
+        print(
+            'Error getTotalweightTime: Document does not exist yet. Creating...');
+        return null;
+      }
+    } catch (error) {
+      print("Error: $error");
+      return null;
+    }
+  }
 }

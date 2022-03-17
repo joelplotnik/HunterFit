@@ -26,7 +26,7 @@ class _SignupPageState extends State<SignupPage> {
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
   insertUserData insertToDB = insertUserData();
-
+getUserData getFromDB= getUserData();
   bool _isProcessing = false;
 
   @override
@@ -247,7 +247,8 @@ class _SignupPageState extends State<SignupPage> {
                                       });
 
                                       if (_registerFormKey.currentState!
-                                          .validate()) {
+                                          .validate()&&await getFromDB.getMessages(_nameTextController.text.toString())==null) {
+
                                         User? user = await FireAuth
                                             .registerUsingEmailPassword(
                                           name: _nameTextController.text,
@@ -271,6 +272,7 @@ class _SignupPageState extends State<SignupPage> {
                                           );
                                           //insert name to db
                                           await insertToDB.insertUserName(_nameTextController.text);
+                                          await insertToDB.createMailbox(_nameTextController.text.toString());
                                         }
                                       }
                                     },

@@ -146,5 +146,17 @@ class insertUserData {
         .catchError(
             (error) => print('Failed to add time to database because: $error'));
   }
+  createMailbox(String displayName) async{
+    getUserData getData =
+    await getUserData(); //wait to initialize an instance if Firestore
+    var currentUID = await getData.getCurrentUserID();
+    return getData.messagesCollection //users > UID > userData > weightsData >
+        .doc('names')
+        .collection(displayName)
+        .doc('messages')
+        .set({
+      'message': FieldValue.arrayUnion([])
+    },);
 
+  }
 }

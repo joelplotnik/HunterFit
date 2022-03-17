@@ -553,8 +553,9 @@ nameController.clear();
                                                                              padding: const EdgeInsets.all(8.0),
                                                                              child: RaisedButton(
                                                                                child: Text("Submit"),
-                                                                               onPressed: ()=> {Navigator.of(context).pop(),
-                                                                                 inviteNewUser(nameController.text.toString()),
+                                                                               onPressed: () async => {Navigator.of(context).pop(),
+                                                                                 if(await getFromDB.personExists(nameController.text.toString())!=null){inviteNewUser(nameController.text.toString())},
+
                                                                                initState(),
                                                                                 //inviteNewUser(nameController.text.toString()),
                                                                                },

@@ -17,19 +17,8 @@ class _ActivityViewState extends State<ActivityView> {
   getUserData getFromDB = getUserData();
   var name;
 
-<<<<<<< HEAD
   Future fetchUserData() async{
     name = await getUserData().getUsername();
-  }
-  void initState(){
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_){
-      setState(() {
-        fetchUserData();
-      });
-    });
-  Future<dynamic> fetchUserData() async {
-    return await getFromDB.getUsername();
   }
 
   void initState() {

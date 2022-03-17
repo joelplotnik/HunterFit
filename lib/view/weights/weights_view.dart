@@ -56,7 +56,15 @@ class _WeightsViewState extends State<WeightsView> {
                   child: IconButton(
                     iconSize: 30,
                     onPressed: () {
-                      openDialog();
+                      if (workoutName.text.isNotEmpty && _setsList.isEmpty) {
+                        setState(() {
+                          SetCard card = SetCard(setNumber);
+                          _setsList.add(card.createSetCard());
+                          setNumber++;
+                        });
+                      } else {
+                        openDialog();
+                      }
                     },
                     icon: Icon(
                       Icons.add,
@@ -120,33 +128,51 @@ class _WeightsViewState extends State<WeightsView> {
 
   Future openDialog() => showDialog(
         context: context,
-        builder: (context) => !workoutName.text.isEmpty
-            ? AlertDialog(
-                title: Text('Log Previous Set?'),
-                actions: [
-                  TextButton(
-                    child: Text('CANCEL'),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                  TextButton(
-                    child: Text('YES'),
-                    onPressed: () => setState(() {
-                      SetCard card = SetCard(setNumber);
-                      _setsList.add(card.createSetCard());
-                      setNumber++;
-                      Navigator.pop(context);
-                    }),
-                  )
-                ],
-              )
-            : AlertDialog(
-                title: Text('Enter a workout name...'),
-                actions: [
-                  TextButton(
-                    child: Text('Close'),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                ],
-              ),
+        builder: (context) {
+          //If workoutName is not empty and the setsLists is not empty
+          if (!workoutName.text.isEmpty && _setsList.isNotEmpty) {
+            return AlertDialog(
+              title: Text('Log Previous Set?'),
+              actions: [
+                TextButton(
+                  child: Text('CANCEL'),
+                  onPressed: () => Navigator.pop(context),
+                ),
+                TextButton(
+                  child: Text('YES'),
+                  onPressed: () => setState(() {
+                    SetCard card = SetCard(setNumber);
+                    _setsList.add(card.createSetCard());
+                    setNumber++;
+                    Navigator.pop(context);
+                  }),
+                )
+              ],
+            );
+            //Else if the workoutName is empty
+          } else if (workoutName.text.isEmpty) {
+            return AlertDialog(
+              title: Text('Enter a workout name...'),
+              actions: [
+                TextButton(
+                  child: Text('Close'),
+                  onPressed: () => Navigator.pop(context),
+                )
+              ],
+            );
+          }
+          //else,
+          else {
+            return AlertDialog(
+              title: Text('ERROR'),
+              actions: [
+                TextButton(
+                  child: Text('Close'),
+                  onPressed: () => Navigator.pop(context),
+                )
+              ],
+            );
+          }
+        },
       );
 }

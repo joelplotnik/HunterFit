@@ -11,7 +11,7 @@ class getUserData {
   CollectionReference groupsCollection =
       FirebaseFirestore.instance.collection('groups');
   CollectionReference messagesCollection =
-  FirebaseFirestore.instance.collection('messages');
+      FirebaseFirestore.instance.collection('messages');
 
   Duration parseDuration(String s) {
     int hours = 0;
@@ -34,7 +34,8 @@ class getUserData {
     return uid;
   }
 
-  String getLogo() => false ? "assets/logo-hunter-fit.svg" : "assets/logo-hunter-fit.svg";
+  String getLogo() =>
+      false ? "assets/logo-hunter-fit.svg" : "assets/logo-hunter-fit.svg";
 
   //String getLogo() => "assets/logo-hunter-fit.svg";
 
@@ -55,7 +56,7 @@ class getUserData {
         return times;
       } else if (!snapshot.exists) {
         print(
-            'Error getTotalweightTime: Document does not exist yet. Creating...');
+            'Notice! getTotalweightTime: Document does not exist yet. Creating...');
       }
     } catch (error) {
       print("Error: $error");
@@ -166,6 +167,7 @@ class getUserData {
     //   print("Error: $error");
     // }
   }
+
   getMessages(String name) async {
     // String UID = await getCurrentUserID();
 
@@ -190,21 +192,23 @@ class getUserData {
       return null;
     }
   }
-  deleteMessages(String name,String subject) async {
+
+  deleteMessages(String name, String subject) async {
     // String UID = await getCurrentUserID();
 
     var snapshot = await messagesCollection
         .doc('names')
         .collection(name)
         .doc('messages')
-    .set({
-      'message': FieldValue.arrayRemove([subject])
-    }, SetOptions(merge: true))
+        .set({
+          'message': FieldValue.arrayRemove([subject])
+        }, SetOptions(merge: true))
         .then((value) => print('message deleted'))
         .catchError(
             (error) => print('Failed to delete database because: $error'));
-return snapshot;
+    return snapshot;
   }
+
   personExists(String name) async {
     // String UID = await getCurrentUserID();
 

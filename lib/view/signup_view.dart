@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hunter_fit/model/database/fire_auth.dart';
+import '../model/database/getUserData.dart';
 import 'navigation_view.dart';
 import '../model/database/validator.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
@@ -25,7 +26,7 @@ class _SignupPageState extends State<SignupPage> {
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
   insertUserData insertToDB = insertUserData();
-
+getUserData getFromDB= getUserData();
   bool _isProcessing = false;
 
   @override
@@ -52,7 +53,7 @@ class _SignupPageState extends State<SignupPage> {
                 //const SizedBox(height: 100,),
                 Align(
                   alignment: Alignment.center,
-                  child: SvgPicture.asset("assets/logo-hunter-fit.svg"),
+                  child: SvgPicture.asset(getUserData().getLogo()),
                 ),
                 const SizedBox(height: 25),
                 Form(
@@ -246,7 +247,8 @@ class _SignupPageState extends State<SignupPage> {
                                       });
 
                                       if (_registerFormKey.currentState!
-                                          .validate()) {
+                                          .validate()&&await getFromDB.personExists(_nameTextController.text.toString())==null) {
+
                                         User? user = await FireAuth
                                             .registerUsingEmailPassword(
                                           name: _nameTextController.text,
@@ -270,6 +272,7 @@ class _SignupPageState extends State<SignupPage> {
                                           );
                                           //insert name to db
                                           await insertToDB.insertUserName(_nameTextController.text);
+                                          await insertToDB.createMailbox(_nameTextController.text.toString());
                                         }
                                       }
                                     },

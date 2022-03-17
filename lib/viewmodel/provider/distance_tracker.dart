@@ -13,34 +13,31 @@ class DistanceTracker extends StatefulWidget {
   var runningTotalInKm = 0.0;
   var runningTotalInMi = 0.0;
 
-  double calculateDistanceKilometers(LatLng location) {
-    /*
-    double calculateDistanceKilometers(LatLng location, bool isTrackingTurnedOn)
-    if (!isTrackingTurnedOn) {
-      return 0.0;
-    }*/
+  void clearLocations() {
+    listOfLocation.clear();
+  }
 
-    if(listOfLocation.isEmpty)
-      {
-        listOfLocation.add(location);
-        return 0.0;
-      }
+  double calculateDistanceKilometers(LatLng location,
+      [bool isStopWatchRunning = true]) {
+    if (!isStopWatchRunning) {
+      return runningTotalInKm;
+    }
+
+    if (listOfLocation.isEmpty) {
+      listOfLocation.add(location);
+      return 0.0;
+    }
     var prevLastLocation = listOfLocation.last;
     listOfLocation.add(location);
-    var firstLocation = listOfLocation.first;
-    var lastLocation = listOfLocation.last;
 
     // compare each coordinate in the list to the previous
-    runningTotalInKm += calculateDistance(prevLastLocation.latitude, prevLastLocation.longitude, location.latitude, location.longitude);
+    runningTotalInKm += calculateDistance(prevLastLocation.latitude,
+        prevLastLocation.longitude, location.latitude, location.longitude);
     // add to running total
     // return running total
 
-    var finalDistance = calculateDistance(firstLocation.latitude,
-        firstLocation.longitude, lastLocation.latitude, lastLocation.longitude);
-
     //return finalDistance;
     return runningTotalInKm;
-
   }
 
   // Haversine Formula
@@ -52,7 +49,6 @@ class DistanceTracker extends StatefulWidget {
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
-
 }
 
 class _DistanceTrackerState extends State<DistanceTracker> {

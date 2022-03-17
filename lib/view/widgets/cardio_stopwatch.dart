@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/view/widgets/stopwatch_state.dart';
 import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
 import 'package:hunter_fit/view/widgets/button_text_widget.dart';
 
@@ -15,6 +16,7 @@ class CardioStopwatch extends StatefulWidget {
 class _CardioStopwatchState extends State<CardioStopwatch> {
   Duration duration = const Duration();
   Timer? timer;
+  StopwatchState stopwatchState = StopwatchState();
 
   late LocationProvider locProv;
 
@@ -41,6 +43,10 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
     to true
     - In the location provider instantiate the same singleton
      */
+
+    //use the singlton to tell the distance tracker to clear the list of location when the start button is clicked
+    stopwatchState.isStopWatchRunning = true;
+
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 
@@ -48,6 +54,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
     if (resets) {
       reset();
     }
+    stopwatchState.isStopWatchRunning = false;
     setState(() => timer?.cancel());
   }
 

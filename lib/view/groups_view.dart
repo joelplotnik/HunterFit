@@ -121,9 +121,9 @@ usernameController.clear();
                 ),
               ),
             ),
-            onPressed: () {
-
-              addItemToList();
+            onPressed: () async {
+if(await getFromDB.groupExists(nameController.text.toString())==null){ addItemToList();}
+             // addItemToList();
             },
           ),
           ElevatedButton(

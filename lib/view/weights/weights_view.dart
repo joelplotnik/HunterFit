@@ -17,7 +17,7 @@ class _WeightsViewState extends State<WeightsView> {
 
   final List<Widget> _setsList = [];
   int setNumber = 1;
-
+  late SetCard card = SetCard(setNumber);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +41,7 @@ class _WeightsViewState extends State<WeightsView> {
                       color: Colors.white,
                     ),
                     decoration: const InputDecoration(
-                      hintText: 'Enter workout name...',
+                      hintText: 'Enter a workout name...',
                       hintStyle: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -62,6 +62,13 @@ class _WeightsViewState extends State<WeightsView> {
                           _setsList.add(card.createSetCard());
                           setNumber++;
                         });
+                      } else if (workoutName.text.isEmpty) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBarWorkoutName);
+                        // } else if (card.lbs.text.isEmpty ||
+                        //     card.reps.text.isEmpty) {
+                        //   ScaffoldMessenger.of(context)
+                        //       .showSnackBar(snackBarRepsLbs);
                       } else {
                         openDialog();
                       }
@@ -141,7 +148,7 @@ class _WeightsViewState extends State<WeightsView> {
                 TextButton(
                   child: Text('YES'),
                   onPressed: () => setState(() {
-                    SetCard card = SetCard(setNumber);
+                    card = SetCard(setNumber);
                     _setsList.add(card.createSetCard());
                     setNumber++;
                     Navigator.pop(context);
@@ -150,17 +157,17 @@ class _WeightsViewState extends State<WeightsView> {
               ],
             );
             //Else if the workoutName is empty
-          } else if (workoutName.text.isEmpty) {
-            return AlertDialog(
-              title: Text('Enter a workout name...'),
-              actions: [
-                TextButton(
-                  child: Text('Close'),
-                  onPressed: () => Navigator.pop(context),
-                )
-              ],
-            );
-          }
+          } //else if (workoutName.text.isEmpty) {
+          //   // return AlertDialog(
+          //   //   title: Text('Enter a workout name...'),
+          //   //   actions: [
+          //   //     TextButton(
+          //   //       child: Text('Close'),
+          //   //       onPressed: () => Navigator.pop(context),
+          //   //     )
+          //   //   ],
+          //   // );
+          // }
           //else,
           else {
             return AlertDialog(
@@ -175,4 +182,14 @@ class _WeightsViewState extends State<WeightsView> {
           }
         },
       );
+
+  final snackBarWorkoutName = SnackBar(
+    content: const Text('Please enter a workout name...'),
+    backgroundColor: Colors.red.shade400,
+    duration: Duration(seconds: 2),
+  );
+
+  final snackBarRepsLbs = SnackBar(
+    content: const Text('Please fill in both sets and reps...'),
+  );
 }

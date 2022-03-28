@@ -8,7 +8,8 @@ class SetCard {
   SetCard(this.setNumber);
 
   int setNumber;
-
+  TextEditingController reps = TextEditingController();
+  TextEditingController lbs = TextEditingController();
   Widget createSetCard() {
     return Row(
       children: [
@@ -26,9 +27,10 @@ class SetCard {
             decoration: myBoxDecoration(),
           ),
         ),
-        const Expanded(
+        Expanded(
           flex: 3,
           child: TextField(
+            controller: reps,
             textAlign: TextAlign.center,
             maxLength: 3,
             keyboardType: TextInputType.number,
@@ -46,9 +48,10 @@ class SetCard {
         const Expanded(
           child: Center(child: Text("x")),
         ),
-        const Expanded(
+        Expanded(
           flex: 3,
           child: TextField(
+            controller: lbs,
             textAlign: TextAlign.center,
             maxLength: 3,
             keyboardType: TextInputType.number,

@@ -68,7 +68,10 @@ dependencies:
   font_awesome_flutter: 9.2.0
   firebase_core: ^1.12.0
   firebase: ^9.0.2
-
+  image_picker: ^0.8.4+11
+  firebase_storage: ^10.2.9
+  path_provider: ^2.0.1
+  file_picker: ^4.5.1
 
 
 

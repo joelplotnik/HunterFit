@@ -1,7 +1,15 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hunter_fit/model/database/getUserData.dart';
+import 'package:hunter_fit/view/activity/storage_service.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
+import 'package:path_provider/path_provider.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:file_picker/file_picker.dart';
 
 class ActivityView extends StatefulWidget {
   static String routeName = "/activity";
@@ -14,11 +22,53 @@ class ActivityView extends StatefulWidget {
 
 class _ActivityViewState extends State<ActivityView> {
   //get from db instantiating the class
+  File? image;
+  final Storage storage = Storage();
   getUserData getFromDB = getUserData();
 
+
+
+  Future pickImage() async {
+    try {
+      // final pic = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final result = await FilePicker.platform.pickFiles(
+        allowMultiple: false,
+        type: FileType.custom,
+        allowedExtensions: ['png', 'jpg'],
+      );
+      if (result == null){
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No files')));
+      }
+
+      final path = result!.files.single.path;
+      // final fileName = result!.files.single.name;
+
+      // print(fileName);
+
+      // final imagePermanent = await saveImagePermanently(image.path);
+      // setState(() {
+      //   image = File(pic.path);   
+      // });
+      storage.uploadFile(path!,"picture").then((value) => {
+        print("Done")
+      });
+
+    } on PlatformException catch (e) {
+      print("failed to pick image: $e");
+    }
+  }
+
+
+  // Future<File> saveImagePermanently(String imagePath) async {
+  //   final directory= await getApplicationDocumentsDirectory();
+  //   final name =    basename (imagePath);
+  //   final image = File('${directory.path}/$name');
+  //   return File(imagePath).copy(image.path);
+  // }
   Future<dynamic> fetchUserData() async {
     return await getFromDB.getUsername(await getFromDB.getCurrentUserID());
   }
+
   void initState() {
     super.initState();
   }
@@ -82,11 +132,21 @@ class _ActivityViewState extends State<ActivityView> {
                     const SizedBox(
                       width: 50,
                     ),
-                    const Icon(
-                      Icons.person_outline_outlined,
-                      color: Colors.black,
-                      size: 75.0,
-                      semanticLabel: 'profile image',
+                    SizedBox(
+                      child: IconButton(
+                          icon: image != null
+                              ? Image.file(
+                                  image!,
+                                  width: 95,
+                                  height: 95,
+                                )
+                              : FlutterLogo(size: 75),
+                          tooltip: "Change Profile Picture",
+                          onPressed: () {
+                            pickImage();
+                          }),
+                      width: 115,
+                      height: 115,
                     ),
                   ]),
                   const SizedBox(

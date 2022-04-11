@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
-import 'workouts_list.dart';
 import 'package:hunter_fit/view/widgets/weights_stopwatch.dart';
 
 class WeightsView extends StatefulWidget {
@@ -11,13 +11,83 @@ class WeightsView extends StatefulWidget {
   State<WeightsView> createState() => _WeightsViewState();
 }
 
+int setNumber = 1;
+TextEditingController repsController = TextEditingController();
+TextEditingController lbsController = TextEditingController();
+String reps = repsController.text;
+String lbs = lbsController.text;
+
+bool tf = true;
+
+Widget createSetCard() {
+  return Row(
+    children: [
+      Expanded(
+        child: Container(
+          height: 60,
+          alignment: Alignment.center,
+          child: Text(
+            setNumber.toString(),
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          decoration: const BoxDecoration(color: constants.kHunterColor),
+        ),
+      ),
+      Expanded(
+        flex: 3,
+        child: TextField(
+          controller: repsController,
+          textAlign: TextAlign.center,
+          maxLength: 3,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+            hintText: "reps",
+            // suffix: Text('reps'),
+            counterText: "",
+            border: InputBorder.none,
+          ),
+        ),
+      ),
+      const Expanded(
+        child: Center(child: Text("x")),
+      ),
+      Expanded(
+        flex: 3,
+        child: TextField(
+          controller: lbsController,
+          textAlign: TextAlign.center,
+          maxLength: 3,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+            hintText: "lbs",
+            suffix: Text("lbs"),
+            counterText: "",
+            border: InputBorder.none,
+            //suffix: Text('lbs'),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+insertToDB() async {
+  insertUserData insertData = insertUserData();
+  await insertData.insertWeightRepAndLbs();
+}
+
 class _WeightsViewState extends State<WeightsView> {
   WeightsStopwatch stopwatch = WeightsStopwatch();
   TextEditingController workoutName = TextEditingController();
-
   final List<Widget> _setsList = [];
-  int setNumber = 1;
-  late SetCard card = SetCard(setNumber);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +128,7 @@ class _WeightsViewState extends State<WeightsView> {
                     onPressed: () {
                       if (workoutName.text.isNotEmpty && _setsList.isEmpty) {
                         setState(() {
-                          SetCard card = SetCard(setNumber);
-                          _setsList.add(card.createSetCard());
-                          setNumber++;
+                          _setsList.add(createSetCard());
                         });
                       } else if (workoutName.text.isEmpty) {
                         ScaffoldMessenger.of(context)
@@ -148,28 +216,15 @@ class _WeightsViewState extends State<WeightsView> {
                 TextButton(
                   child: Text('YES'),
                   onPressed: () => setState(() {
-                    card = SetCard(setNumber);
-                    _setsList.add(card.createSetCard());
+                    _setsList.add(createSetCard());
                     setNumber++;
                     Navigator.pop(context);
+                    insertToDB();
                   }),
                 )
               ],
             );
-            //Else if the workoutName is empty
-          } //else if (workoutName.text.isEmpty) {
-          //   // return AlertDialog(
-          //   //   title: Text('Enter a workout name...'),
-          //   //   actions: [
-          //   //     TextButton(
-          //   //       child: Text('Close'),
-          //   //       onPressed: () => Navigator.pop(context),
-          //   //     )
-          //   //   ],
-          //   // );
-          // }
-          //else,
-          else {
+          } else {
             return AlertDialog(
               title: Text('ERROR'),
               actions: [

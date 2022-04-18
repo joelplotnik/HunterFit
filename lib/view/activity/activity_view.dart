@@ -26,8 +26,6 @@ class _ActivityViewState extends State<ActivityView> {
   final Storage storage = Storage();
   getUserData getFromDB = getUserData();
 
-
-
   Future pickImage() async {
     try {
       // final pic = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -36,8 +34,9 @@ class _ActivityViewState extends State<ActivityView> {
         type: FileType.custom,
         allowedExtensions: ['png', 'jpg'],
       );
-      if (result == null){
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No files')));
+      if (result == null) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('No files')));
       }
 
       final path = result!.files.single.path;
@@ -47,17 +46,13 @@ class _ActivityViewState extends State<ActivityView> {
 
       // final imagePermanent = await saveImagePermanently(image.path);
       // setState(() {
-      //   image = File(pic.path);   
+      //   image = File(pic.path);
       // });
-      storage.uploadFile(path!,"picture").then((value) => {
-        print("Done")
-      });
-
+      storage.uploadFile(path!, "picture").then((value) => {print("Done")});
     } on PlatformException catch (e) {
       print("failed to pick image: $e");
     }
   }
-
 
   // Future<File> saveImagePermanently(String imagePath) async {
   //   final directory= await getApplicationDocumentsDirectory();
@@ -133,24 +128,49 @@ class _ActivityViewState extends State<ActivityView> {
                       width: 50,
                     ),
                     SizedBox(
-                      child: IconButton(
-                          icon: image != null
-                              ? Image.file(
-                                  image!,
-                                  width: 95,
-                                  height: 95,
-                                )
-                              : FlutterLogo(size: 75),
-                          tooltip: "Change Profile Picture",
-                          onPressed: () {
-                            pickImage();
-                          }),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          FutureBuilder(
+                              future: storage.downloadUrl("picture"),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<String> snapshot) {
+                                if (snapshot.connectionState ==
+                                        ConnectionState.done &&
+                                    snapshot.hasData) {
+                                  return SizedBox(
+                                      height: 115,
+                                      width: 115,
+                                      child: Image.network(snapshot.data!,
+                                          fit: BoxFit.cover));
+                                }
+                                if (snapshot.connectionState ==
+                                        ConnectionState.waiting ||
+                                    !snapshot.hasData) {
+                                  return const SizedBox(child:CircularProgressIndicator(),width:100,height:100);
+                                }
+                                return Container();
+                              }),
+                          SizedBox(height:10),
+                          SizedBox(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                pickImage();
+                              },
+                              child: Text("Upload"),
+                          ),
+                            height:20,
+                            width:100,
+                          )
+                        ],
+                      ),
+                      // child:
                       width: 115,
-                      height: 115,
+                      height: 145,
                     ),
                   ]),
                   const SizedBox(
-                    height: 50,
+                    height: 80,
                   ),
                   Row(
                     children: [

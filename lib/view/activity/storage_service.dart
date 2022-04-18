@@ -12,6 +12,25 @@ class Storage {
 
     try{
       await storage.ref('pictures/$fileName').putFile(file);
-    } on firebase_core.FirebaseException catch (e){print(e);}
+    } on firebase_core.FirebaseException catch (e){
+      print(e);
+    }
+  }
+
+  Future<firebase_storage.ListResult> listFiles() async{
+    firebase_storage.ListResult result = await storage.ref('pictures').listAll();
+    
+    result.items.forEach((firebase_storage.Reference ref){
+      print("Found file: $ref");
+    });
+    
+    return result;
+  }
+
+  Future<String> downloadUrl(String imageName) async{
+    String downloadURL = await storage.ref('pictures/$imageName').getDownloadURL();
+    
+
+    return downloadURL;
   }
 }

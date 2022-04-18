@@ -7,8 +7,10 @@ BoxDecoration myBoxDecoration() {
 class SetCard {
   SetCard(this.setNumber);
 
-  int setNumber;
+  late String reps;
+  TextEditingController repsController = TextEditingController();
 
+  int setNumber;
   Widget createSetCard() {
     return Row(
       children: [
@@ -26,9 +28,10 @@ class SetCard {
             decoration: myBoxDecoration(),
           ),
         ),
-        const Expanded(
+        Expanded(
           flex: 3,
           child: TextField(
+            controller: repsController,
             textAlign: TextAlign.center,
             maxLength: 3,
             keyboardType: TextInputType.number,
@@ -46,7 +49,7 @@ class SetCard {
         const Expanded(
           child: Center(child: Text("x")),
         ),
-        const Expanded(
+        Expanded(
           flex: 3,
           child: TextField(
             textAlign: TextAlign.center,

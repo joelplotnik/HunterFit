@@ -22,6 +22,7 @@ class insertUserData {
     return d.toString().split('.').first.padLeft(8, "0");
   }
 
+//------------------------WEIGHTS-----------------------------------------
   Future<void> insertWeightTime(Duration duration) async {
     getUserData getData =
         await getUserData(); //wait to initialize an instance if Firestore
@@ -47,7 +48,26 @@ class insertUserData {
             (error) => print('Failed to add time to database because: $error'));
   }
 
-  Future<void> insertNewGroupIntoDB(String groupname,String user) async {
+  Future<void> insertWeightRepAndLbs() async {
+    getUserData getData =
+        await getUserData(); //wait to initialize an instance of Firestore
+    var currentUID =
+        await getData.getCurrentUserID(); //wait to fetch user ID from DB
+
+    return getData.userCollection //users > UID > workoutData > weightsData >
+        .doc(currentUID)
+        .collection('workoutData')
+        .doc('weightsData')
+        .set({
+          'DATE': FieldValue.arrayUnion(['5'])
+        }, SetOptions(merge: true))
+        .then((value) => print('Date added'))
+        .catchError(
+            (error) => print('Failed to add time to database because: $error'));
+  }
+
+//----------------------END OF WEIGHTS-----------------------------------
+  Future<void> insertNewGroupIntoDB(String groupname, String user) async {
     getUserData getData =
         await getUserData(); //wait to initialize an instance if Firestore
     //var currentUID = await getData.getCurrentUserID();
@@ -80,10 +100,10 @@ class insertUserData {
             (error) => print('Failed to add to database because: $error'));
   }
 
-
-  Future<void> insertNewUserIntoGroupIntoDB(String groupname,String user) async {
+  Future<void> insertNewUserIntoGroupIntoDB(
+      String groupname, String user) async {
     getUserData getData =
-    await getUserData(); //wait to initialize an instance if Firestore
+        await getUserData(); //wait to initialize an instance if Firestore
     //var currentUID = await getData.getCurrentUserID();
 
     return getData.groupsCollection
@@ -91,29 +111,29 @@ class insertUserData {
         .collection('groups')
         .doc(groupname)
         .set({
-      'Members': FieldValue.arrayUnion([user])
-    }, SetOptions(merge: true))
+          'Members': FieldValue.arrayUnion([user])
+        }, SetOptions(merge: true))
         .then((value) => print('Member added'))
         .catchError(
             (error) => print('Failed to add to database because: $error'));
   }
 
-  Future<void> insertNewUserIntoGroupIntoUserlist(String groupname,String currentUID) async {
+  Future<void> insertNewUserIntoGroupIntoUserlist(
+      String groupname, String currentUID) async {
     getUserData getData =
-    await getUserData(); //wait to initialize an instance if Firestore
+        await getUserData(); //wait to initialize an instance if Firestore
     //var currentUID = await getData.getCurrentUserID();
     return getData.userCollection
         .doc(currentUID)
         .collection('groups')
         .doc('mygroups')
         .set({
-      'Groups': FieldValue.arrayUnion([groupname])
-    }, SetOptions(merge: true))
+          'Groups': FieldValue.arrayUnion([groupname])
+        }, SetOptions(merge: true))
         .then((value) => print('Group added'))
         .catchError(
             (error) => print('Failed to add to database because: $error'));
   }
-
 
   Future<void> insertUserName(String userName) async {
     getUserData getData =
@@ -131,34 +151,42 @@ class insertUserData {
             (error) => print('Failed to add time to database because: $error'));
   }
 
-  Future<void> sendGroupsInvitation(String displayName, String groupname) async{
+  Future<void> sendGroupsInvitation(
+      String displayName, String groupname) async {
     getUserData getData =
-    await getUserData(); //wait to initialize an instance if Firestore
+        await getUserData(); //wait to initialize an instance if Firestore
     var currentUID = await getData.getCurrentUserID();
     return getData.messagesCollection //users > UID > userData > weightsData >
         .doc('names')
         .collection(displayName)
         .doc('messages')
         .set({
-      'message': FieldValue.arrayUnion([groupname])
-    }, SetOptions(merge: true))
+          'message': FieldValue.arrayUnion([groupname])
+        }, SetOptions(merge: true))
         .then((value) => print('Name added'))
         .catchError(
             (error) => print('Failed to add time to database because: $error'));
   }
-  createMailbox(String displayName) async{
+
+  createMailbox(String displayName) async {
     getUserData getData =
-    await getUserData(); //wait to initialize an instance if Firestore
+        await getUserData(); //wait to initialize an instance if Firestore
     var currentUID = await getData.getCurrentUserID();
     return getData.messagesCollection //users > UID > userData > weightsData >
         .doc('names')
         .collection(displayName)
         .doc('messages')
+<<<<<<< HEAD
         .set({
       'message': FieldValue.arrayUnion([])
     },);
 
 
+=======
+        .set(
+      {'message': FieldValue.arrayUnion([])},
+    );
+>>>>>>> 23f6b79a4f219b4fdd4ca5cad0ecda3536ad0992
   }
 }
 

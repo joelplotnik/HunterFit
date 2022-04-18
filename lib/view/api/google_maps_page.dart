@@ -34,7 +34,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
         children: [
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 350,
+            height: 250,
             child: GoogleMap(
               mapType: MapType.normal,
               initialCameraPosition:

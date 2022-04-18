@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/view/widgets/button_text_widget.dart';
 import 'package:hunter_fit/constants.dart' as constant;
+import 'package:hunter_fit/view/weights/weights_view.dart';
 
 import 'button_icon_widget.dart';
 

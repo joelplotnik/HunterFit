@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
-import 'workouts_list.dart';
 import 'package:hunter_fit/view/widgets/weights_stopwatch.dart';
 
 class WeightsView extends StatefulWidget {
@@ -11,12 +11,82 @@ class WeightsView extends StatefulWidget {
   State<WeightsView> createState() => _WeightsViewState();
 }
 
+int setNumber = 1;
+TextEditingController repsController = TextEditingController();
+TextEditingController lbsController = TextEditingController();
+String reps = repsController.text;
+String lbs = lbsController.text;
+
+bool tf = true;
+
+Widget createSetCard() {
+  return Row(
+    children: [
+      Expanded(
+        child: Container(
+          height: 60,
+          alignment: Alignment.center,
+          child: Text(
+            setNumber.toString(),
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          decoration: const BoxDecoration(color: constants.kHunterColor),
+        ),
+      ),
+      Expanded(
+        flex: 3,
+        child: TextField(
+          controller: repsController,
+          textAlign: TextAlign.center,
+          maxLength: 3,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+            hintText: "reps",
+            // suffix: Text('reps'),
+            counterText: "",
+            border: InputBorder.none,
+          ),
+        ),
+      ),
+      const Expanded(
+        child: Center(child: Text("x")),
+      ),
+      Expanded(
+        flex: 3,
+        child: TextField(
+          controller: lbsController,
+          textAlign: TextAlign.center,
+          maxLength: 3,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+            hintText: "lbs",
+            suffix: Text("lbs"),
+            counterText: "",
+            border: InputBorder.none,
+            //suffix: Text('lbs'),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+insertToDB() async {
+  insertUserData insertData = insertUserData();
+  await insertData.insertWeightRepAndLbs();
+}
+
 class _WeightsViewState extends State<WeightsView> {
   WeightsStopwatch stopwatch = WeightsStopwatch();
   TextEditingController workoutName = TextEditingController();
-
   final List<Widget> _setsList = [];
-  int setNumber = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +111,7 @@ class _WeightsViewState extends State<WeightsView> {
                       color: Colors.white,
                     ),
                     decoration: const InputDecoration(
-                      hintText: 'Enter workout name...',
+                      hintText: 'Enter a workout name...',
                       hintStyle: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -56,7 +126,20 @@ class _WeightsViewState extends State<WeightsView> {
                   child: IconButton(
                     iconSize: 30,
                     onPressed: () {
-                      openDialog();
+                      if (workoutName.text.isNotEmpty && _setsList.isEmpty) {
+                        setState(() {
+                          _setsList.add(createSetCard());
+                        });
+                      } else if (workoutName.text.isEmpty) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBarWorkoutName);
+                        // } else if (card.lbs.text.isEmpty ||
+                        //     card.reps.text.isEmpty) {
+                        //   ScaffoldMessenger.of(context)
+                        //       .showSnackBar(snackBarRepsLbs);
+                      } else {
+                        openDialog();
+                      }
                     },
                     icon: Icon(
                       Icons.add,
@@ -120,33 +203,48 @@ class _WeightsViewState extends State<WeightsView> {
 
   Future openDialog() => showDialog(
         context: context,
-        builder: (context) => !workoutName.text.isEmpty
-            ? AlertDialog(
-                title: Text('Log Previous Set?'),
-                actions: [
-                  TextButton(
-                    child: Text('CANCEL'),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                  TextButton(
-                    child: Text('YES'),
-                    onPressed: () => setState(() {
-                      SetCard card = SetCard(setNumber);
-                      _setsList.add(card.createSetCard());
-                      setNumber++;
-                      Navigator.pop(context);
-                    }),
-                  )
-                ],
-              )
-            : AlertDialog(
-                title: Text('Enter a workout name...'),
-                actions: [
-                  TextButton(
-                    child: Text('Close'),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                ],
-              ),
+        builder: (context) {
+          //If workoutName is not empty and the setsLists is not empty
+          if (!workoutName.text.isEmpty && _setsList.isNotEmpty) {
+            return AlertDialog(
+              title: Text('Log Previous Set?'),
+              actions: [
+                TextButton(
+                  child: Text('CANCEL'),
+                  onPressed: () => Navigator.pop(context),
+                ),
+                TextButton(
+                  child: Text('YES'),
+                  onPressed: () => setState(() {
+                    _setsList.add(createSetCard());
+                    setNumber++;
+                    Navigator.pop(context);
+                    insertToDB();
+                  }),
+                )
+              ],
+            );
+          } else {
+            return AlertDialog(
+              title: Text('ERROR'),
+              actions: [
+                TextButton(
+                  child: Text('Close'),
+                  onPressed: () => Navigator.pop(context),
+                )
+              ],
+            );
+          }
+        },
       );
+
+  final snackBarWorkoutName = SnackBar(
+    content: const Text('Please enter a workout name...'),
+    backgroundColor: Colors.red.shade400,
+    duration: Duration(seconds: 2),
+  );
+
+  final snackBarRepsLbs = SnackBar(
+    content: const Text('Please fill in both sets and reps...'),
+  );
 }

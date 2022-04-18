@@ -27,8 +27,8 @@ class LocationProvider with ChangeNotifier {
   late final List<LatLng> _coordinateList;
   List<LatLng> get coordinateList => _coordinateList;
 
-  double simulatedTravelPerSecond = 0.0001;
-  //double simulatedTravelPerSecond = 0.0;
+  //double simulatedTravelPerSecond = 0.0001;
+  double simulatedTravelPerSecond = 0.0;
 
   // to convert km to miles
   var conversionFactor = 1.609344;

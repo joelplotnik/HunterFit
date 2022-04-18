@@ -44,8 +44,10 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
     - In the location provider instantiate the same singleton
      */
 
-    //use the singlton to tell the distance tracker to clear the list of location when the start button is clickedgit pull
+    //use the singleton to tell the distance tracker to clear the list of location when the start button is clickedgit pull
     stopwatchState.isStopWatchRunning = true;
+
+    // !!!! When someones starts the timer call the clearLocations method in distanceTracker
 
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
@@ -136,7 +138,7 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ButtonTextWidget(
-                text: isRunning ? 'STOP' : 'RESUME',
+                text: isRunning ? 'STOP' : 'START',
                 onClicked: () {
                   if (isRunning) {
                     print("STOP GETTING USER POSITION... MAYBE");

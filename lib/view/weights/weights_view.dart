@@ -12,9 +12,10 @@ class WeightsView extends StatefulWidget {
 }
 
 int setNumber = 1;
-TextEditingController repsController = TextEditingController();
+int controllerNumber = 1;
+List<TextEditingController> repsControllerList = [];
+
 TextEditingController lbsController = TextEditingController();
-String reps = repsController.text;
 String lbs = lbsController.text;
 
 bool tf = true;
@@ -39,7 +40,6 @@ Widget createSetCard() {
       Expanded(
         flex: 3,
         child: TextField(
-          controller: repsController,
           textAlign: TextAlign.center,
           maxLength: 3,
           keyboardType: TextInputType.number,
@@ -56,14 +56,13 @@ Widget createSetCard() {
       const Expanded(
         child: Center(child: Text("x")),
       ),
-      Expanded(
+      const Expanded(
         flex: 3,
         child: TextField(
-          controller: lbsController,
           textAlign: TextAlign.center,
           maxLength: 3,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             isDense: true,
             contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
             hintText: "lbs",

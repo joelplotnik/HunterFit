@@ -4,6 +4,8 @@ import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:hunter_fit/view/widgets/cardio_stopwatch.dart';
 
+import '../widgets/stopwatch_state.dart';
+
 class GoogleMapPage extends StatefulWidget {
   const GoogleMapPage({Key? key}) : super(key: key);
 
@@ -13,11 +15,13 @@ class GoogleMapPage extends StatefulWidget {
 
 class _GoogleMapPageState extends State<GoogleMapPage> {
   CardioStopwatch cardioStopwatch = const CardioStopwatch();
+  StopwatchState stopwatchState = StopwatchState();
 
   @override
   void initState() {
     super.initState();
     Provider.of<LocationProvider>(context, listen: false).initialization();
+    // !!!! Call clearLocation here!!
   }
 
   @override
@@ -70,17 +74,19 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
               text: TextSpan(
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
-                    TextSpan(
-                        text: "MILES",
-                        style: TextStyle(
-                            color: Colors.grey.shade800,
-                            decoration: TextDecoration.none,
-                            backgroundColor: Colors.grey.shade300,
-                            //color: ,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 18))
-                  ])),
-          const SizedBox( height: 20,)
+                TextSpan(
+                    text: "MILES",
+                    style: TextStyle(
+                        color: Colors.grey.shade800,
+                        decoration: TextDecoration.none,
+                        backgroundColor: Colors.grey.shade300,
+                        //color: ,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 18))
+              ])),
+          const SizedBox(
+            height: 20,
+          )
           /*Text(model.distanceTraveled + " kilometers",
               textAlign: TextAlign.left),*/
           /*Text(model.distanceTraveledMiles + " miles",

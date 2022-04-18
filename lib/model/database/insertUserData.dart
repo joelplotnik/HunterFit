@@ -176,8 +176,18 @@ class insertUserData {
         .doc('names')
         .collection(displayName)
         .doc('messages')
+<<<<<<< HEAD
+        .set({
+      'message': FieldValue.arrayUnion([])
+    },);
+
+
+=======
         .set(
       {'message': FieldValue.arrayUnion([])},
     );
+>>>>>>> 23f6b79a4f219b4fdd4ca5cad0ecda3536ad0992
   }
 }
+
+

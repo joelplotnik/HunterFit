@@ -12,10 +12,13 @@ class WeightsView extends StatefulWidget {
 }
 
 int setNumber = 1;
-int controllerNumber = 1;
-List<TextEditingController> repsControllerList = [];
+int controllerNumber = 0;
+
+List<TextEditingController> repsControllerList = [TextEditingController()];
+List<TextEditingController> lbsControllerList = [TextEditingController()];
 
 TextEditingController lbsController = TextEditingController();
+TextEditingController repsController = TextEditingController();
 String lbs = lbsController.text;
 
 bool tf = true;
@@ -40,6 +43,7 @@ Widget createSetCard() {
       Expanded(
         flex: 3,
         child: TextField(
+          controller: repsControllerList[controllerNumber],
           textAlign: TextAlign.center,
           maxLength: 3,
           keyboardType: TextInputType.number,
@@ -56,13 +60,14 @@ Widget createSetCard() {
       const Expanded(
         child: Center(child: Text("x")),
       ),
-      const Expanded(
+      Expanded(
         flex: 3,
         child: TextField(
+          controller: lbsController,
           textAlign: TextAlign.center,
           maxLength: 3,
           keyboardType: TextInputType.number,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             isDense: true,
             contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
             hintText: "lbs",
@@ -128,6 +133,7 @@ class _WeightsViewState extends State<WeightsView> {
                       if (workoutName.text.isNotEmpty && _setsList.isEmpty) {
                         setState(() {
                           _setsList.add(createSetCard());
+                          setNumber++;
                         });
                       } else if (workoutName.text.isEmpty) {
                         ScaffoldMessenger.of(context)
@@ -217,8 +223,11 @@ class _WeightsViewState extends State<WeightsView> {
                   onPressed: () => setState(() {
                     _setsList.add(createSetCard());
                     setNumber++;
+                    repsControllerList.add(repsController);
+                    lbsControllerList.add(lbsController);
+                    print(repsControllerList[controllerNumber - 9].text);
+                    controllerNumber++;
                     Navigator.pop(context);
-                    insertToDB();
                   }),
                 )
               ],

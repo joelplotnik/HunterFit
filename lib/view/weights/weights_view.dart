@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
@@ -12,16 +14,8 @@ class WeightsView extends StatefulWidget {
 }
 
 int setNumber = 1;
-int controllerNumber = 0;
-
-List<TextEditingController> repsControllerList = [TextEditingController()];
-List<TextEditingController> lbsControllerList = [TextEditingController()];
-
-TextEditingController lbsController = TextEditingController();
-TextEditingController repsController = TextEditingController();
-String lbs = lbsController.text;
-
-bool tf = true;
+String reps = '';
+String lbs = '';
 
 Widget createSetCard() {
   return Row(
@@ -43,7 +37,9 @@ Widget createSetCard() {
       Expanded(
         flex: 3,
         child: TextField(
-          controller: repsControllerList[controllerNumber],
+          onChanged: (value) {
+            reps = value;
+          },
           textAlign: TextAlign.center,
           maxLength: 3,
           keyboardType: TextInputType.number,
@@ -63,7 +59,9 @@ Widget createSetCard() {
       Expanded(
         flex: 3,
         child: TextField(
-          controller: lbsController,
+          onChanged: (value) {
+            lbs = value;
+          },
           textAlign: TextAlign.center,
           maxLength: 3,
           keyboardType: TextInputType.number,
@@ -82,16 +80,16 @@ Widget createSetCard() {
   );
 }
 
-insertToDB() async {
+insertToDB(String workoutName, String reps, String lbs) async {
   insertUserData insertData = insertUserData();
-  await insertData.insertWeightRepAndLbs();
+  await insertData.insertWeightRepAndLbs(workoutName, reps, lbs);
 }
 
 class _WeightsViewState extends State<WeightsView> {
   WeightsStopwatch stopwatch = WeightsStopwatch();
   TextEditingController workoutName = TextEditingController();
-  final List<Widget> _setsList = [];
-
+  List<Widget> _setsList = [];
+  void resetData() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -223,10 +221,9 @@ class _WeightsViewState extends State<WeightsView> {
                   onPressed: () => setState(() {
                     _setsList.add(createSetCard());
                     setNumber++;
-                    repsControllerList.add(repsController);
-                    lbsControllerList.add(lbsController);
-                    print(repsControllerList[controllerNumber - 9].text);
-                    controllerNumber++;
+                    print(
+                        'WORKOUT: ${workoutName.text} \nREPS: $reps + LBS: $lbs');
+                    // insertToDB(workoutName.text, reps, lbs);
                     Navigator.pop(context);
                   }),
                 )

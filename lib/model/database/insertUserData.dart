@@ -48,7 +48,8 @@ class insertUserData {
             (error) => print('Failed to add time to database because: $error'));
   }
 
-  Future<void> insertWeightRepAndLbs() async {
+  Future<void> insertWeightRepAndLbs(
+      String workoutName, String reps, String lbs) async {
     getUserData getData =
         await getUserData(); //wait to initialize an instance of Firestore
     var currentUID =

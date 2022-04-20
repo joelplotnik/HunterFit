@@ -7,6 +7,7 @@ import 'package:hunter_fit/view/widgets/button_text_widget.dart';
 import 'package:hunter_fit/constants.dart' as constant;
 import 'package:hunter_fit/view/weights/weights_view.dart';
 
+import '../weights/weights_functions.dart';
 import 'button_icon_widget.dart';
 
 class WeightsStopwatch extends StatefulWidget {
@@ -17,6 +18,7 @@ class WeightsStopwatch extends StatefulWidget {
 }
 
 class _WeightsStopwatchState extends State<WeightsStopwatch> {
+  WeightsView weightsView = new WeightsView();
   insertUserData insertToDB = insertUserData();
   Duration duration = const Duration();
   Timer? timer;
@@ -31,6 +33,14 @@ class _WeightsStopwatchState extends State<WeightsStopwatch> {
   void reset() {
     setState(() => duration = const Duration());
   }
+
+  // bool isFinished() {
+  //   if (finished == false) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
   void startTimer({bool resets = true}) {
     if (resets) {
@@ -145,12 +155,11 @@ class _WeightsStopwatchState extends State<WeightsStopwatch> {
               ),
               const SizedBox(width: 12),
               ButtonTextWidget(
-                text: 'Finish Workout',
-                onClicked: () async {
-                  await insertToDB.insertWeightTime(duration);
-                  stopTimer();
-                },
-              ),
+                  text: 'Finish Workout',
+                  onClicked: () async {
+                    await insertToDB.insertWeightTime(duration);
+                    stopTimer();
+                  }),
               const SizedBox(width: 12),
               ButtonIconWidget(
                 icon: CupertinoIcons.arrow_counterclockwise, //CANCEL

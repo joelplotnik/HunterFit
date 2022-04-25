@@ -13,7 +13,7 @@ class LocationProvider with ChangeNotifier {
   // String get distanceTraveled => _distanceTraveled == null ? _distanceTraveled.toString() : '0.00';
   String get distanceTraveled => _distanceTraveled.toStringAsFixed(2);
 
-  late double _distanceTraveledMiles = 0.0;
+  static late double _distanceTraveledMiles = 0.0;
   String get distanceTraveledMiles => _distanceTraveledMiles.toStringAsFixed(2);
 
   Location get location => _location;
@@ -68,9 +68,9 @@ class LocationProvider with ChangeNotifier {
           currentLocation.latitude! + simulatedTravelPerSecond,
           currentLocation.longitude!); // CHANGES MADE HERE
 
-      print(simulatedTravelPerSecond);
 
-      simulatedTravelPerSecond += 0.0001;
+      //print(simulatedTravelPerSecond);
+      //simulatedTravelPerSecond += 0.0001;
       //_distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition, singleton.isDistanceTrackingturnedOn);
 
       /*

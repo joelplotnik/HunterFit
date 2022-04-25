@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hunter_fit/view/widgets/stopwatch_state.dart';
 import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
 import 'package:hunter_fit/view/widgets/button_text_widget.dart';
 
@@ -16,7 +15,7 @@ class CardioStopwatch extends StatefulWidget {
 class _CardioStopwatchState extends State<CardioStopwatch> {
   Duration duration = const Duration();
   Timer? timer;
-  StopwatchState stopwatchState = StopwatchState();
+  DistanceTracker distanceTracker = DistanceTracker();
 
   late LocationProvider locProv;
 
@@ -45,7 +44,9 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
      */
 
     //use the singleton to tell the distance tracker to clear the list of location when the start button is clickedgit pull
-    stopwatchState.isStopWatchRunning = true;
+    distanceTracker.clearLocations();
+
+    distanceTracker.isStopWatchRunning = true;
 
     // !!!! When someones starts the timer call the clearLocations method in distanceTracker
 
@@ -53,10 +54,14 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
   }
 
   void stopTimer({bool resets = true}) {
-    if (resets) {
+
+    /*if (resets) {
       reset();
     }
-    stopwatchState.isStopWatchRunning = false;
+     */
+
+    reset();
+    distanceTracker.isStopWatchRunning = false;
     setState(() => timer?.cancel());
   }
 
@@ -150,13 +155,13 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
                 },
               ),
               const SizedBox(width: 12),
-              ButtonTextWidget(
+              /*ButtonTextWidget(
                 text: 'CANCEL',
                 onClicked: () {
                   print("STOP GETTING USER POSITION");
                   stopTimer();
                 },
-              ),
+              ),*/
             ],
           )
         : ButtonTextWidget(

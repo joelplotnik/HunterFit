@@ -1,13 +1,11 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hunter_fit/view/widgets/stopwatch_state.dart';
 import 'package:hunter_fit/viewmodel/provider/distance_tracker.dart';
 import 'package:location/location.dart';
 
 class LocationProvider with ChangeNotifier {
   late Location _location;
-  StopwatchState stopwatchState = StopwatchState();
 
   late final DistanceTracker _distanceTracker;
 
@@ -81,7 +79,7 @@ class LocationProvider with ChangeNotifier {
       }*/
 
       _distanceTraveled = _distanceTracker.calculateDistanceKilometers(
-          _locationPosition, stopwatchState.isStopWatchRunning);
+          _locationPosition);
 
       _distanceTraveledMiles =
           _distanceTraveled / conversionFactor; // convert km to miles

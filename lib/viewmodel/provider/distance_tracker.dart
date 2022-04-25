@@ -2,16 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:math';
 
-import 'package:hunter_fit/view/widgets/stopwatch_state.dart';
-
 //ignore: must_be_immutable
-class DistanceTracker extends StatefulWidget {
-  DistanceTracker({Key? key}) : super(key: key);
+class DistanceTracker {
+  bool isStopWatchRunning = false;
 
-  @override
-  _DistanceTrackerState createState() => _DistanceTrackerState();
+  DistanceTracker._privateConstructor();
 
-  StopwatchState stopwatchState = StopwatchState();
+  static final DistanceTracker _instance = DistanceTracker._privateConstructor();
+
+  factory DistanceTracker() {
+    return _instance;
+  }
 
   var listOfLocation = <LatLng>[];
   var runningTotalInKm = 0.0;
@@ -22,8 +23,7 @@ class DistanceTracker extends StatefulWidget {
     runningTotalInKm = 0;
   }
 
-  double calculateDistanceKilometers(LatLng location,
-      [bool isStopWatchRunning = true]) {
+  double calculateDistanceKilometers(LatLng location) {
     if (!isStopWatchRunning) {
       return runningTotalInKm;
     }
@@ -54,12 +54,5 @@ class DistanceTracker extends StatefulWidget {
         c((lat2 - lat1) * p) / 2 +
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
-  }
-}
-
-class _DistanceTrackerState extends State<DistanceTracker> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

@@ -4,8 +4,6 @@ import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:hunter_fit/view/widgets/cardio_stopwatch.dart';
 
-import '../widgets/stopwatch_state.dart';
-
 class GoogleMapPage extends StatefulWidget {
   const GoogleMapPage({Key? key}) : super(key: key);
 
@@ -15,7 +13,6 @@ class GoogleMapPage extends StatefulWidget {
 
 class _GoogleMapPageState extends State<GoogleMapPage> {
   CardioStopwatch cardioStopwatch = const CardioStopwatch();
-  StopwatchState stopwatchState = StopwatchState();
 
   @override
   void initState() {

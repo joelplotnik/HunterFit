@@ -34,30 +34,13 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
     if (resets) {
       reset();
     }
-    /*
-    - Create singleton that has a public property on it that
-    is called isTrackingDistance
-    - Instantiate the singleton in the cardio_stopwatch widget
-    - When user clicks start on stopwatch, set the singletons property
-    to true
-    - In the location provider instantiate the same singleton
-     */
-
-    //use the singleton to tell the distance tracker to clear the list of location when the start button is clickedgit pull
     distanceTracker.clearLocations();
-
     distanceTracker.isStopWatchRunning = true;
-
-    // !!!! When someones starts the timer call the clearLocations method in distanceTracker
-
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 
   void stopTimer({bool resets = true}) {
     reset();
-
-    //LocationProvider._distanceTraveledMilesVar = 0.0;
-
     distanceTracker.isStopWatchRunning = false;
     setState(() => timer?.cancel());
   }
@@ -150,13 +133,6 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
                 },
               ),
               const SizedBox(width: 12),
-              /*ButtonTextWidget(
-                text: 'CANCEL',
-                onClicked: () {
-                  print("STOP GETTING USER POSITION");
-                  stopTimer();
-                },
-              ),*/
             ],
           )
         : ButtonTextWidget(

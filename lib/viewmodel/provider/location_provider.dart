@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hunter_fit/viewmodel/provider/distance_tracker.dart';
@@ -6,15 +5,9 @@ import 'package:location/location.dart';
 
 class LocationProvider with ChangeNotifier {
   late Location _location;
-
   late final DistanceTracker _distanceTracker;
+  var conversionFactor = 1.609344; // to convert km to miles
 
-  // late double _distanceTraveled = 0.0;
-  // String get distanceTraveled => _distanceTraveled == null ? _distanceTraveled.toString() : '0.00';
-  // String get distanceTraveled => _distanceTraveled.toStringAsFixed(2);
-
-  //static late double _distanceTraveledMiles = 0.0;
-  //String get distanceTraveledMiles => _distanceTraveledMiles.toStringAsFixed(2);
   String get distanceTraveledMiles {
     var distanceTraveledMiles = _distanceTracker.runningTotalInKm / conversionFactor;
     return distanceTraveledMiles.toStringAsFixed(2);
@@ -23,17 +16,10 @@ class LocationProvider with ChangeNotifier {
   Location get location => _location;
   late LatLng _locationPosition;
   LatLng get locationPosition => _locationPosition;
-
   bool locationServiceActive = true;
-
   late final List<LatLng> _coordinateList;
   List<LatLng> get coordinateList => _coordinateList;
-
-  //double simulatedTravelPerSecond = 0.0001;
   double simulatedTravelPerSecond = 0.0;
-
-  // to convert km to miles
-  var conversionFactor = 1.609344;
 
   LocationProvider() {
     _location = Location();
@@ -72,7 +58,7 @@ class LocationProvider with ChangeNotifier {
           currentLocation.latitude! + simulatedTravelPerSecond,
           currentLocation.longitude!); // CHANGES MADE HERE
 
-
+      // FOR DEBUGGING PURPOSES
       //print(simulatedTravelPerSecond);
       //simulatedTravelPerSecond += 0.0001;
       //_distanceTraveled = _distanceTracker.calculateDistanceKilometers(_locationPosition, singleton.isDistanceTrackingturnedOn);
@@ -85,9 +71,6 @@ class LocationProvider with ChangeNotifier {
       _distanceTracker.calculateDistanceKilometers(
           _locationPosition);
 
-      //_distanceTraveledMiles =
-      //    _distanceTraveled / conversionFactor; // convert km to miles
-
       notifyListeners();
 
       /*
@@ -96,15 +79,7 @@ class LocationProvider with ChangeNotifier {
       for (int i = 0; i < coordinateList.length ; i++){
         print(_coordinateList[i]);
       }*/
-
       //print(_locationPosition);
-
-      /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-      XXXXXXXXXX  WORKING ON LIST OF COORDINATES HERE  XXXXXXXXXX
-      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-       */
 
       // if the list is empty
       if (_coordinateList.isEmpty) {

@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:math';
 
-//ignore: must_be_immutable
 class DistanceTracker {
   bool isStopWatchRunning = false;
 
@@ -29,7 +27,6 @@ class DistanceTracker {
     if (lastLocation != null) {
       calculateDistanceKilometers(lastLocation);
     }
-
   }
 
   double calculateDistanceKilometers(LatLng location) {
@@ -48,10 +45,7 @@ class DistanceTracker {
     // compare each coordinate in the list to the previous
     runningTotalInKm += calculateDistance(prevLastLocation.latitude,
         prevLastLocation.longitude, location.latitude, location.longitude);
-    // add to running total
-    // return running total
 
-    //return finalDistance;
     return runningTotalInKm;
   }
 

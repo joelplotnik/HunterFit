@@ -9,12 +9,16 @@ class LocationProvider with ChangeNotifier {
 
   late final DistanceTracker _distanceTracker;
 
-  late double _distanceTraveled = 0.0;
+  // late double _distanceTraveled = 0.0;
   // String get distanceTraveled => _distanceTraveled == null ? _distanceTraveled.toString() : '0.00';
-  String get distanceTraveled => _distanceTraveled.toStringAsFixed(2);
+  // String get distanceTraveled => _distanceTraveled.toStringAsFixed(2);
 
-  static late double _distanceTraveledMiles = 0.0;
-  String get distanceTraveledMiles => _distanceTraveledMiles.toStringAsFixed(2);
+  //static late double _distanceTraveledMiles = 0.0;
+  //String get distanceTraveledMiles => _distanceTraveledMiles.toStringAsFixed(2);
+  String get distanceTraveledMiles {
+    var distanceTraveledMiles = _distanceTracker.runningTotalInKm / conversionFactor;
+    return distanceTraveledMiles.toStringAsFixed(2);
+  }
 
   Location get location => _location;
   late LatLng _locationPosition;
@@ -78,11 +82,11 @@ class LocationProvider with ChangeNotifier {
         distance
       }*/
 
-      _distanceTraveled = _distanceTracker.calculateDistanceKilometers(
+      _distanceTracker.calculateDistanceKilometers(
           _locationPosition);
 
-      _distanceTraveledMiles =
-          _distanceTraveled / conversionFactor; // convert km to miles
+      //_distanceTraveledMiles =
+      //    _distanceTraveled / conversionFactor; // convert km to miles
 
       notifyListeners();
 

@@ -46,7 +46,6 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
     //use the singleton to tell the distance tracker to clear the list of location when the start button is clickedgit pull
     distanceTracker.clearLocations();
 
-
     distanceTracker.isStopWatchRunning = true;
 
     // !!!! When someones starts the timer call the clearLocations method in distanceTracker

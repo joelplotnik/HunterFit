@@ -15,12 +15,21 @@ class DistanceTracker {
   }
 
   var listOfLocation = <LatLng>[];
-  var runningTotalInKm = 0.0;
-  var runningTotalInMi = 0.0;
+  double runningTotalInKm = 0.0;
 
   void clearLocations() {
+    LatLng? lastLocation = null;
+
+    if (!listOfLocation.isEmpty) {
+      lastLocation = listOfLocation.last;
+    }
+
     listOfLocation.clear();
-    runningTotalInKm = 0;
+    runningTotalInKm = 0; // do we need this?
+    if (lastLocation != null) {
+      calculateDistanceKilometers(lastLocation);
+    }
+
   }
 
   double calculateDistanceKilometers(LatLng location) {

@@ -1,10 +1,15 @@
+import 'dart:async';
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/model/database/insertUserData.dart';
 import 'package:hunter_fit/view/weights/components/set_card.dart';
 import 'package:hunter_fit/constants.dart' as constants;
-import 'package:hunter_fit/view/widgets/weights_stopwatch.dart';
+//import 'package:hunter_fit/view/widgets/weights_stopwatch.dart';
+
+import '../widgets/button_icon_widget.dart';
+import '../widgets/button_text_widget.dart';
 
 class WeightsView extends StatefulWidget {
   const WeightsView({Key? key}) : super(key: key);
@@ -86,7 +91,6 @@ insertToDB(String workoutName, String reps, String lbs) async {
 }
 
 class _WeightsViewState extends State<WeightsView> {
-  WeightsStopwatch stopwatch = WeightsStopwatch();
   TextEditingController workoutName = TextEditingController();
   List<Widget> _setsList = [];
   void resetData() {}
@@ -197,7 +201,7 @@ class _WeightsViewState extends State<WeightsView> {
             ),
           ),
           Expanded(
-            child: stopwatch,
+            child: stopwatch(),
           )
         ],
       ),
@@ -252,4 +256,167 @@ class _WeightsViewState extends State<WeightsView> {
   final snackBarRepsLbs = SnackBar(
     content: const Text('Please fill in both sets and reps...'),
   );
+  insertUserData insertToDB = insertUserData();
+  Duration duration = const Duration();
+  Timer? timer;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    reset();
+  }
+
+  void reset() {
+    setState(() => duration = const Duration());
+  }
+
+  // bool isFinished() {
+  //   if (finished == false) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
+  void startTimer({bool resets = true}) {
+    if (resets) {
+      reset();
+    }
+
+    timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
+  }
+
+  void stopTimer({bool resets = true}) {
+    if (resets) {
+      reset();
+    }
+    setState(() => timer?.cancel());
+  }
+
+  addTime() {
+    const addSeconds = 1;
+
+    setState(() {
+      final seconds = duration.inSeconds + addSeconds;
+      duration = Duration(seconds: seconds);
+    });
+  }
+
+  @override
+  Widget stopwatch() {
+    return Scaffold(
+      body: Center(
+        child: Container(
+          color: Colors.grey.shade300,
+          child: Column(
+            children: [
+              buildTime(),
+              buildButtons(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildTime() {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final hours = twoDigits(duration.inHours.remainder(60));
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildTimeCard(time: hours, header: 'HOURS'),
+          const SizedBox(
+            width: 4,
+          ),
+          buildTimeCard(time: minutes, header: 'MINUTES'),
+          const SizedBox(
+            width: 4,
+          ),
+          buildTimeCard(time: seconds, header: 'SECONDS'),
+        ],
+      ),
+    );
+  }
+
+  Widget buildTimeCard({required String time, required String header}) =>
+      FittedBox(
+        child: Column(
+          children: [
+            Container(
+              height: 70,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.shade200,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                time,
+                style: const TextStyle(
+                    fontSize: 43,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(header),
+          ],
+        ),
+      );
+
+  Widget buildButtons() {
+    final isRunning = timer == null ? false : timer!.isActive;
+    final isCompleted = duration.inSeconds == 0;
+
+    return isRunning || !isCompleted
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ButtonIconWidget(
+                icon: isRunning
+                    ? Icons.pause
+                    : CupertinoIcons.play_arrow_solid, //PLAY & PAUSE
+                color: constants.kHunterColor,
+                onClicked: () {
+                  if (isRunning) {
+                    stopTimer(resets: false);
+                  } else {
+                    startTimer(resets: false);
+                  }
+                },
+              ),
+              const SizedBox(width: 12),
+              ButtonTextWidget(
+                  text: 'Finish Workout',
+                  onClicked: () async {
+                    await insertToDB.insertWeightTime(duration);
+                    stopTimer();
+                    _setsList = [];
+                    setNumber = 1;
+                  }),
+              const SizedBox(width: 12),
+              ButtonIconWidget(
+                icon: CupertinoIcons.arrow_counterclockwise, //CANCEL
+                color: constants.kHunterColor,
+                onClicked: () {
+                  stopTimer();
+                  _setsList = [];
+                  setNumber = 1;
+                },
+              ),
+            ],
+          )
+        : ButtonTextWidget(
+            text: 'Start Workout',
+            onClicked: () {
+              startTimer();
+            },
+          );
+  }
 }

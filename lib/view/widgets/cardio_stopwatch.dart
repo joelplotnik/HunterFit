@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hunter_fit/viewmodel/provider/location_provider.dart';
 import 'package:hunter_fit/view/widgets/button_text_widget.dart';
-
 import '../../viewmodel/provider/distance_tracker.dart';
+import '../../viewmodel/provider/location_provider.dart';
 
 class CardioStopwatch extends StatefulWidget {
   const CardioStopwatch({Key? key}) : super(key: key);
@@ -34,32 +34,12 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
     if (resets) {
       reset();
     }
-    /*
-    - Create singleton that has a public property on it that
-    is called isTrackingDistance
-    - Instantiate the singleton in the cardio_stopwatch widget
-    - When user clicks start on stopwatch, set the singletons property
-    to true
-    - In the location provider instantiate the same singleton
-     */
-
-    //use the singleton to tell the distance tracker to clear the list of location when the start button is clickedgit pull
     distanceTracker.clearLocations();
-
     distanceTracker.isStopWatchRunning = true;
-
-    // !!!! When someones starts the timer call the clearLocations method in distanceTracker
-
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 
   void stopTimer({bool resets = true}) {
-
-    /*if (resets) {
-      reset();
-    }
-     */
-
     reset();
     distanceTracker.isStopWatchRunning = false;
     setState(() => timer?.cancel());
@@ -146,30 +126,19 @@ class _CardioStopwatchState extends State<CardioStopwatch> {
                 text: isRunning ? 'STOP' : 'START',
                 onClicked: () {
                   if (isRunning) {
-                    print("STOP GETTING USER POSITION... MAYBE");
                     stopTimer(resets: false);
                   } else {
-                    print("START GETTING USER POSITION");
                     startTimer(resets: false);
                   }
                 },
               ),
               const SizedBox(width: 12),
-              /*ButtonTextWidget(
-                text: 'CANCEL',
-                onClicked: () {
-                  print("STOP GETTING USER POSITION");
-                  stopTimer();
-                },
-              ),*/
             ],
           )
         : ButtonTextWidget(
             text: 'Start Timer',
             onClicked: () {
               startTimer();
-
-              print("START GETTING USER POSITION");
             },
           );
   }

@@ -62,7 +62,32 @@ class getUserData {
       print("Error: $error");
     }
   }
+  getWorkoutData(String displayname, String groupname)async {
+    var snapshot = await groupsCollection
+        .doc('groups-social')
+        .collection('groups')
+        .doc(groupname)
+        .collection(groupname)
+        .doc(displayname)
+        .collection('workouts')
+        .doc('workoutdata')
+        .get();
+    try {
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+        print(data);
+        var times = data['WeightTime'];
 
+        return snapshot;
+      } else if (!snapshot.exists) {
+        print(
+            'Notice! getTotalweightTime: Document does not exist yet. Creating...');
+      }
+    } catch (error) {
+      print("Error: $error");
+    }
+
+  }
   getUsersGroupsListStreamSnapshots() async {
     String UID = await getCurrentUserID();
 

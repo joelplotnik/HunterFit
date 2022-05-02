@@ -182,7 +182,7 @@ usernameController.clear();
 
                     body: Column(
                       children: <Widget>[
-                        FutureBuilder(builder: (BuildContext context,
+                        Expanded(child: FutureBuilder(builder: (BuildContext context,
                             AsyncSnapshot<dynamic> snapshot) {
 
                           try {
@@ -231,44 +231,44 @@ usernameController.clear();
                                                 body: Column(
                                                   children: <Widget>[
                                                     Center(
-                                                    child: Text('You have been invited to join ${groups[index]}'),
+                                                      child: Text('You have been invited to join ${groups[index]}'),
 
                                                     ),
                                                     Center(
                                                       child: ElevatedButton(
 
-                                                      child: const Text('Accept'),
-                                                      style: ElevatedButton.styleFrom(
+                                                        child: const Text('Accept'),
+                                                        style: ElevatedButton.styleFrom(
 
-                                                        primary:  const Color(0xFF47ABD1),
+                                                          primary:  const Color(0xFF47ABD1),
 
-                                                        textStyle: const TextStyle(
-                                                            fontSize: 18,
-                                                            fontFamily: 'Roboto',
-                                                            fontWeight: FontWeight.normal),
-                                                        shape: const RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                            topLeft: Radius.circular(5),
-                                                            topRight: Radius.circular(5),
-                                                            bottomLeft: Radius.circular(5),
-                                                            bottomRight: Radius.circular(5),
+                                                          textStyle: const TextStyle(
+                                                              fontSize: 18,
+                                                              fontFamily: 'Roboto',
+                                                              fontWeight: FontWeight.normal),
+                                                          shape: const RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.only(
+                                                              topLeft: Radius.circular(5),
+                                                              topRight: Radius.circular(5),
+                                                              bottomLeft: Radius.circular(5),
+                                                              bottomRight: Radius.circular(5),
+                                                            ),
                                                           ),
                                                         ),
+                                                        onPressed: ()=> {Navigator.of(context).pop(),Navigator.of(context).pop(),
+                                                          initState(),
+                                                          {
+                                                            acceptInvitation(
+                                                                groups[index]
+                                                                    .toString()),
+                                                            declineInvitation(
+                                                                groups[index]
+                                                                    .toString()),
+
+
+                                                          }},
                                                       ),
-                                                      onPressed: ()=> {Navigator.of(context).pop(),Navigator.of(context).pop(),
-    initState(),
-                                                        {
-                                                          acceptInvitation(
-                                                              groups[index]
-                                                                  .toString()),
-                                                          declineInvitation(
-                                                              groups[index]
-                                                                  .toString()),
-
-
-                                                        }},
                                                     ),
-                                                     ),
                                                     Center( child: ElevatedButton(
 
                                                       child: const Text('Decline'),
@@ -346,7 +346,8 @@ usernameController.clear();
                           }
                         },
                           future: fetchMessageList(_currentUser.displayName.toString()),
-                        ),
+                        ),),
+
                         Padding(padding: const EdgeInsets.all(20),
 
 
@@ -423,359 +424,360 @@ usernameController.clear();
 
                                                    body: Column(
                                                      children: <Widget>[
-                                                       FutureBuilder(builder: (BuildContext context,
-                                                       AsyncSnapshot<dynamic> snapshot) {
+                                                       Expanded(child: FutureBuilder(builder: (BuildContext context,
+                                                           AsyncSnapshot<dynamic> snapshot) {
 
-                                                 try {
-                                                 // if (ConnectionState.waiting != null ) {
-                                                 //   return CircularProgressIndicator();
+                                                         try {
+                                                           // if (ConnectionState.waiting != null ) {
+                                                           //   return CircularProgressIndicator();
 
-                                                 //  }
-                                                 if (snapshot.hasData) {
-                                                 if (snapshot.hasError) {
-                                                 return Container();
-                                                 }
-                                                 else  {
-                                                 groups = snapshot.data['Members'];
-                                                 return  ListView.builder(
-                                                 itemCount: groups.length,
-                                                 addAutomaticKeepAlives: true,
-                                                 shrinkWrap: true,
-
-                                                 itemBuilder: (BuildContext context,
-                                                 int index) {
-                                                 return Container(
-                                                 //height: heightexpanse,
-                                                 margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
-                                                 decoration: BoxDecoration(
-                                                 color: const Color(0xFF47ABD1),
-
-                                                 border: Border.all(
-
-                                                 color: const Color(0xFF47ABD1),
-                                                 ),
-                                                 borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
-                                                 ),
-
-                                                 child: ListTile(
-
-                                                 title: Text('${groups[index]}'),
-                                                 onTap: () async {
-                                                   var name = groups[index];
-    if ('${groups[index]}' == _currentUser.displayName) {
-
-
-    showDialog(context: context, builder: (BuildContext context) {
-
-    return Scaffold(
-
-    appBar: AppBar(
-
-    backgroundColor: const Color(0xFF47ABD1),
-    title: Text(name),
-
-    ),
-
-    body: Column(
-    children:
-
-    <Widget>[
-      Expanded(child:FutureBuilder(builder: (BuildContext context,
-          AsyncSnapshot<dynamic> snapshot) {
-
-        try {
-          // if (ConnectionState.waiting != null ) {
-          //   return CircularProgressIndicator();
-
-          //  }
-          if (snapshot.hasData) {
-            if (snapshot.hasError) {
-              return Container();
-            }
-            else  {
-              groups = snapshot.data['WeightTime'];
-              return  ListView.builder(
-                  itemCount: groups.length,
-                  addAutomaticKeepAlives: true,
-                  shrinkWrap: true,
-
-                  itemBuilder: (BuildContext context,
-                      int index) {
-                    return Container(
-                      //height: heightexpanse,
-                      margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
-                      decoration: BoxDecoration(
-                          color: const Color(0xFF47ABD1),
-
-                          border: Border.all(
-
-                            color: const Color(0xFF47ABD1),
-                          ),
-                          borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
-                      ),
-
-                      child: ListTile(
-
-                        title: Text('${groups[index]}'),
-
-
-                      ),
-
-
-                      height: heightexpanse,);
-
-                  });
-
-              //Text(
-              //'${snapshot.data['Groups']}',
-              //style: TextStyle(
-              //     fontSize: 20,
-              //     fontWeight: FontWeight.bold),
-              //  );
-            }
-
-          }
-          else if (snapshot.hasError) {
-            return Text(
-              '${snapshot.error}',
-              style: TextStyle(fontSize: 10),
-            );
-          }
-          else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        } catch(error){
-
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-        future: fetchGroupsworkoutList(name,group),
-      ), ),
-
-    Center( child: RaisedButton(
-    onPressed: () {
-    showDialog(
-    context: context,
-    builder: (BuildContext context) {
-    return AlertDialog(
-    content: Stack(
-    overflow: Overflow.visible,
-    children: <Widget>[
-    Positioned(
-    right: -40.0,
-    top: -40.0,
-    child: InkResponse(
-    onTap: () {
-    Navigator.of(context).pop();
-    },
-    child: CircleAvatar(
-    child: Icon(Icons.close),
-    backgroundColor: Colors.red,
-    ),
-    ),
-    ),
-    Form(
-    key: _formKey,
-    child: Column(
-    mainAxisSize: MainAxisSize.min,
-    children: <Widget>[
-    Padding(
-    padding: EdgeInsets.all(8.0),
-    child: TextField(
-    controller: activityNameController,
-    decoration: const InputDecoration(
-    border: OutlineInputBorder(),
-    labelText: 'Activity Name',
-    ),
-    ),
-    ),
-    Padding(
-    padding: EdgeInsets.all(8.0),
-    child: TextField(
-    controller: hoursController,
-    decoration: const InputDecoration(
-    border: OutlineInputBorder(),
-    labelText: 'Time Spent',
-    ),
-    ),
-    ),
-    Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: RaisedButton(
-    child: Text("Submit"),
-    onPressed: () async => {Navigator.of(context).pop(),
-    if(activityNameController.text.isNotEmpty&&hoursController.text.isNotEmpty) {
-
-      insertToDB.insertNewUserDataIntoGroupIntoDB(group,name,hoursController.text.toString(),activityNameController.text.toString())
-
-      // addItemToList();
-    },
-
-    initState(),
-    //inviteNewUser(nameController.text.toString()),
-    },
-    ),
-    )
-    ],
-    ),
-    ),
-    ],
-    ),
-    );
-    });
-    },
-    child: Text("Catalog Workout"),
-    ),
-
-    ),
-
-    Padding(padding: const EdgeInsets.all(20),
-
-
-    ), ],
-
-    ),
-    );
-    });
-
-    } else{
-      showDialog(context: context, builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-
-            backgroundColor: const Color(0xFF47ABD1),
-            title: Text('${groups[index]}'),
-          ),
-
-          body: Column(
-
-
-            children: <Widget>[
-          FutureBuilder(builder: (BuildContext context,
-              AsyncSnapshot<dynamic> snapshot) {
-
-        try {
-        // if (ConnectionState.waiting != null ) {
-        //   return CircularProgressIndicator();
-
-        //  }
-        if (snapshot.hasData) {
-        if (snapshot.hasError) {
-        return Container();
-        }
-        else  {
-        groups = snapshot.data['WeightTime'];
-        return  ListView.builder(
-        itemCount: groups.length,
-        addAutomaticKeepAlives: true,
-        shrinkWrap: true,
-
-        itemBuilder: (BuildContext context,
-        int index) {
-        return Container(
-        //height: heightexpanse,
-        margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
-        decoration: BoxDecoration(
-        color: const Color(0xFF47ABD1),
-
-        border: Border.all(
-
-        color: const Color(0xFF47ABD1),
-        ),
-        borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
-        ),
-
-        child: ListTile(
-
-        title: Text('${groups[index]}'),
-
-
-        ),
-
-
-        height: heightexpanse,);
-
-        });
-
-        //Text(
-        //'${snapshot.data['Groups']}',
-        //style: TextStyle(
-        //     fontSize: 20,
-        //     fontWeight: FontWeight.bold),
-        //  );
-        }
-
-        }
-        else if (snapshot.hasError) {
-        return Text(
-        '${snapshot.error}',
-        style: TextStyle(fontSize: 10),
-        );
-        }
-        else {
-        return const Center(
-        child: CircularProgressIndicator(),
-        );
-        }
-        } catch(error){
-
-        return const Center(
-        child: CircularProgressIndicator(),
-        );
-        }
-        },
-          future: fetchGroupsworkoutList(name,group),
-        ),
-        Padding(padding: const EdgeInsets.all(20),
-
-
-
-
-        ), ], ),
-        );
-      });
-    } },
-
-                                                 ),
-
-
-                                                 height: heightexpanse,);
-
-                                                 });
-
-                                                 //Text(
-                                                 //'${snapshot.data['Groups']}',
-                                                 //style: TextStyle(
-                                                 //     fontSize: 20,
-                                                 //     fontWeight: FontWeight.bold),
-                                                 //  );
-                                                 }
-
-                                                 }
-                                                 else if (snapshot.hasError) {
-                                                 return Text(
-                                                 '${snapshot.error}',
-                                                 style: TextStyle(fontSize: 10),
-                                                 );
-                                                 }
-                                                 else {
-                                                 return const Center(
-                                                 child: CircularProgressIndicator(),
-                                                 );
-                                                 }
-                                                 } catch(error){
-
-                                                   return const Center(
-                                                     child: CircularProgressIndicator(),
-                                                   );
-                                                 }
-                                                 },
-                                                   future: fetchMemberList(groups[index]),
-                                                 ),
+                                                           //  }
+                                                           if (snapshot.hasData) {
+                                                             if (snapshot.hasError) {
+                                                               return Container();
+                                                             }
+                                                             else  {
+                                                               groups = snapshot.data['Members'];
+                                                               return  ListView.builder(
+                                                                   itemCount: groups.length,
+                                                                   addAutomaticKeepAlives: true,
+                                                                   shrinkWrap: true,
+
+                                                                   itemBuilder: (BuildContext context,
+                                                                       int index) {
+                                                                     return Container(
+                                                                       //height: heightexpanse,
+                                                                       margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+                                                                       decoration: BoxDecoration(
+                                                                           color: const Color(0xFF47ABD1),
+
+                                                                           border: Border.all(
+
+                                                                             color: const Color(0xFF47ABD1),
+                                                                           ),
+                                                                           borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
+                                                                       ),
+
+                                                                       child: ListTile(
+
+                                                                         title: Text('${groups[index]}'),
+                                                                         onTap: () async {
+                                                                           var name = groups[index];
+                                                                           if ('${groups[index]}' == _currentUser.displayName) {
+
+
+                                                                             showDialog(context: context, builder: (BuildContext context) {
+
+                                                                               return Scaffold(
+
+                                                                                 appBar: AppBar(
+
+                                                                                   backgroundColor: const Color(0xFF47ABD1),
+                                                                                   title: Text(name),
+
+                                                                                 ),
+
+                                                                                 body: Column(
+                                                                                   children:
+
+                                                                                   <Widget>[
+                                                                                     Expanded(child:FutureBuilder(builder: (BuildContext context,
+                                                                                         AsyncSnapshot<dynamic> snapshot) {
+
+                                                                                       try {
+                                                                                         // if (ConnectionState.waiting != null ) {
+                                                                                         //   return CircularProgressIndicator();
+
+                                                                                         //  }
+                                                                                         if (snapshot.hasData) {
+                                                                                           if (snapshot.hasError) {
+                                                                                             return Container();
+                                                                                           }
+                                                                                           else  {
+                                                                                             groups = snapshot.data['WeightTime'];
+                                                                                             return  ListView.builder(
+                                                                                                 itemCount: groups.length,
+                                                                                                 addAutomaticKeepAlives: true,
+                                                                                                 shrinkWrap: true,
+
+                                                                                                 itemBuilder: (BuildContext context,
+                                                                                                     int index) {
+                                                                                                   return Container(
+                                                                                                     //height: heightexpanse,
+                                                                                                     margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+                                                                                                     decoration: BoxDecoration(
+                                                                                                         color: const Color(0xFF47ABD1),
+
+                                                                                                         border: Border.all(
+
+                                                                                                           color: const Color(0xFF47ABD1),
+                                                                                                         ),
+                                                                                                         borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
+                                                                                                     ),
+
+                                                                                                     child: ListTile(
+
+                                                                                                       title: Text('${groups[index]}'),
+
+
+                                                                                                     ),
+
+
+                                                                                                     height: heightexpanse,);
+
+                                                                                                 });
+
+                                                                                             //Text(
+                                                                                             //'${snapshot.data['Groups']}',
+                                                                                             //style: TextStyle(
+                                                                                             //     fontSize: 20,
+                                                                                             //     fontWeight: FontWeight.bold),
+                                                                                             //  );
+                                                                                           }
+
+                                                                                         }
+                                                                                         else if (snapshot.hasError) {
+                                                                                           return Text(
+                                                                                             '${snapshot.error}',
+                                                                                             style: TextStyle(fontSize: 10),
+                                                                                           );
+                                                                                         }
+                                                                                         else {
+                                                                                           return const Center(
+                                                                                             child: CircularProgressIndicator(),
+                                                                                           );
+                                                                                         }
+                                                                                       } catch(error){
+
+                                                                                         return const Center(
+                                                                                           child: CircularProgressIndicator(),
+                                                                                         );
+                                                                                       }
+                                                                                     },
+                                                                                       future: fetchGroupsworkoutList(name,group),
+                                                                                     ), ),
+
+                                                                                     Center( child: RaisedButton(
+                                                                                       onPressed: () {
+                                                                                         showDialog(
+                                                                                             context: context,
+                                                                                             builder: (BuildContext context) {
+                                                                                               return AlertDialog(
+                                                                                                 content: Stack(
+                                                                                                   overflow: Overflow.visible,
+                                                                                                   children: <Widget>[
+                                                                                                     Positioned(
+                                                                                                       right: -40.0,
+                                                                                                       top: -40.0,
+                                                                                                       child: InkResponse(
+                                                                                                         onTap: () {
+                                                                                                           Navigator.of(context).pop();
+                                                                                                         },
+                                                                                                         child: CircleAvatar(
+                                                                                                           child: Icon(Icons.close),
+                                                                                                           backgroundColor: Colors.red,
+                                                                                                         ),
+                                                                                                       ),
+                                                                                                     ),
+                                                                                                     Form(
+                                                                                                       key: _formKey,
+                                                                                                       child: Column(
+                                                                                                         mainAxisSize: MainAxisSize.min,
+                                                                                                         children: <Widget>[
+                                                                                                           Padding(
+                                                                                                             padding: EdgeInsets.all(8.0),
+                                                                                                             child: TextField(
+                                                                                                               controller: activityNameController,
+                                                                                                               decoration: const InputDecoration(
+                                                                                                                 border: OutlineInputBorder(),
+                                                                                                                 labelText: 'Activity Name',
+                                                                                                               ),
+                                                                                                             ),
+                                                                                                           ),
+                                                                                                           Padding(
+                                                                                                             padding: EdgeInsets.all(8.0),
+                                                                                                             child: TextField(
+                                                                                                               controller: hoursController,
+                                                                                                               decoration: const InputDecoration(
+                                                                                                                 border: OutlineInputBorder(),
+                                                                                                                 labelText: 'Time Spent',
+                                                                                                               ),
+                                                                                                             ),
+                                                                                                           ),
+                                                                                                           Padding(
+                                                                                                             padding: const EdgeInsets.all(8.0),
+                                                                                                             child: RaisedButton(
+                                                                                                               child: Text("Submit"),
+                                                                                                               onPressed: () async => {Navigator.of(context).pop(),
+                                                                                                                 if(activityNameController.text.isNotEmpty&&hoursController.text.isNotEmpty) {
+
+                                                                                                                   insertToDB.insertNewUserDataIntoGroupIntoDB(group,name,hoursController.text.toString(),activityNameController.text.toString())
+
+                                                                                                                   // addItemToList();
+                                                                                                                 },
+
+                                                                                                                 initState(),
+                                                                                                                 //inviteNewUser(nameController.text.toString()),
+                                                                                                               },
+                                                                                                             ),
+                                                                                                           )
+                                                                                                         ],
+                                                                                                       ),
+                                                                                                     ),
+                                                                                                   ],
+                                                                                                 ),
+                                                                                               );
+                                                                                             });
+                                                                                       },
+                                                                                       child: Text("Catalog Workout"),
+                                                                                     ),
+
+                                                                                     ),
+
+                                                                                     Padding(padding: const EdgeInsets.all(20),
+
+
+                                                                                     ), ],
+
+                                                                                 ),
+                                                                               );
+                                                                             });
+
+                                                                           } else{
+                                                                             showDialog(context: context, builder: (BuildContext context) {
+                                                                               return Scaffold(
+                                                                                 appBar: AppBar(
+
+                                                                                   backgroundColor: const Color(0xFF47ABD1),
+                                                                                   title: Text('${groups[index]}'),
+                                                                                 ),
+
+                                                                                 body: Column(
+
+
+                                                                                   children: <Widget>[
+                                                                                     FutureBuilder(builder: (BuildContext context,
+                                                                                         AsyncSnapshot<dynamic> snapshot) {
+
+                                                                                       try {
+                                                                                         // if (ConnectionState.waiting != null ) {
+                                                                                         //   return CircularProgressIndicator();
+
+                                                                                         //  }
+                                                                                         if (snapshot.hasData) {
+                                                                                           if (snapshot.hasError) {
+                                                                                             return Container();
+                                                                                           }
+                                                                                           else  {
+                                                                                             groups = snapshot.data['WeightTime'];
+                                                                                             return  ListView.builder(
+                                                                                                 itemCount: groups.length,
+                                                                                                 addAutomaticKeepAlives: true,
+                                                                                                 shrinkWrap: true,
+
+                                                                                                 itemBuilder: (BuildContext context,
+                                                                                                     int index) {
+                                                                                                   return Container(
+                                                                                                     //height: heightexpanse,
+                                                                                                     margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+                                                                                                     decoration: BoxDecoration(
+                                                                                                         color: const Color(0xFF47ABD1),
+
+                                                                                                         border: Border.all(
+
+                                                                                                           color: const Color(0xFF47ABD1),
+                                                                                                         ),
+                                                                                                         borderRadius: BorderRadius.circular(20) // use instead of BorderRadius.all(Radius.circular(20))
+                                                                                                     ),
+
+                                                                                                     child: ListTile(
+
+                                                                                                       title: Text('${groups[index]}'),
+
+
+                                                                                                     ),
+
+
+                                                                                                     height: heightexpanse,);
+
+                                                                                                 });
+
+                                                                                             //Text(
+                                                                                             //'${snapshot.data['Groups']}',
+                                                                                             //style: TextStyle(
+                                                                                             //     fontSize: 20,
+                                                                                             //     fontWeight: FontWeight.bold),
+                                                                                             //  );
+                                                                                           }
+
+                                                                                         }
+                                                                                         else if (snapshot.hasError) {
+                                                                                           return Text(
+                                                                                             '${snapshot.error}',
+                                                                                             style: TextStyle(fontSize: 10),
+                                                                                           );
+                                                                                         }
+                                                                                         else {
+                                                                                           return const Center(
+                                                                                             child: CircularProgressIndicator(),
+                                                                                           );
+                                                                                         }
+                                                                                       } catch(error){
+
+                                                                                         return const Center(
+                                                                                           child: CircularProgressIndicator(),
+                                                                                         );
+                                                                                       }
+                                                                                     },
+                                                                                       future: fetchGroupsworkoutList(name,group),
+                                                                                     ),
+                                                                                     Padding(padding: const EdgeInsets.all(20),
+
+
+
+
+                                                                                     ), ], ),
+                                                                               );
+                                                                             });
+                                                                           } },
+
+                                                                       ),
+
+
+                                                                       height: heightexpanse,);
+
+                                                                   });
+
+                                                               //Text(
+                                                               //'${snapshot.data['Groups']}',
+                                                               //style: TextStyle(
+                                                               //     fontSize: 20,
+                                                               //     fontWeight: FontWeight.bold),
+                                                               //  );
+                                                             }
+
+                                                           }
+                                                           else if (snapshot.hasError) {
+                                                             return Text(
+                                                               '${snapshot.error}',
+                                                               style: TextStyle(fontSize: 10),
+                                                             );
+                                                           }
+                                                           else {
+                                                             return const Center(
+                                                               child: CircularProgressIndicator(),
+                                                             );
+                                                           }
+                                                         } catch(error){
+
+                                                           return const Center(
+                                                             child: CircularProgressIndicator(),
+                                                           );
+                                                         }
+                                                       },
+                                                         future: fetchMemberList(groups[index]),
+                                                       ),),
+
                                                        Padding(padding: const EdgeInsets.all(20),
 
 

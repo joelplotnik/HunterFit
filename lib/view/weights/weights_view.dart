@@ -399,6 +399,7 @@ class _WeightsViewState extends State<WeightsView> {
                     stopTimer();
                     _setsList = [];
                     setNumber = 1;
+                    workoutName.clear();
                   }),
               const SizedBox(width: 12),
               ButtonIconWidget(
@@ -408,6 +409,7 @@ class _WeightsViewState extends State<WeightsView> {
                   stopTimer();
                   _setsList = [];
                   setNumber = 1;
+                  workoutName.clear();
                 },
               ),
             ],

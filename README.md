@@ -1,6 +1,4 @@
-# hunter_fit
-
-HunterFit
+# HunterFit
 
 HunterFIt is a cross-platform mobile application written in 
 Flutter and Dart. This is a fitness application designed to 
